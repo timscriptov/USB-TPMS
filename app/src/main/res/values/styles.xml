@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="App.Button" parent="Widget.AppCompat.Button">
+    <style name="App.Button" parent="@android:style/Widget.Button">
         <item name="android:textSize">26px</item>
         <item name="android:textColor">#ffffffff</item>
     </style>
 
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="StdToggleButton" parent="@android:style/Widget.Holo.Light.Button.Toggle">
+        <item name="android:background">@null</item>
+        <item name="android:button">@drawable/togglebutton_selector</item>
+    </style>
+
     <style name="AppTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:buttonStyle">@style/App.Button</item>
+        <item name="android:buttonStyleToggle">@style/StdToggleButton</item>
         <item name="android:textSize">28px</item>
         <item name="android:textColor">#ffffffff</item>
     </style>

@@ -27,7 +27,6 @@
     <string name="settings">Настройки</string>
     <string name="shengyinbaojin">Звуковой сигнал</string>
     <string name="spare_tire_enable">Отображение запасного колеса</string>
-    <string name="status_bar_notification_info_overflow">&gt;999</string>
     <string name="taiyadanwei">Единицы давления</string>
     <string name="taiyaguodi">Низкое давление</string>
     <string name="taiyaguogao">Высокое давление</string>

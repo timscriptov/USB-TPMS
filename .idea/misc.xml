@@ -41,9 +41,14 @@
         <entry key="..\:/AppProjects/TMPS/app/src/main/res/layout/reset_dialog.xml" value="0.2957427536231884" />
         <entry key="..\:/AppProjects/TMPS/app/src/main/res/layout/time_dialog.xml" value="0.2957427536231884" />
         <entry key="..\:/AppProjects/TMPS/app/src/main/res/menu/main.xml" value="0.36666666666666664" />
+        <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/drawable/outline_battery_alert_24.xml" value="0.36944444444444446" />
+        <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/drawable/outline_toggle_on_24.xml" value="0.14270833333333333" />
+        <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/drawable/togglebutton_selector.xml" value="0.36944444444444446" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/activity_main.xml" value="0.28940217391304346" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/activity_main_test.xml" value="0.28940217391304346" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/activity_paire_id.xml" value="0.28940217391304346" />
+        <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/activity_set.xml" value="0.1265625" />
+        <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/click_error_toast.xml" value="0.28940217391304346" />
       </map>
     </option>
   </component>

@@ -77,7 +77,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/customtitlebar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -93,16 +93,16 @@
         <activity
             android:name="com.tpms.view.PaireIDActivity"
             android:launchMode="singleTask"
-            android:theme="@style/customtitlebar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.tpms.view.SetActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/customtitlebar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.tpms.view.GetSreenInfoActivity"
             android:launchMode="singleTask"
-            android:theme="@style/customtitlebar" />
+            android:theme="@style/AppTheme" />
 
         <receiver android:name="com.syt.tmps.BKReceiver">
             <intent-filter>
