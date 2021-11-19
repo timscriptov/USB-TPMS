@@ -2,6 +2,7 @@ package com.tpms.decode;
 
 import android.content.Context;
 
+import com.tpms.data.UmengConst;
 import com.tpms.modle.AlarmAgrs;
 import com.tpms.modle.PaireIDOkEvent;
 import com.tpms.modle.QueryIDOkEvent;
@@ -10,7 +11,6 @@ import com.tpms.modle.TiresState;
 import com.tpms.modle.TiresStateEvent;
 import com.tpms.utils.Log;
 import com.tpms.utils.SLOG;
-import com.umeng.commonsdk.proguard.ap;
 
 import java.nio.ByteBuffer;
 
@@ -97,7 +97,7 @@ public class FrameDecode {
                             " 漏气";
                     Log.i(TAG, "漏气");
                 }
-                if ((array[9] & ap.n) != 0) {
+                if ((array[9] & UmengConst.n) != 0) {
                     TiresState tiresState5 = tiresStateEvent.mState;
                     tiresState5.error = tiresState5.error +
                             " 低电";

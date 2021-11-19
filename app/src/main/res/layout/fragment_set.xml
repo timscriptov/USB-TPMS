@@ -26,14 +26,16 @@
                 android:layout_height="50px"
                 android:gravity="center_vertical"
                 android:text="@string/yichangzhudongbaojin"
-                android:textColor="#666666"
+                android:textColor="@color/colorAccent"
                 android:textSize="20px" />
+
         </TableRow>
 
         <TableRow
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -46,17 +48,19 @@
             <ToggleButton
                 android:id="@+id/cb_showui_enable"
                 android:layout_width="0px"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:checked="true"
                 android:textOff=""
                 android:textOn="" />
+
         </TableRow>
 
         <TableRow
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -70,17 +74,103 @@
                 android:id="@+id/cb_sound_warring"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:checked="true"
                 android:textOff=""
                 android:textOn="" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_height="92px"
+            android:background="#4d314584"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="1024px"
+                android:layout_height="50px"
+                android:gravity="center_vertical"
+                android:text="Калибровка"
+                android:textColor="@color/colorAccent"
+                android:textSize="20px" />
+
+        </TableRow>
+
+        <TableRow
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
+
+            <Button
+                android:id="@+id/btn_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Bar"
+                android:layout_weight="1"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:textColor="@color/colorWhite"
+                android:textSize="24px" />
+
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorGray" />
+
+        <TableRow
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
+
+            <Button
+                android:id="@+id/btn_psi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:text="Psi"
+                android:textColor="@color/colorWhite"
+                android:textSize="24px" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorGray" />
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
+
+            <Button
+                android:id="@+id/btn_kpa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="Kpa"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:textColor="@color/colorWhite"
+                android:textSize="24px" />
+
         </TableRow>
 
         <TableRow
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -97,12 +187,13 @@
                 android:text="80度"
                 android:textSize="24px" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_temp_def"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/btn_default_selector"
+                android:layout_weight="0.7"
+                android:background="@null"
+                android:src="@drawable/btn_default_selector"
                 android:text="@string/morengzhi"
                 android:textSize="24px" />
 
@@ -110,7 +201,7 @@
                 android:id="@+id/btn_temp_dec"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_dec_selector" />
 
@@ -118,7 +209,7 @@
                 android:id="@+id/btn_temp_add"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_add_selector" />
         </TableRow>
@@ -127,7 +218,8 @@
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -144,11 +236,12 @@
                 android:text="度"
                 android:textSize="24px" />
 
-            <Button
+            <ImageButton
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/btn_default_selector"
+                android:layout_weight="0.7"
+                android:background="@null"
+                android:src="@drawable/btn_default_selector"
                 android:text="@string/morengzhi"
                 android:visibility="invisible" />
 
@@ -156,7 +249,7 @@
                 android:id="@+id/btn_tempunit_dec"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_dec_selector" />
 
@@ -164,7 +257,7 @@
                 android:id="@+id/btn_tempunit_add"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_add_selector" />
         </TableRow>
@@ -173,7 +266,8 @@
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -190,20 +284,19 @@
                 android:text="45.0"
                 android:textSize="24px" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_hipressure_def"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/btn_default_selector"
-                android:text="@string/morengzhi"
-                android:textSize="24px" />
+                android:layout_weight="0.7"
+                android:background="@null"
+                android:src="@drawable/btn_default_selector" />
 
             <ImageButton
                 android:id="@+id/btn_hipressure_dec"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_dec_selector" />
 
@@ -211,7 +304,7 @@
                 android:id="@+id/btn_hipressure_add"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_add_selector" />
         </TableRow>
@@ -221,7 +314,8 @@
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -238,20 +332,19 @@
                 android:text="45.0"
                 android:textSize="24px" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_lowpressure_def"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/btn_default_selector"
-                android:text="@string/morengzhi"
-                android:textSize="24px" />
+                android:layout_weight="0.7"
+                android:background="@null"
+                android:src="@drawable/btn_default_selector" />
 
             <ImageButton
                 android:id="@+id/btn_lowpressure_dec"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_dec_selector" />
 
@@ -259,7 +352,7 @@
                 android:id="@+id/btn_lowpressure_add"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_add_selector" />
         </TableRow>
@@ -268,7 +361,8 @@
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -288,7 +382,7 @@
             <ImageButton
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:visibility="invisible" />
 
@@ -296,7 +390,7 @@
                 android:id="@+id/btn_pressureunit_dec"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_dec_selector" />
 
@@ -304,7 +398,7 @@
                 android:id="@+id/btn_pressureunit_add"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.7"
                 android:background="@null"
                 android:src="@drawable/btn_add_selector" />
         </TableRow>
@@ -313,7 +407,8 @@
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -327,7 +422,7 @@
                 android:id="@+id/cb_betta_warring"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:checked="true"
                 android:textOff=""
                 android:textOn="" />
@@ -337,7 +432,8 @@
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -351,7 +447,7 @@
                 android:id="@+id/cb_connect_warring"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:checked="true"
                 android:textOff=""
                 android:textOn="" />
@@ -362,7 +458,8 @@
             android:background="#4d314584"
             android:contentDescription="备胎开关"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -376,7 +473,7 @@
                 android:id="@+id/cb_spare_tire_enable"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:checked="true"
                 android:textOff=""
                 android:textOn="" />
@@ -386,7 +483,8 @@
             android:layout_marginBottom="6px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:id="@+id/tv_reset_all"
@@ -402,7 +500,8 @@
             android:layout_marginBottom="30px"
             android:background="#4d314584"
             android:gravity="center_vertical"
-            android:paddingLeft="36px">
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
 
             <TextView
                 android:layout_width="0px"
@@ -420,6 +519,41 @@
                 android:gravity="center"
                 android:text="V1.1.53M_USB_L10_20200901"
                 android:textSize="20px" />
+
         </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="30px"
+            android:background="#4d314584"
+            android:paddingLeft="36px"
+            android:paddingRight="36px">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/telegram"
+                android:layout_weight="1"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_telegram"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Репак от Ивана Тимашкова"
+                    android:textSize="24px" />
+
+            </LinearLayout>
+
+        </TableRow>
+
     </TableLayout>
 </ScrollView>

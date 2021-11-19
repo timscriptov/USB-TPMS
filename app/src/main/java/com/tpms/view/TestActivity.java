@@ -156,6 +156,7 @@ public class TestActivity extends Activity {
     private void showTimeDialog_x() {
         final String[] strArr = {"10分钟内", "20分钟内", "30分钟内", "熄火前不再提示"};
         new AlertDialog.Builder(this).setTitle("此轮胎相同警告不再提示").setSingleChoiceItems(strArr, 0, new DialogInterface.OnClickListener() {
+            @SuppressLint("WrongConstant")
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(TestActivity.this, strArr[i], 1).show();
             }
@@ -217,7 +218,7 @@ public class TestActivity extends Activity {
         Log.i(this.TAG, "showNormalNotifMsg mNotificationState:" + this.mNotificationState);
         if (this.mNotificationState != 1) {
             this.notificationManager.cancel(1);
-            new Notification(R.drawable.ic_notif_ok, "胎压", System.currentTimeMillis()).flags |= 2;
+            new Notification(R.drawable.outline_error_ok_24, "胎压", System.currentTimeMillis()).flags |= 2;
         }
     }
 
@@ -225,7 +226,7 @@ public class TestActivity extends Activity {
         Log.i(this.TAG, "showErrorNotifMsg mNotificationState:" + this.mNotificationState);
         if (this.mNotificationState != 0) {
             this.notificationManager.cancel(1);
-            new Notification(R.drawable.ic_notif_error, "胎压", System.currentTimeMillis()).flags |= 2;
+            new Notification(R.drawable.outline_error_24, "胎压", System.currentTimeMillis()).flags |= 2;
             PendingIntent.getActivity(this.app, 0, new Intent(this.app, TpmsMainActivity.class), 0);
         }
     }

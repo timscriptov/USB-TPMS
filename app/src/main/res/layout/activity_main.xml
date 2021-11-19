@@ -138,8 +138,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0px"
                     android:layout_weight="1"
-                    android:background="@drawable/outline_wifi_24"
-                    android:rotation="-90"
+                    android:background="@drawable/connect_error_l"
                     android:gravity="center" />
 
                 <TextView
@@ -148,7 +147,7 @@
                     android:layout_height="0px"
                     android:layout_marginTop="15px"
                     android:layout_weight="1"
-                    android:background="@drawable/outline_battery_alert_24"
+                    android:background="@drawable/bettawaring"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -164,8 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0px"
                     android:layout_weight="1"
-                    android:background="@drawable/outline_wifi_24"
-                    android:rotation="-90"
+                    android:background="@drawable/connect_error_l"
                     android:gravity="center" />
 
                 <TextView
@@ -174,7 +172,7 @@
                     android:layout_height="0px"
                     android:layout_marginTop="15px"
                     android:layout_weight="1"
-                    android:background="@drawable/outline_battery_alert_24"
+                    android:background="@drawable/bettawaring"
                     android:gravity="center" />
             </LinearLayout>
         </LinearLayout>
@@ -214,8 +212,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0px"
                     android:layout_weight="1"
-                    android:background="@drawable/outline_wifi_24"
-                    android:rotation="90"
+                    android:background="@drawable/connect_error_r"
                     android:gravity="center" />
 
                 <TextView
@@ -224,7 +221,7 @@
                     android:layout_height="0px"
                     android:layout_marginTop="15px"
                     android:layout_weight="1"
-                    android:background="@drawable/outline_battery_alert_24"
+                    android:background="@drawable/bettawaring"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -240,8 +237,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0px"
                     android:layout_weight="1"
-                    android:background="@drawable/outline_wifi_24"
-                    android:rotation="90"
+                    android:background="@drawable/connect_error_r"
                     android:gravity="center" />
 
                 <TextView
@@ -250,7 +246,7 @@
                     android:layout_height="0px"
                     android:layout_marginTop="15px"
                     android:layout_weight="1"
-                    android:background="@drawable/outline_battery_alert_24"
+                    android:background="@drawable/bettawaring"
                     android:gravity="center" />
             </LinearLayout>
         </LinearLayout>

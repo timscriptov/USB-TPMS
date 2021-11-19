@@ -1,6 +1,6 @@
 package com.syt.tmps;
 
-import com.umeng.commonsdk.proguard.ap;
+import com.tpms.data.UmengConst;
 
 import java.io.ByteArrayOutputStream;
 
@@ -13,7 +13,7 @@ public class ModelManager {
         byte[] bytes = str.getBytes();
         for (int i = 0; i < bytes.length; i++) {
             sb.append(charArray[(bytes[i] & 240) >> 4]);
-            sb.append(charArray[bytes[i] & ap.m]);
+            sb.append(charArray[bytes[i] & UmengConst.m]);
         }
         return sb.toString();
     }
@@ -96,7 +96,7 @@ public class ModelManager {
         StringBuilder sb = new StringBuilder(bytes.length * 2);
         for (int i = 0; i < bytes.length; i++) {
             sb.append(hexString.charAt((bytes[i] & 240) >> 4));
-            sb.append(hexString.charAt((bytes[i] & ap.m) >> 0));
+            sb.append(hexString.charAt((bytes[i] & UmengConst.m) >> 0));
         }
         return sb.toString();
     }

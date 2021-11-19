@@ -1,13 +1,22 @@
 package com.tpms.view;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -18,6 +27,7 @@ import com.syt.tmps.BuildConfig;
 import com.syt.tmps.R;
 import com.syt.tmps.TpmsApplication;
 import com.tpms.biz.Tpms;
+import com.tpms.data.Preferences;
 import com.tpms.modle.TiresState;
 import com.tpms.utils.Log;
 import com.tpms.widget.CDialog;
@@ -137,6 +147,74 @@ public class SetDetailActivity extends Fragment {
         String sb = tpms.getTempString(tpms.setHiTempDef()) +
                 this.mTpms.getWenduDanwei();
         textView.setText(sb);
+    }
+////////////////////////////////////
+    @OnClick({R.id.btn_bar})
+    public void btn_bar(View view) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(40, 0, 40, 0);
+        ll.setLayoutParams(layoutParams);
+        final AppCompatEditText enterClassname = new AppCompatEditText(getActivity());
+        enterClassname.setText(Float.toString(Preferences.getBar()));
+        ll.addView(enterClassname);
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Bar")
+                .setView(ll)
+                .setPositiveButton("Save", (p1, p2) -> {
+                    Preferences.setBar(Float.valueOf(enterClassname.getText().toString()));
+                    getActivity().recreate();
+                })
+                .setNegativeButton("Cancel", null)
+                .create().show();
+    }
+
+    @OnClick({R.id.btn_psi})
+    public void btn_psi(View view) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(40, 0, 40, 0);
+        ll.setLayoutParams(layoutParams);
+        final AppCompatEditText enterClassname = new AppCompatEditText(getActivity());
+        enterClassname.setText(Float.toString(Preferences.getPsi()));
+        ll.addView(enterClassname);
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Psi")
+                .setView(ll)
+                .setPositiveButton("Save", (p1, p2) -> {
+                    Preferences.setPsi(Float.valueOf(enterClassname.getText().toString()));
+                    getActivity().recreate();
+                })
+                .setNegativeButton("Cancel", null)
+                .create().show();
+    }
+
+    @OnClick({R.id.btn_kpa})
+    public void btn_kpa(View view) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(40, 0, 40, 0);
+        ll.setLayoutParams(layoutParams);
+        final AppCompatEditText enterClassname = new AppCompatEditText(getActivity());
+        enterClassname.setText(Float.toString(Preferences.getKpa()));
+        ll.addView(enterClassname);
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Kpa")
+                .setView(ll)
+                .setPositiveButton("Save", (p1, p2) -> {
+                    Preferences.setKpa(Float.valueOf(enterClassname.getText().toString()));
+                    getActivity().recreate();
+                })
+                .setNegativeButton("Cancel", null)
+                .create().show();
+    }
+
+    @OnClick({R.id.telegram})
+    public void telegram(View view) {
+        this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/timscriptov")));
     }
 
     @OnClick({R.id.btn_hipressure_def})

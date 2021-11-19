@@ -1,6 +1,6 @@
 package com.tpms.utils;
 
-import com.umeng.commonsdk.proguard.ap;
+import com.tpms.data.UmengConst;
 
 import java.io.PrintStream;
 
@@ -125,7 +125,7 @@ public class FormatTransfer {
         if (bArr[1] >= 0) {
             i = bArr[1] + 0;
         } else {
-            i = bArr[1] + ap.a;
+            i = bArr[1] + UmengConst.a;
         }
         int i2 = i * 256;
         if (bArr[0] >= 0) {

@@ -1,5 +1,6 @@
 package com.syt.tmps;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -13,13 +14,9 @@ import android.text.TextUtils;
 
 import com.std.dev.TpmsDataSrc;
 import com.std.dev.TpmsDataSrcUsb;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.tpms.biz.Tpms;
 import com.tpms.biz.Tpms3;
 import com.tpms.utils.Log;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.commonsdk.UMConfigure;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -30,6 +27,16 @@ public class TpmsApplication extends Application {
     TpmsDataSrc datasrc = null;
     private Service mAppService;
     private Tpms tpms;
+    @SuppressLint("StaticFieldLeak")
+    public static Context context;
+
+    public static Context getContext() {
+        if (context == null) {
+            context = new TpmsApplication();
+        }
+        return context;
+    }
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -113,6 +120,7 @@ public class TpmsApplication extends Application {
 
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         if (!isMainPid()) {
             android.util.Log.i(this.TAG, "onCreate is two process");
             return;
@@ -122,10 +130,6 @@ public class TpmsApplication extends Application {
         Log.setLogToFile(false);
         String str = this.TAG;
         Log.i(str, "App is onCreate tid:" + Thread.currentThread().getId());
-        Bugly.init(this, "693e3499ab", false);
-        initBugly();
-        UMConfigure.init(this, "5e145d030cafb240a50000a2", BuildConfig.AppChannel, 1, null);
-        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
         if (Build.VERSION.SDK_INT >= 26) {
             startForegroundService(new Intent(this, TpmsService.class));
         } else {
@@ -136,16 +140,6 @@ public class TpmsApplication extends Application {
         intentFilter.addAction("android.hardware.usb.action.USB_DEVICE_ATTACHED");
         registerReceiver(this.mReceiver, intentFilter);
         startTpms();
-    }
-
-    private void initBugly() {
-        Context applicationContext = getApplicationContext();
-        String packageName = applicationContext.getPackageName();
-        String processName = getProcessName(Process.myPid());
-        CrashReport.UserStrategy userStrategy = new CrashReport.UserStrategy(applicationContext);
-        userStrategy.setUploadProcess(processName == null || processName.equals(packageName));
-        userStrategy.setAppChannel(BuildConfig.AppChannel);
-        CrashReport.initCrashReport(getApplicationContext(), "693e3499ab", false, userStrategy);
     }
 
     private boolean isMainPid() {

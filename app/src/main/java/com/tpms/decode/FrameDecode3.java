@@ -2,6 +2,7 @@ package com.tpms.decode;
 
 import android.content.Context;
 
+import com.tpms.data.UmengConst;
 import com.tpms.modle.AlarmAgrs;
 import com.tpms.modle.HeartbeatEvent;
 import com.tpms.modle.PaireIDOkEvent;
@@ -12,7 +13,6 @@ import com.tpms.modle.TiresState;
 import com.tpms.modle.TiresStateEvent;
 import com.tpms.utils.Log;
 import com.tpms.utils.SLOG;
-import com.umeng.commonsdk.proguard.ap;
 
 import java.nio.ByteBuffer;
 
@@ -73,7 +73,7 @@ public class FrameDecode3 extends FrameDecode {
                 tiresStateEvent.mState.Leakage = true;
                 Log.i(TAG, "漏气");
             }
-            if ((array[6] & ap.n) != 0) {
+            if ((array[6] & UmengConst.n) != 0) {
                 tiresStateEvent.mState.LowPower = true;
                 Log.i(TAG, "低电");
             }

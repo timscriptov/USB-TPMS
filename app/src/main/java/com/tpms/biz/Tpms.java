@@ -9,15 +9,20 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Handler;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import android.text.TextUtils;
 
+import com.syt.tmps.utils.BitmapUtils;
 import com.syt.tmps.ModelManager;
 import com.syt.tmps.R;
 import com.syt.tmps.TpmsApplication;
+import com.tpms.data.Preferences;
+import com.tpms.data.UMErrorCode;
+import com.tpms.data.UmengConst;
 import com.tpms.decode.FrameDecode;
 import com.tpms.encode.FrameEncode;
 import com.tpms.modle.AlarmAgrs;
@@ -33,8 +38,6 @@ import com.tpms.utils.SoundPoolCtrl2;
 import com.tpms.view.TpmsMainActivity;
 import com.tpms.widget.CDialog2;
 import com.tpms.widget.ClickToast;
-import com.umeng.analytics.pro.b;
-import com.umeng.commonsdk.statistics.UMErrorCode;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -561,11 +564,11 @@ public class Tpms {
         String yaliDanwei = getYaliDanwei();
         DecimalFormat decimalFormat = new DecimalFormat("######0.00");
         if (yaliDanwei.equals("Kpa")) {
-            return "" + i;
+            return Preferences.getKpa() + i + "";
         } else if (yaliDanwei.equals("Bar")) {
-            return decimalFormat.format((double) (((float) i) / 100.0f));
+            return decimalFormat.format((double) (((float) i) / Preferences.getBar()));
         } else {
-            return yaliDanwei.equals("Psi") ? new DecimalFormat("######0.0").format((double) (((float) i) / 6.895f)) : b.N;
+            return yaliDanwei.equals("Psi") ? new DecimalFormat("######0.0").format((double) (((float) i) / 6.895f)) : UmengConst.N;
         }
     }
 
@@ -575,9 +578,8 @@ public class Tpms {
         if (wenduDanwei.equals("℃")) {
             return "" + i;
         }
-        double d = (double) i;
-        Double.isNaN(d);
-        return decimalFormat.format((d * 1.8d) + 32.0d);
+        Double.isNaN((double) i);
+        return decimalFormat.format(((double) i * 1.8d) + 32.0d);
     }
 
     public int addHiPressStamp() {
@@ -647,7 +649,14 @@ public class Tpms {
             if (Build.VERSION.SDK_INT >= 26) {
                 this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", 4));
             }
-            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms").setContentTitle(this.app.getString(R.string.zhuangtailantaiya)).setContentText(this.app.getString(R.string.zhuangtailantaiyazhengchang)).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_notif_ok).setLargeIcon(BitmapFactory.decodeResource(this.app.getResources(), R.drawable.ic_notif_ok)).setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0)).build();
+            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms")
+                    .setContentTitle(this.app.getString(R.string.zhuangtailantaiya))
+                    .setContentText(this.app.getString(R.string.zhuangtailantaiyazhengchang))
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.outline_error_ok_24)
+                    .setLargeIcon(BitmapUtils.getBitmapFromVectorDrawable(this.app, R.drawable.outline_error_ok_24))
+                    .setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0))
+                    .build();
             build.flags |= 2;
             try {
                 this.app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
@@ -681,7 +690,15 @@ public class Tpms {
             if (Build.VERSION.SDK_INT >= 26) {
                 this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", 4));
             }
-            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms").setContentTitle(this.app.getString(R.string.zhuangtailantaiya)).setContentText(this.app.getString(R.string.ztltaiyayichang)).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_notif_error).setLargeIcon(BitmapFactory.decodeResource(this.app.getResources(), R.drawable.ic_notif_ok)).setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0)).build();
+            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms")
+                    .setContentTitle(this.app.getString(R.string.zhuangtailantaiya))
+                    .setContentText(this.app.getString(R.string.ztltaiyayichang))
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.outline_error_24)
+                    .setLargeIcon(BitmapUtils.getBitmapFromVectorDrawable(this.app, R.drawable.outline_error_ok_24))
+                    .setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0))
+                    .setPriority(1)
+                    .build();
             build.flags |= 2;
             try {
                 this.app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
@@ -698,7 +715,7 @@ public class Tpms {
         return isokTires(this.mFrontLeft.mAlarmCntrols) && isokTires(this.mFrontRight.mAlarmCntrols) && isokTires(this.mBackLeft.mAlarmCntrols) && isokTires(this.mBackRight.mAlarmCntrols) && isokTires(this.mSpareTire.mAlarmCntrols);
     }
 
-    private boolean isokTires(Map<String, AlarmCntrol> map) {
+    private boolean isokTires(@NonNull Map<String, AlarmCntrol> map) {
         for (AlarmCntrol alarmCntrol : map.values()) {
             if (!TextUtils.isEmpty(alarmCntrol.mError)) {
                 return false;
@@ -713,5 +730,9 @@ public class Tpms {
         String str = this.TAG;
         Log.i(str, "isDevCheckOk:" + this.mIsSeedAckOk);
         return this.mIsSeedAckOk;
+    }
+
+    public String lt() {
+        return getFrontLeftState().toString();
     }
 }

@@ -3,8 +3,8 @@ package com.tpms.encode;
 import android.content.Context;
 
 import com.syt.tmps.TpmsApplication;
+import com.tpms.data.UmengConst;
 import com.tpms.utils.Log;
-import com.umeng.commonsdk.proguard.ap;
 
 import java.util.HashMap;
 
@@ -60,7 +60,7 @@ public class FrameEncode3 extends FrameEncode {
     @Override
     public void paireBackLeft() {
         Log.i(this.TAG, "配对后左轮ID");
-        this.FrameEn.send(new byte[]{85, -86, 6, 1, ap.n, 0});
+        this.FrameEn.send(new byte[]{85, -86, 6, 1, UmengConst.n, 0});
     }
 
     @Override
@@ -108,7 +108,7 @@ public class FrameEncode3 extends FrameEncode {
     @Override
     public void exchangeLeftFrontLeftBack() {
         Log.i(this.TAG, "exchangeLeftFrontLeftBack");
-        this.FrameEn.send(new byte[]{85, -86, 7, 3, 0, ap.n, 0});
+        this.FrameEn.send(new byte[]{85, -86, 7, 3, 0, UmengConst.n, 0});
     }
 
     @Override
@@ -120,7 +120,7 @@ public class FrameEncode3 extends FrameEncode {
     @Override
     public void exchangeRightFrontLeftBack() {
         Log.i(this.TAG, "exchangeRightFrontLeftBack");
-        this.FrameEn.send(new byte[]{85, -86, 7, 3, 1, ap.n, 0});
+        this.FrameEn.send(new byte[]{85, -86, 7, 3, 1, UmengConst.n, 0});
     }
 
     @Override
@@ -132,7 +132,7 @@ public class FrameEncode3 extends FrameEncode {
     @Override
     public void exchangeLeftBackRightBack() {
         Log.i(this.TAG, "exchangeLeftBackRightBack");
-        this.FrameEn.send(new byte[]{85, -86, 7, 3, ap.n, 17, 0});
+        this.FrameEn.send(new byte[]{85, -86, 7, 3, UmengConst.n, 17, 0});
     }
 
     @Override
@@ -147,7 +147,7 @@ public class FrameEncode3 extends FrameEncode {
 
     @Override
     public void exchange_sp_bl() {
-        this.FrameEn.send(new byte[]{85, -86, 7, 3, ap.n, 5, 0});
+        this.FrameEn.send(new byte[]{85, -86, 7, 3, UmengConst.n, 5, 0});
     }
 
     @Override
