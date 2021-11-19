@@ -71,7 +71,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/customtitlebar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.tpms.view.TpmsMainActivity"
             android:exported="true"

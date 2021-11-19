@@ -14,7 +14,7 @@ public class CDialog extends Dialog {
     View mView;
 
     public CDialog(Context context, View view) {
-        super(context, R.style.DialogStyle);
+        super(context);
         this.inflater = LayoutInflater.from(context);
         initView(view);
         setCancelable(true);

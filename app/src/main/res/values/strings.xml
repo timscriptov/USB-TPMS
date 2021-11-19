@@ -7,7 +7,6 @@
     <string name="dianjikaishianniujintupeidui">Press the pair button to start</string>
     <string name="dianyabaojin">Low battery alarm</string>
     <string name="dianyaguodi">Low pwr.</string>
-    <string name="hello_world">Hello world!</string>
     <string name="houyou_spjiaohuan">RR and Spare tire exchange</string>
     <string name="houzou_spjiaohuan">RL and Spare tire exchange</string>
     <string name="huifumorenzhi">Restore to default</string>
@@ -47,7 +46,6 @@
     <string name="xihuoqian">Before engine off</string>
     <string name="xingxiduqushibai">Information read failed.</string>
     <string name="xuexichenggong">ID code paired</string>
-    <string name="xuexishibai">ID code pair failed</string>
     <string name="yichangzhudongbaojin">Abnormal tyre alarm</string>
     <string name="youhouluntai">RR tire:</string>
     <string name="youqianluntai">FR tire:</string>

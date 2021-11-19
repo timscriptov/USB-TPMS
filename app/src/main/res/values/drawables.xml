@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="aux_bg_transparent">#00000000</drawable>
-    <drawable name="back_color">#e8e8e8</drawable>
-    <drawable name="btn_pressed">#ff33b5e5</drawable>
-    <drawable name="btn_transparent">#00000000</drawable>
     <drawable name="notification_template_icon_bg">#3333b5e5</drawable>
     <drawable name="notification_template_icon_low_bg">#0cffffff</drawable>
-    <drawable name="test_color">#cc0099</drawable>
 </resources>

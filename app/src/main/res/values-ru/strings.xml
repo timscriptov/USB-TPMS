@@ -7,7 +7,6 @@
     <string name="dianjikaishianniujintupeidui">Нажмите кнопку «Сопряжение», чтобы начать</string>
     <string name="dianyabaojin">Предупреждение низкого заряда</string>
     <string name="dianyaguodi">Низкий заряд батареи</string>
-    <string name="hello_world">Hello world!</string>
     <string name="houyou_spjiaohuan">Обмен RR и запасного колеса</string>
     <string name="houzou_spjiaohuan">Обмен RL и запасного колеса</string>
     <string name="huifumorenzhi">Сброс настроек</string>
@@ -47,7 +46,6 @@
     <string name="xihuoqian">Перед выключением двигателя</string>
     <string name="xingxiduqushibai">Ошибка чтения информации!</string>
     <string name="xuexichenggong">Код датчика сопряжен</string>
-    <string name="xuexishibai">Ошибка сопряжения датчиков</string>
     <string name="yichangzhudongbaojin">Аварийная сигнализация колеса</string>
     <string name="youhouluntai">Заднее правое (RR):</string>
     <string name="youqianluntai">Переднее правое (FR):</string>
