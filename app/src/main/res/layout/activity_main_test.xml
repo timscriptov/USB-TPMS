@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:id="@+id/main_view"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/hand_work"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="握手"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/query"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="查旬"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/query_front_left"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="查旬前左轮id"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/query_two_back"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="查旬两后轮id"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/btn_enter_apk"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="进入应用" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/btn_exchangeing"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="正在互换" />
+
+            <Button
+                android:id="@+id/btn_exchange_failed"
+                android:visibility="gone"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="互换失败" />
+
+            <Button
+                android:id="@+id/btn_reset_data"
+                android:visibility="gone"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="恢复默认" />
+
+            <Button
+                android:id="@+id/btn_open_usb"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="打开USB" />
+
+            <Button
+                android:id="@+id/btn_close_usb"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="关闭USB" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/btn_get_px"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="获取分辩信息" />
+
+            <TextView
+                android:id="@+id/tv_screen_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="text" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/btn_notif_ok"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="正常状态" />
+
+            <Button
+                android:id="@+id/btn_notif_error"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="错误状态" />
+
+            <Button
+                android:id="@+id/btn_play_sound"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="播放声音" />
+
+            <Button
+                android:id="@+id/btn_stop_sound"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="停声音" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/btn_stop_data"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="停止数据" />
+
+            <Button
+                android:id="@+id/btn_start_data"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="开启数据" />
+
+            <Button
+                android:id="@+id/btn_start_datat"
+                android:background="@drawable/fr_fl_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="level" />
+
+            <Button
+                android:id="@+id/btn_error"
+                android:layout_width="253px"
+                android:layout_height="wrap_content"
+                android:text="error" />
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:background="#313131"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="40px">
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:id="@+id/mcu_ver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerVertical="true" />
+
+        <Button
+            android:id="@+id/btn_click_toast"
+            android:layout_width="253px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="380px"
+            android:text="告警浮动框"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true" />
+
+        <Button
+            android:id="@+id/btn_time_select"
+            android:layout_width="253px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="120px"
+            android:text="时间选择框"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bars"
+        android:paddingTop="20px"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pagebackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="86px">
+
+        <TextView
+            android:id="@+id/back_ui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="主架胎ID"
+            android:drawableLeft="@drawable/btn_back_selector"
+            android:gravity="center"
+            android:paddingLeft="30px"
+            android:text="@string/idmapeidui" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48px"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/tv_title_state"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="状态"
+                android:gravity="center"
+                android:text="@string/qinxuanzeyaopeiduideluntai"
+                android:textSize="24px" />
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="上部大容器">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:contentDescription="上部大容器2"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="第1列"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_left_front_id"
+                    android:layout_width="180px"
+                    android:layout_height="150px"
+                    android:layout_marginTop="10px"
+                    android:contentDescription="主架胎ID"
+                    android:gravity="center"
+                    android:text=""
+                    android:textSize="26px" />
+
+                <TextView
+                    android:id="@+id/tv_left_back_id"
+                    android:layout_width="180px"
+                    android:layout_height="150px"
+                    android:layout_marginTop="30px"
+                    android:contentDescription="主架后胎ID"
+                    android:gravity="center"
+                    android:text=""
+                    android:textSize="26px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="140px"
+                android:layout_height="wrap_content"
+                android:contentDescription="第2列"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/ib_left_front_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:background="@drawable/tires_level"
+                    android:contentDescription="主架轮胎"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px"
+                    android:src="@null" />
+
+                <ImageButton
+                    android:id="@+id/ib_left_back_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:background="@drawable/tires_level"
+                    android:contentDescription="主架后胎"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px"
+                    android:src="@null" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="第3列中间汽车容器"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="107px"
+                    android:layout_height="240px"
+                    android:layout_marginTop="30px"
+                    android:background="@drawable/ic_car" />
+
+                <TextView
+                    android:id="@+id/tv_sptires_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:background="@drawable/sptires_level"
+                    android:clickable="true"
+                    android:gravity="bottom|center_vertical|center_horizontal|center"
+                    android:textSize="22px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="140px"
+                android:layout_height="wrap_content"
+                android:contentDescription="第4列"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/ib_right_front_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:background="@drawable/tires_level"
+                    android:contentDescription="副架轮胎"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px"
+                    android:src="@null" />
+
+                <ImageButton
+                    android:id="@+id/ib_right_back_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:background="@drawable/tires_level"
+                    android:contentDescription="副架后胎"
+                    android:paddingLeft="20px"
+                    android:paddingRight="20px"
+                    android:src="@null" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="第5列"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_right_front_id"
+                    android:layout_width="180px"
+                    android:layout_height="150px"
+                    android:layout_marginTop="10px"
+                    android:contentDescription="副架胎ID"
+                    android:gravity="center"
+                    android:text=""
+                    android:textSize="26px" />
+
+                <TextView
+                    android:id="@+id/tv_right_back_id"
+                    android:layout_width="180px"
+                    android:layout_height="150px"
+                    android:layout_marginTop="30px"
+                    android:contentDescription="副架后胎ID"
+                    android:gravity="center"
+                    android:text=""
+                    android:textSize="26px" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tires_container"
+            android:layout_width="match_parent"
+            android:layout_height="356px"
+            android:layout_marginTop="30px"
+            android:contentDescription="上部大容器"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/view_plane"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0px"
+        android:contentDescription="底部"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:paddingLeft="20px">
+
+        <Button
+            android:id="@+id/btn_paire_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_paire_start_selector"
+            android:text="@string/kaishipeidui" />
+
+        <Button
+            android:id="@+id/btn_paire_canel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_paire_canel_selector"
+            android:text="@string/quxiaopeidui"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

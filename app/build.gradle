@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.syt.tmps"
+        minSdk 16
+        targetSdk 29
+        versionCode 157
+        versionName "Deelife USB Android TPMS for MU7J MU9F V1.5.7-"
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "String", "AppChannel", "\"public\""
+            buildConfigField "boolean", "ENABLE_FOUCES", "false"
+            buildConfigField "boolean", "ENABLE_NOTIF", "true"
+            buildConfigField "long", "USB_READ_SLEEP", "100"
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String", "AppChannel", "\"public\""
+            buildConfigField "boolean", "ENABLE_FOUCES", "false"
+            buildConfigField "boolean", "ENABLE_NOTIF", "true"
+            buildConfigField "long", "USB_READ_SLEEP", "100"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+}

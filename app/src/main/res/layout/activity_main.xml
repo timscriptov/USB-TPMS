@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pagebackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_bg"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10px"
+        android:layout_weight="30"
+        android:contentDescription="空隙 填充"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="388"
+        android:contentDescription="上部大容器"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="113"
+            android:contentDescription="空隙 填充"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="220"
+            android:contentDescription="第1列"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/front_left_infos"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="150"
+                android:background="@drawable/tires_bkinfo_level"
+                android:contentDescription="主架胎压信息"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/front_left_pressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="---  Bar"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/front_left_temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="---  ℃"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/front_left_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/lianjieyichang"
+                    android:textSize="23px" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="45"
+                android:contentDescription="空隙 填充"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:id="@+id/back_left_infos"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="150"
+                android:background="@drawable/tires_bkinfo_level"
+                android:contentDescription="主架后胎压信息"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/back_left_pressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="---  Bar"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/back_left_temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="---  ℃"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/back_left_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/lianjieyichang"
+                    android:textSize="23px" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="100"
+            android:contentDescription="第2列"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:contentDescription="主架胎压连接和电池装态"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/front_left_connect"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:background="@drawable/connect_error_l"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/front_left_betta"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_marginTop="15px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bettawaring"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80px"
+                android:contentDescription="主架后胎压连接和电池装态"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/back_left_connect"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:background="@drawable/connect_error_l"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/back_left_betta"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_marginTop="15px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bettawaring"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10px"
+            android:layout_weight="143"
+            android:contentDescription="第3列"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="114px"
+                android:layout_height="257px"
+                android:background="@drawable/ic_car" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="100"
+            android:contentDescription="第4列"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:contentDescription="副架胎压连接和电池装态"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/front_right_connect"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:background="@drawable/connect_error_r"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/front_right_betta"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_marginTop="15px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bettawaring"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80px"
+                android:contentDescription="副架后胎压连接和电池装态"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/back_right_connect"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:background="@drawable/connect_error_r"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/back_right_betta"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_marginTop="15px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bettawaring"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="220"
+            android:contentDescription="第5列"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/front_right_infos"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="150"
+                android:background="@drawable/tires_bkinfo_level"
+                android:contentDescription="主架胎压信息"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/front_right_pressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="---  Bar"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/front_right_temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="---  ℃"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/front_right_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/lianjieyichang"
+                    android:textSize="23px" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="45"
+                android:contentDescription="空隙 填充"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:id="@+id/back_right_infos"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="150"
+                android:background="@drawable/tires_bkinfo_level"
+                android:contentDescription="主架后胎压信息"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/back_right_pressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="---  Bar"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/back_right_temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="---  ℃"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/back_right_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/lianjieyichang"
+                    android:textSize="23px" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="113"
+            android:contentDescription="空隙 填充"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="54"
+        android:contentDescription="备胎容器"
+        android:gravity="top|center_vertical|center_horizontal|center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_sptires_contioner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sptires_bkinfo_level"
+            android:contentDescription="备胎容器"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_sptires_pressure"
+                android:layout_width="124px"
+                android:layout_height="50px"
+                android:gravity="center"
+                android:text="---  Bar"
+                android:textSize="22px" />
+
+            <TextView
+                android:id="@+id/tv_sptires_temp"
+                android:layout_width="124px"
+                android:layout_height="50px"
+                android:gravity="center"
+                android:text="---  ℃"
+                android:textSize="22px" />
+
+            <TextView
+                android:id="@+id/tv_sptires_error"
+                android:layout_width="124px"
+                android:layout_height="50px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_sptires_betta"
+                android:layout_width="124px"
+                android:layout_height="50px"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="70"
+        android:contentDescription="底部"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_paire_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_paire_id_selector"
+            android:text="@string/idmapeidui" />
+
+        <Button
+            android:id="@+id/btn_tpms_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70px"
+            android:background="@drawable/btn_tpms_set_selector"
+            android:text="@string/taiyasheding" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300px"
+    android:layout_height="180px"
+    android:background="#99314584"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:gravity="center"
+        android:text="@string/taiyahuhuanshibai"
+        android:textColor="#fff"
+        android:textSize="27px" />
+
+    <View
+        android:layout_width="280px"
+        android:layout_height="1px"
+        android:layout_marginTop="6px"
+        android:background="#fff" />
+
+    <Button
+        android:id="@+id/close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50px"
+        android:layout_marginBottom="20px"
+        android:background="@drawable/btn_ok_selector"
+        android:text="@android:string/ok" />
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/deputy_master"
+            android:layout_width="324px"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:background="@drawable/btn_long_selector"
+            android:gravity="center"
+            android:paddingTop="8px"
+            android:paddingBottom="8px"
+            android:text="@string/zuoqianyouqianjiaohuan"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/mater_updown"
+            android:layout_width="324px"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:background="@drawable/btn_long_selector"
+            android:gravity="center"
+            android:paddingTop="8px"
+            android:paddingBottom="8px"
+            android:text="@string/zuoqianzuohoujiaohuan"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/master_cross"
+            android:layout_width="324px"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:background="@drawable/btn_long_selector"
+            android:gravity="center"
+            android:paddingTop="8px"
+            android:paddingBottom="8px"
+            android:text="@string/zuoqianyouhoujiaohuan"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/deputy_cross"
+            android:layout_width="324px"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:background="@drawable/btn_long_selector"
+            android:gravity="center"
+            android:paddingTop="8px"
+            android:paddingBottom="8px"
+            android:text="@string/youqianzuohoujiaohuan"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/deputy_updown"
+            android:layout_width="324px"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:background="@drawable/btn_long_selector"
+            android:gravity="center"
+            android:paddingTop="8px"
+            android:paddingBottom="8px"
+            android:text="@string/youqianyouhoujiaohuan"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/back_exchange"
+            android:layout_width="324px"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10px"
+            android:background="@drawable/btn_long_selector"
+            android:gravity="center"
+            android:paddingTop="8px"
+            android:paddingBottom="8px"
+            android:text="@string/zuohouyouhoujiaohuan"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_exchange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_noexchange" />
+
+        <Button
+            android:id="@+id/btn_start_exchange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_start_exchange_selector"
+            android:text="@string/kaishihuhuang" />
+
+        <Button
+            android:id="@+id/btn_cannel_exchange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_cannel_exchange_selector"
+            android:text="@string/quxiaohuhuan" />
+    </LinearLayout>
+</LinearLayout>

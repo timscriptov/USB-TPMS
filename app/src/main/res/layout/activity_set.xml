@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pagebackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="86px">
+
+        <TextView
+            android:id="@+id/back_ui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="反回的"
+            android:drawableLeft="@drawable/btn_back_selector"
+            android:gravity="center"
+            android:paddingLeft="30px"
+            android:text="@string/taiyasheding"
+            android:textSize="24px" />
+
+        <RadioGroup
+            android:id="@+id/tablable"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="38px"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/mainbtn_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_set_selector"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:tag="com.tpms.view.SetDetailActivity"
+                android:text="@string/settings"
+                android:textColor="@drawable/txt_color_selector"
+                android:textSize="26px" />
+
+            <RadioButton
+                android:id="@+id/btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_exchange_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:tag="com.tpms.view.SetExchangeActivity"
+                android:text="@string/taiyahuhuan"
+                android:textColor="@drawable/txt_color_selector"
+                android:textSize="26px" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4px"
+        android:gravity="center_horizontal" />
+</LinearLayout>

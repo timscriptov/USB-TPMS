@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/img_nosptires_exchange" android:maxLevel="0"/>
+    <item android:drawable="@drawable/img_nosptires_exchange_bl_fl" android:maxLevel="1"/>
+    <item android:drawable="@drawable/img_nosptires_exchange_bl_fr" android:maxLevel="2"/>
+    <item android:drawable="@drawable/img_nosptires_exchange_fl_bl" android:maxLevel="3"/>
+    <item android:drawable="@drawable/img_nosptires_exchange_fl_br" android:maxLevel="4"/>
+    <item android:drawable="@drawable/img_nosptires_exchange_fl_fr" android:maxLevel="5"/>
+    <item android:drawable="@drawable/img_nosptires_exchange_fr_br" android:maxLevel="6"/>
+    <item android:drawable="@drawable/img_sptires_exchange_sp_bl" android:maxLevel="7"/>
+    <item android:drawable="@drawable/img_sptires_exchange_sp_br" android:maxLevel="8"/>
+    <item android:drawable="@drawable/img_sptires_exchange_sp_fl" android:maxLevel="9"/>
+    <item android:drawable="@drawable/img_sptires_exchange_sp_fr" android:maxLevel="10"/>
+    <item android:drawable="@drawable/img_sptires_exchange" android:maxLevel="11"/>
+</level-list>

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4px"
+    android:fillViewport="true"
+    android:focusable="false">
+
+    <TableLayout
+        android:id="@+id/table2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="52px"
+        android:layout_marginTop="10px"
+        android:layout_marginRight="52px">
+
+        <TableRow
+            android:layout_height="92px"
+            android:layout_marginTop="1px"
+            android:background="#4d314584"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="1024px"
+                android:layout_height="50px"
+                android:gravity="center_vertical"
+                android:text="@string/yichangzhudongbaojin"
+                android:textColor="#666666"
+                android:textSize="20px" />
+        </TableRow>
+
+        <TableRow
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="70px"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:text="@string/tanchukuangbaojin"
+                android:textSize="24px" />
+
+            <ToggleButton
+                android:id="@+id/cb_showui_enable"
+                android:layout_width="0px"
+                android:layout_weight="2"
+                android:checked="true"
+                android:textOff=""
+                android:textOn="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="70px"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:text="@string/shengyinbaojin"
+                android:textSize="24px" />
+
+            <ToggleButton
+                android:id="@+id/cb_sound_warring"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:checked="true"
+                android:textOff=""
+                android:textOn="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="2.4"
+                android:gravity="center_vertical"
+                android:text="@string/zuigaowendubaojin"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/tv_hi_temp"
+                android:layout_width="0px"
+                android:layout_weight="0.8"
+                android:text="80度"
+                android:textSize="24px" />
+
+            <Button
+                android:id="@+id/btn_temp_def"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_default_selector"
+                android:text="@string/morengzhi"
+                android:textSize="24px" />
+
+            <ImageButton
+                android:id="@+id/btn_temp_dec"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_dec_selector" />
+
+            <ImageButton
+                android:id="@+id/btn_temp_add"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_add_selector" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="2.4"
+                android:gravity="center_vertical"
+                android:text="@string/wendudanwei"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/tv_tempunit"
+                android:layout_width="0px"
+                android:layout_weight="0.8"
+                android:text="度"
+                android:textSize="24px" />
+
+            <Button
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_default_selector"
+                android:text="@string/morengzhi"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:id="@+id/btn_tempunit_dec"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_dec_selector" />
+
+            <ImageButton
+                android:id="@+id/btn_tempunit_add"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_add_selector" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="2.4"
+                android:gravity="center_vertical"
+                android:text="@string/zuigaobaojintaiya"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/tv_hipressure"
+                android:layout_width="0px"
+                android:layout_weight="0.8"
+                android:text="45.0"
+                android:textSize="24px" />
+
+            <Button
+                android:id="@+id/btn_hipressure_def"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_default_selector"
+                android:text="@string/morengzhi"
+                android:textSize="24px" />
+
+            <ImageButton
+                android:id="@+id/btn_hipressure_dec"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_dec_selector" />
+
+            <ImageButton
+                android:id="@+id/btn_hipressure_add"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_add_selector" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="92px"
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="2.4"
+                android:gravity="center_vertical"
+                android:text="@string/zuidibojintaiya"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/tv_lopressure"
+                android:layout_width="0px"
+                android:layout_weight="0.8"
+                android:text="45.0"
+                android:textSize="24px" />
+
+            <Button
+                android:id="@+id/btn_lowpressure_def"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_default_selector"
+                android:text="@string/morengzhi"
+                android:textSize="24px" />
+
+            <ImageButton
+                android:id="@+id/btn_lowpressure_dec"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_dec_selector" />
+
+            <ImageButton
+                android:id="@+id/btn_lowpressure_add"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_add_selector" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="2.4"
+                android:gravity="center_vertical"
+                android:text="@string/taiyadanwei"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/tv_pressureunit"
+                android:layout_width="0px"
+                android:layout_weight="0.8"
+                android:text="Psi"
+                android:textSize="24px" />
+
+            <ImageButton
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:id="@+id/btn_pressureunit_dec"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_dec_selector" />
+
+            <ImageButton
+                android:id="@+id/btn_pressureunit_add"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:src="@drawable/btn_add_selector" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:text="@string/dianyabaojin"
+                android:textSize="24px" />
+
+            <ToggleButton
+                android:id="@+id/cb_betta_warring"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:checked="true"
+                android:textOff=""
+                android:textOn="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:text="@string/lianjieyichangbaojin"
+                android:textSize="24px" />
+
+            <ToggleButton
+                android:id="@+id/cb_connect_warring"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:checked="true"
+                android:textOff=""
+                android:textOn="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:contentDescription="备胎开关"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="7"
+                android:gravity="center_vertical"
+                android:text="@string/spare_tire_enable"
+                android:textSize="24px" />
+
+            <ToggleButton
+                android:id="@+id/cb_spare_tire_enable"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:checked="true"
+                android:textOff=""
+                android:textOn="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="6px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:id="@+id/tv_reset_all"
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="5"
+                android:gravity="center_vertical"
+                android:text="@string/huifumorenzhi"
+                android:textSize="24px" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="30px"
+            android:background="#4d314584"
+            android:gravity="center_vertical"
+            android:paddingLeft="36px">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="2.5"
+                android:gravity="center_vertical"
+                android:text="@string/banbenxingxi"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/tv_version"
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="2.5"
+                android:gravity="center"
+                android:text="V1.1.53M_USB_L10_20200901"
+                android:textSize="20px" />
+        </TableRow>
+    </TableLayout>
+</ScrollView>
