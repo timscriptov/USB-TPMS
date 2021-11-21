@@ -23,7 +23,6 @@ import java.util.Map;
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public static final String TAG = "CrashHandler";
-    @SuppressLint("StaticFieldLeak")
     private static final CrashHandler INSTANCE = new CrashHandler();
     private static Thread s_td = null;
     @SuppressLint("SimpleDateFormat")
@@ -107,8 +106,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             return false;
         }
         new Thread() {
-            /* class com.tpms.utils.CrashHandler.AnonymousClass1 */
-
             public void run() {
                 Looper.prepare();
                 Toast.makeText(CrashHandler.this.mContext, "很抱歉,程序出现异常,即将退出.", 1).show();
@@ -148,7 +145,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private String saveCrashInfo2File(Throwable th) {
         StringBuilder stringBuffer = new StringBuilder();
         for (Map.Entry<String, String> entry : this.infos.entrySet()) {
-            stringBuffer.append(entry.getKey()).append("=").append(entry.getValue()).append("\n");
+            stringBuffer.append(entry.getKey() + "=" + entry.getValue() + "\n");
         }
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);

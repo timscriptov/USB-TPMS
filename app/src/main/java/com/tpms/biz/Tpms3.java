@@ -1,6 +1,5 @@
 package com.tpms.biz;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -187,7 +186,7 @@ public class Tpms3 extends Tpms {
         if (this.mHiPressStamp > MaxHiPress) {
             this.mHiPressStamp = MaxHiPress;
         }
-        this.mPreferences.edit().putInt("mHiPressStamp", this.mHiPressStamp).commit();
+        this.mPreferences.edit().putInt("mHiPressStamp", this.mHiPressStamp).apply();
         return this.mHiPressStamp;
     }
 
@@ -199,7 +198,7 @@ public class Tpms3 extends Tpms {
         if (this.mHiPressStamp < max) {
             this.mHiPressStamp = max;
         }
-        this.mPreferences.edit().putInt("mHiPressStamp", this.mHiPressStamp).commit();
+        this.mPreferences.edit().putInt("mHiPressStamp", this.mHiPressStamp).apply();
         return this.mHiPressStamp;
     }
 
@@ -211,7 +210,7 @@ public class Tpms3 extends Tpms {
         if (this.mLowPressStamp > min) {
             this.mLowPressStamp = min;
         }
-        this.mPreferences.edit().putInt("mLowPressStamp", this.mLowPressStamp).commit();
+        this.mPreferences.edit().putInt("mLowPressStamp", this.mLowPressStamp).apply();
         return this.mLowPressStamp;
     }
 
@@ -222,7 +221,7 @@ public class Tpms3 extends Tpms {
         if (this.mLowPressStamp < 0) {
             this.mLowPressStamp = 0;
         }
-        this.mPreferences.edit().putInt("mLowPressStamp", this.mLowPressStamp).commit();
+        this.mPreferences.edit().putInt("mLowPressStamp", this.mLowPressStamp).apply();
         return this.mLowPressStamp;
     }
 
@@ -435,7 +434,7 @@ public class Tpms3 extends Tpms {
     public void showAlarmDialog(String str, String str2, TiresStateEvent tiresStateEvent) {
         String str3;
         int i = 0;
-        String str4 = null;
+        String str4 = "";
         String str5;
         String string;
         Log.w(this.TAG, "showAlarmDialog");
@@ -596,10 +595,9 @@ public class Tpms3 extends Tpms {
         }
     }
 
-    @SuppressLint("WrongConstant")
     private void startMainActivity() {
         Intent intent = new Intent(this.app, TpmsMainActivity.class);
-        intent.addFlags(268435456);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         this.app.startActivity(intent);
     }
 

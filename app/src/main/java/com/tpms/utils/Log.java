@@ -16,9 +16,9 @@ public class Log {
     private static final char DEBUG = 'd';
     private static final char ERROR = 'e';
     private static final char INFO = 'i';
-    private static final String TAG = "LogToFile";
     private static final char VERBOSE = 'v';
     private static final char WARN = 'w';
+    private static final String TAG = "LogToFile";
     private static final Date date = new Date();
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
     public static boolean enableLog = true;

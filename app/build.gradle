@@ -30,6 +30,24 @@ android {
             buildConfigField "long", "USB_READ_SLEEP", "100"
         }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/INDEX.LIST'
+        exclude("META-INF/*.kotlin_module")
+        exclude 'META-INF/androidx**version'
+        exclude 'firebase**properties'
+        exclude 'play-services**properties'
+        exclude 'play-services**properties'
+        exclude 'androidsupportmultidexversion.txt'
+        exclude 'fabric/*'
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -38,11 +56,25 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    implementation 'androidx.cardview:cardview:1.0.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-v13:27.1.1'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-v4:27.1.1'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:27.1.1'
+    //noinspection GradleDependency
+    implementation 'com.android.support:support-annotations:27.1.1'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-fragment:27.1.1'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:coordinatorlayout:28.0.0'
 
-    implementation 'com.google.android.material:material:1.4.0'
+    //noinspection GradleDependency,DuplicatePlatformClasses
+    implementation 'org.apache.httpcomponents:httpclient:4.5'
+
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
 
     implementation 'org.jetbrains:annotations:22.0.0'
 }

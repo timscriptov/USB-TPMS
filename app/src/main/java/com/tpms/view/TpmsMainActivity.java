@@ -1,7 +1,7 @@
 package com.tpms.view;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -24,7 +22,6 @@ import com.std.dev.TpmsDataSrc;
 import com.syt.tmps.R;
 import com.syt.tmps.TpmsApplication;
 import com.tpms.biz.Tpms;
-import com.tpms.data.Preferences;
 import com.tpms.modle.DeviceOpenEvent;
 import com.tpms.modle.TiresState;
 import com.tpms.modle.TiresStateEvent;
@@ -35,10 +32,7 @@ import com.tpms.widget.PAlertDialog;
 import de.greenrobot.event.EventBus;
 
 public class TpmsMainActivity extends Activity {
-    private final String TAG = "difengze.com-TpmsMainActivity";
     private final BroadcastReceiver filterReceiver = new BroadcastReceiver() {
-        /* class com.tpms.view.TpmsMainActivity.AnonymousClass2 */
-
         public void onReceive(Context context, Intent intent) {
             String stringExtra;
             if ("android.intent.action.CLOSE_SYSTEM_DIALOGS".equals(intent.getAction()) && (stringExtra = intent.getStringExtra("reason")) != null) {
@@ -46,6 +40,7 @@ public class TpmsMainActivity extends Activity {
             }
         }
     };
+    private final String TAG = "difengze.com-TpmsMainActivity";
     TpmsApplication app = null;
     @ViewInject(R.id.back_left_betta)
     TextView back_left_betta;
@@ -106,10 +101,9 @@ public class TpmsMainActivity extends Activity {
     TiresState mSpareTire;
     Handler mSyncHandler;
     Runnable mSyncRunAble = new Runnable() {
-        @SuppressLint("WrongConstant")
         public void run() {
-            if (mPDlg.isShowing()) {
-                mPDlg.dismiss();
+            if (TpmsMainActivity.this.mPDlg.isShowing()) {
+                TpmsMainActivity.this.mPDlg.dismiss();
                 TpmsMainActivity tpmsMainActivity = TpmsMainActivity.this;
                 Toast.makeText(tpmsMainActivity, tpmsMainActivity.getString(R.string.xingxiduqushibai), 4000).show();
             }
@@ -128,7 +122,6 @@ public class TpmsMainActivity extends Activity {
     public void onClick(View view) {
     }
 
-    @SuppressLint("WrongConstant")
     public void onCreate(Bundle bundle) {
         String action;
         super.onCreate(bundle);
@@ -142,7 +135,7 @@ public class TpmsMainActivity extends Activity {
             tpmsApplication.startTpms();
             this.mTpms = this.app.getTpms();
             this.datasrc = this.app.getDataSrc();
-            mPDlg = PAlertDialog.showDiolg(this, getString(R.string.zhengzaiduquzhong));
+            this.mPDlg = PAlertDialog.showDiolg(this, getString(R.string.zhengzaiduquzhong));
             Handler handler = new Handler();
             this.mSyncHandler = handler;
             handler.postDelayed(this.mSyncRunAble, 14000);
@@ -153,28 +146,23 @@ public class TpmsMainActivity extends Activity {
                 TiresState frontLeftState = this.mTpms.getFrontLeftState();
                 this.mFrontLeft = frontLeftState;
                 this.front_left_pressure.setText(getPressure(frontLeftState.AirPressure));
-
                 this.front_left_error.setText(this.mFrontLeft.error);
                 this.front_left_temp.setText(getTempString(this.mFrontLeft.Temperature));
-
                 TiresState frontRightState = this.app.getTpms().getFrontRightState();
                 this.mFrontRight = frontRightState;
                 this.front_right_pressure.setText(getPressure(frontRightState.AirPressure));
                 this.front_right_error.setText(this.mFrontRight.error);
                 this.front_right_temp.setText(getTempString(this.mFrontRight.Temperature));
-
                 TiresState backRightState = this.app.getTpms().getBackRightState();
                 this.mBackRight = backRightState;
                 this.back_right_pressure.setText(getPressure(backRightState.AirPressure));
                 this.back_right_error.setText(this.mBackRight.error);
                 this.back_right_temp.setText(getTempString(this.mBackRight.Temperature));
                 TiresState backLeftState = this.app.getTpms().getBackLeftState();
-
                 this.mBackLeft = backLeftState;
                 this.back_left_pressure.setText(getPressure(backLeftState.AirPressure));
                 this.back_left_error.setText(this.mBackLeft.error);
                 this.back_left_temp.setText(getTempString(this.mBackLeft.Temperature));
-
                 if (this.app.getTpms().getSparetireEnable()) {
                     this.ll_sptires_contioner.setVisibility(0);
                 } else {
@@ -204,7 +192,6 @@ public class TpmsMainActivity extends Activity {
         super.onStart();
     }
 
-    @SuppressLint("WrongConstant")
     public void onResume() {
         super.onResume();
         this.mTpms.setForeground(true);

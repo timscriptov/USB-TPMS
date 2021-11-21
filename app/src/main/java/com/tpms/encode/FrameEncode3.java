@@ -3,7 +3,7 @@ package com.tpms.encode;
 import android.content.Context;
 
 import com.syt.tmps.TpmsApplication;
-import com.tpms.data.UmengConst;
+import com.syt.tmps.data.UmengConst;
 import com.tpms.utils.Log;
 
 import java.util.HashMap;

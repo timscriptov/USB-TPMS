@@ -1,6 +1,5 @@
 package com.tpms.widget;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -34,10 +33,9 @@ public class CDialog2 {
         return cDialog2;
     }
 
-    @SuppressLint("WrongConstant")
     public void initToast(Context context, View view, String str) {
         this.mContext = context;
-        this.mWM = (WindowManager) context.getSystemService("window");
+        this.mWM = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         this.mParams = layoutParams;
         layoutParams.height = -1;

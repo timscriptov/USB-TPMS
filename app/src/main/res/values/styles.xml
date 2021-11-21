@@ -1,56 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
+    <style name="App.Button" parent="@android:style/Widget.Button">
+        <item name="android:textSize">26px</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
 
     <style name="StdToggleButton" parent="@android:style/Widget.Holo.Light.Button.Toggle">
         <item name="android:background">@null</item>
         <item name="android:button">@drawable/togglebutton_selector</item>
     </style>
 
-    <style name="AppTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:buttonStyle">@style/App.Button</item>
         <item name="android:buttonStyleToggle">@style/StdToggleButton</item>
         <item name="android:textSize">28px</item>
         <item name="android:textColor">#ffffffff</item>
-
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorOnSecondary">?android:textColorPrimaryInverse</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="background">@color/colorPrimary</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorSecondaryVariant">#2962FF</item>
-        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
-        <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
-        <item name="materialButtonStyle">@style/Widget.App.Button</item>
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
-
-    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
-        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
-        <item name="buttonBarNeutralButtonStyle">@style/NeutralButtonStyle</item>
-        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
-    </style>
-
-    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/colorAccent</item>
-    </style>
-
-    <style name="NeutralButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/colorAccent</item>
-    </style>
-
-    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/colorAccent</item>
-    </style>
-
-    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
-        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
-    </style>
-
-    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerFamily">cut</item>
-        <item name="cornerSize">4dp</item>
-    </style>
-
 </resources>

@@ -2,7 +2,7 @@ package com.tpms.decode;
 
 import android.content.Context;
 
-import com.tpms.data.UmengConst;
+import com.syt.tmps.data.UmengConst;
 import com.tpms.modle.AlarmAgrs;
 import com.tpms.modle.PaireIDOkEvent;
 import com.tpms.modle.QueryIDOkEvent;

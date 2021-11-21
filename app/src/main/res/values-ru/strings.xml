@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TPMS</string>
     <string name="aianzuo_spjiaohuan">Обмен FL и запасного колеса</string>
     <string name="banbenxingxi">Информация о версии</string>
     <string name="beitailuntai">Запасная шина:</string>
@@ -16,7 +15,7 @@
     <string name="kaishipeidui">Сопряжение</string>
     <string name="lianjieyichang">Ошибка подкл.</string>
     <string name="lianjieyichangbaojin">Предупреждение потери соединения</string>
-    <string name="louqizhong">Утечка…</string>
+    <string name="louqizhong">Утечка …</string>
     <string name="luntaixiangtongjingaobutishe">Не показывать одинаковое предупреждение для одного колеса?</string>
     <string name="morengzhi">По умолчанию</string>
     <string name="qianyou_spjiaohuan">Обмен FR и запасного колеса</string>
@@ -50,9 +49,9 @@
     <string name="youqianluntai">Переднее правое (FR):</string>
     <string name="youqianyouhoujiaohuan">Обмен переднего правого (FR) и заднего правого (RR)</string>
     <string name="youqianzuohoujiaohuan">Обмен переднего правого (FR) и заднего левого (RL)</string>
-    <string name="zhengzaiduquzhong">Загрузка…</string>
-    <string name="zhengzaipeidui">Сопряжение…</string>
-    <string name="zhengzeihuhuan">Обмен…</string>
+    <string name="zhengzaiduquzhong">Загрузка …</string>
+    <string name="zhengzaipeidui">Сопряжение …</string>
+    <string name="zhengzeihuhuan">Обмен …</string>
     <string name="zhuangtailantaiya">TPMS</string>
     <string name="zhuangtailantaiyazhengchang">Давление в колесах в норме.</string>
     <string name="zouhouluntai">Заднее левое (RL):</string>

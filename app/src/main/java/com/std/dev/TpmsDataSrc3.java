@@ -3,13 +3,14 @@ package com.std.dev;
 import com.syt.tmps.TpmsApplication;
 import com.tpms.decode.PackBufferFrame;
 import com.tpms.utils.SLOG;
+
 import java.io.File;
 import java.io.IOException;
 
 public class TpmsDataSrc3 extends TpmsDataSrc {
     private final String TAG = "TpmsDataSrc3";
-    Serialport mPort;
     protected ReadThread mReadThread;
+    Serialport mPort;
 
     public TpmsDataSrc3(TpmsApplication tpmsApplication) {
         super(tpmsApplication);
@@ -78,7 +79,7 @@ public class TpmsDataSrc3 extends TpmsDataSrc {
             byte[] bArr = new byte[512];
             while (!isInterrupted()) {
                 try {
-                    int read = TpmsDataSrc3.this.mPort.read(bArr);
+                    int read = mPort.read(bArr);
                     if (read == 0) {
                         try {
                             Thread.sleep(20);
@@ -86,10 +87,10 @@ public class TpmsDataSrc3 extends TpmsDataSrc {
                             e.printStackTrace();
                         }
                     } else {
-                        SLOG.LogByteArr(TpmsDataSrc3.this.TAG + "read", bArr, read);
+                        SLOG.LogByteArr(TAG + "read", bArr, read);
                         byte[] bArr2 = new byte[read];
                         System.arraycopy(bArr, 0, bArr2, 0, read);
-                        TpmsDataSrc3.this.BufferFrame.addBuffer(bArr2, read);
+                        BufferFrame.addBuffer(bArr2, read);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

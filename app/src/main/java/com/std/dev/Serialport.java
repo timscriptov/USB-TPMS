@@ -1,8 +1,7 @@
 package com.std.dev;
 
-import androidx.annotation.NonNull;
-
 import com.tpms.utils.Log;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -13,15 +12,16 @@ import java.io.OutputStream;
 
 public class Serialport {
     private static final String TAG = "Serialport";
+
+    static {
+        System.loadLibrary("stdSerialport");
+    }
+
     private FileDescriptor mFd;
     private FileInputStream mFileInputStream;
     private FileOutputStream mFileOutputStream;
 
-    public static native void close(FileDescriptor fileDescriptor);
-
-    public static native FileDescriptor open(String str, int i, int i2);
-
-    public Serialport(@NonNull File file, int i, int i2) throws SecurityException, IOException {
+    public Serialport(File file, int i, int i2) throws SecurityException, IOException {
         if (!file.canRead() || !file.canWrite()) {
             try {
                 Process exec = Runtime.getRuntime().exec("/system/bin/su");
@@ -44,6 +44,10 @@ public class Serialport {
         Log.e(TAG, "native open returns null");
         throw new IOException();
     }
+
+    public static native void close(FileDescriptor fileDescriptor);
+
+    public static native FileDescriptor open(String str, int i, int i2);
 
     public int read(byte[] bArr) throws IOException {
         return this.mFileInputStream.read(bArr);
@@ -76,9 +80,5 @@ public class Serialport {
         this.mFileInputStream = null;
         OsWrap.close(this.mFd);
         this.mFd = null;
-    }
-
-    static {
-        System.loadLibrary("stdSerialport");
     }
 }

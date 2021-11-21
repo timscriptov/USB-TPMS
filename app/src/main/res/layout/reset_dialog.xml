@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="400px"
+    android:layout_height="160px"
+    android:background="#000"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/quanbuhuifumorenzhi"
-        android:textColor="@color/colorGray" />
+        android:textColor="#fff"
+        android:textSize="27px" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="400px"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="10px"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -22,14 +25,15 @@
             android:id="@+id/close_btn_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:background="@drawable/btn_ok_selector"
             android:text="@android:string/ok" />
 
         <Button
             android:id="@+id/close_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginLeft="30px"
+            android:background="@drawable/btn_cannel_selector"
             android:text="@android:string/cancel" />
     </LinearLayout>
 </LinearLayout>

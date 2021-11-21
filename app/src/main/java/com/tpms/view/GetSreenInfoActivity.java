@@ -27,9 +27,9 @@ public class GetSreenInfoActivity extends Activity {
                 int height = windowManager.getDefaultDisplay().getHeight();
                 editText.setText(width + "");
                 editText2.setText(height + "");
-                float f = GetSreenInfoActivity.this.getResources().getDisplayMetrics().density;
+                float f = getResources().getDisplayMetrics().density;
                 editText3.setText(f + "");
-                editText4.setText(((float) GetSreenInfoActivity.this.getResources().getDisplayMetrics().densityDpi) + "");
+                editText4.setText(((float) getResources().getDisplayMetrics().densityDpi) + "");
                 GetSreenInfoActivity getSreenInfoActivity = GetSreenInfoActivity.this;
                 int pxToDip = getSreenInfoActivity.pxToDip(getSreenInfoActivity, (float) width);
                 GetSreenInfoActivity getSreenInfoActivity2 = GetSreenInfoActivity.this;

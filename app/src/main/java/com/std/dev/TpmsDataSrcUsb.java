@@ -13,15 +13,13 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.SystemClock;
 
-import androidx.annotation.NonNull;
-
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.HexDump;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 import com.syt.tmps.TpmsApplication;
-import com.tpms.data.UmengConst;
+import com.syt.tmps.data.UmengConst;
 import com.tpms.decode.PackBufferFrame;
 import com.tpms.modle.DeviceOpenEvent;
 import com.tpms.utils.Log;
@@ -35,10 +33,10 @@ import de.greenrobot.event.EventBus;
 
 public class TpmsDataSrcUsb extends TpmsDataSrc {
     private static final String ACTION_USB_PERMISSION = "com.android.cz.USB_PERMISSION";
-    private final String TAG = "TpmsDataSrcUsb";
-    private List<UsbSerialPort> mEntries = null;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+    private final String TAG = "TpmsDataSrcUsb";
     boolean mIsStart = false;
+    Handler mMainHander = new Handler();
     private final SerialInputOutputManager.Listener mListener = new SerialInputOutputManager.Listener() {
         @Override
         public void onRunError(Exception exc) {
@@ -50,7 +48,6 @@ public class TpmsDataSrcUsb extends TpmsDataSrc {
             });
         }
 
-        @Override
         public void onNewData(byte[] bArr) {
             Log.e(TpmsDataSrcUsb.this.TAG, "usb read onNewData" + HexDump.dumpHexString(bArr));
             int length = bArr.length;
@@ -59,13 +56,13 @@ public class TpmsDataSrcUsb extends TpmsDataSrc {
             TpmsDataSrcUsb.this.BufferFrame.addBuffer(bArr2, length);
         }
     };
-    Handler mMainHander = new Handler();
     PendingIntent mPermissionIntent;
     UsbSerialPort mPort;
     SerialInputOutputManager mSerialIoManager;
+    private List<UsbSerialPort> mEntries = null;
     private UsbManager mUsbManager = null;
     private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, @NonNull Intent intent) {
+        public void onReceive(Context context, Intent intent) {
             if (TpmsDataSrcUsb.ACTION_USB_PERMISSION.equals(intent.getAction())) {
                 synchronized (this) {
                     UsbDevice usbDevice = (UsbDevice) intent.getParcelableExtra("device");
@@ -87,10 +84,9 @@ public class TpmsDataSrcUsb extends TpmsDataSrc {
         super(tpmsApplication);
     }
 
-    @SuppressLint("WrongConstant")
     @Override
     public void init() {
-        this.mUsbManager = (UsbManager) this.theapp.getSystemService("usb");
+        this.mUsbManager = (UsbManager) this.theapp.getSystemService(Context.USB_SERVICE);
         this.mEntries = new ArrayList<>();
         this.mPermissionIntent = PendingIntent.getBroadcast(this.theapp, 0, new Intent(ACTION_USB_PERMISSION), 0);
         this.theapp.registerReceiver(this.mUsbReceiver, new IntentFilter(ACTION_USB_PERMISSION));
@@ -155,7 +151,7 @@ public class TpmsDataSrcUsb extends TpmsDataSrc {
         new AsyncTask<Void, Void, List<UsbSerialPort>>() {
             public List<UsbSerialPort> doInBackground(Void... voidArr) {
                 Log.d(TAG, "Refreshing device list 刷新设备列表 ...");
-                sleep(1000);
+                TpmsDataSrcUsb.this.sleep(1000);
                 List<UsbSerialDriver> findAllDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(mUsbManager);
                 ArrayList<UsbSerialPort> arrayList = new ArrayList<>();
                 for (UsbSerialDriver usbSerialDriver : findAllDrivers) {
@@ -272,7 +268,7 @@ public class TpmsDataSrcUsb extends TpmsDataSrc {
         }
     }
 
-    public void onEventMainThread(@NonNull DeviceOpenEvent deviceOpenEvent) {
+    public void onEventMainThread(DeviceOpenEvent deviceOpenEvent) {
         if (!deviceOpenEvent.mOpen) {
             this.theapp.stopTpms();
         }

@@ -1,6 +1,5 @@
 package com.tpms.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -37,13 +36,12 @@ public class SoundPoolCtrl {
     String mGuid = "";
     private int playerId = 0;
 
-    @SuppressLint("WrongConstant")
     public SoundPoolCtrl(Context context) {
         this.mcont = context;
         SoundPool soundPool2 = new SoundPool(10, 3, 100);
         this.soundPool = soundPool2;
         soundPool2.load(context, R.raw.alarm, 1);
-        this.mAudioM = (AudioManager) context.getSystemService("audio");
+        this.mAudioM = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public void player(String str) {

@@ -37,8 +37,7 @@ public class BKReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         this.Util = new ModelManager();
-        String str = TAG;
-        Log.i(str, "onReceive act:" + action);
+        Log.i(TAG, "onReceive act:" + action);
         if (this.app == null) {
             this.app = (TpmsApplication) context.getApplicationContext();
         }

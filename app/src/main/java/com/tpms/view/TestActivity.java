@@ -1,6 +1,5 @@
 package com.tpms.view;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -34,7 +33,6 @@ import com.tpms.widget.ClickToast;
 import com.tpms.widget.PAlertDialog;
 
 public class TestActivity extends Activity {
-    private final String TAG = "MainActivity";
     private final BroadcastReceiver filterReceiver = new BroadcastReceiver() {
         /* class com.tpms.view.TestActivity.AnonymousClass1 */
 
@@ -45,6 +43,7 @@ public class TestActivity extends Activity {
             }
         }
     };
+    private final String TAG = "MainActivity";
     TpmsApplication app = null;
     ClickToast ctotast = null;
     TpmsDataSrc datasrc = null;
@@ -62,7 +61,6 @@ public class TestActivity extends Activity {
     int volindex = 0;
     private SoundPool soundPool;
 
-    @SuppressLint("WrongConstant")
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_main_test);
@@ -70,7 +68,7 @@ public class TestActivity extends Activity {
         TpmsApplication tpmsApplication = (TpmsApplication) getApplication();
         this.app = tpmsApplication;
         this.datasrc = tpmsApplication.getDataSrc();
-        this.notificationManager = (NotificationManager) getSystemService("notification");
+        this.notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         this.mSound = new SoundPoolCtrl(this);
     }
 
@@ -156,7 +154,6 @@ public class TestActivity extends Activity {
     private void showTimeDialog_x() {
         final String[] strArr = {"10分钟内", "20分钟内", "30分钟内", "熄火前不再提示"};
         new AlertDialog.Builder(this).setTitle("此轮胎相同警告不再提示").setSingleChoiceItems(strArr, 0, new DialogInterface.OnClickListener() {
-            @SuppressLint("WrongConstant")
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(TestActivity.this, strArr[i], 1).show();
             }
@@ -181,7 +178,6 @@ public class TestActivity extends Activity {
         this.resetDlg = cDialog;
         cDialog.show();
         inflate.findViewById(R.id.close_btn_ok).setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
             public void onClick(View view) {
                 TestActivity.this.resetDlg.dismiss();
                 Toast.makeText(TestActivity.this, "点击了关闭", 5000).show();
@@ -218,7 +214,7 @@ public class TestActivity extends Activity {
         Log.i(this.TAG, "showNormalNotifMsg mNotificationState:" + this.mNotificationState);
         if (this.mNotificationState != 1) {
             this.notificationManager.cancel(1);
-            new Notification(R.drawable.outline_error_ok_24, "胎压", System.currentTimeMillis()).flags |= 2;
+            new Notification(R.drawable.ic_notif_ok, "胎压", System.currentTimeMillis()).flags |= 2;
         }
     }
 
@@ -226,7 +222,7 @@ public class TestActivity extends Activity {
         Log.i(this.TAG, "showErrorNotifMsg mNotificationState:" + this.mNotificationState);
         if (this.mNotificationState != 0) {
             this.notificationManager.cancel(1);
-            new Notification(R.drawable.outline_error_24, "胎压", System.currentTimeMillis()).flags |= 2;
+            new Notification(R.drawable.ic_notif_error, "胎压", System.currentTimeMillis()).flags |= 2;
             PendingIntent.getActivity(this.app, 0, new Intent(this.app, TpmsMainActivity.class), 0);
         }
     }

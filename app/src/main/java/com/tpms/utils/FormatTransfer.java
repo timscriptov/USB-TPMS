@@ -1,6 +1,6 @@
 package com.tpms.utils;
 
-import com.tpms.data.UmengConst;
+import com.syt.tmps.data.UmengConst;
 
 import java.io.PrintStream;
 

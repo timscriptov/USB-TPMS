@@ -1,6 +1,5 @@
 package com.tpms.view;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,7 +24,6 @@ import com.tpms.utils.Log;
 import de.greenrobot.event.EventBus;
 
 public class PaireIDActivity extends Activity {
-    private final String TAG = "PaireIDActivity";
     TpmsApplication app = null;
     @ViewInject(R.id.btn_paire_canel)
     Button btn_paire_canel;
@@ -59,8 +57,8 @@ public class PaireIDActivity extends Activity {
     TextView tv_sptires_id;
     @ViewInject(R.id.tv_title_state)
     TextView tv_title_state;
+    private String TAG = "PaireIDActivity";
     Runnable timeOutCnt = new Runnable() {
-        @SuppressLint("WrongConstant")
         public void run() {
             if (PaireIDActivity.this.mTimeOut <= 0) {
                 PaireIDActivity.this.timeOut.removeCallbacks(PaireIDActivity.this.timeOutCnt);
@@ -82,7 +80,6 @@ public class PaireIDActivity extends Activity {
         }
     };
 
-    @SuppressLint("WrongConstant")
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_paire_id);
@@ -128,7 +125,6 @@ public class PaireIDActivity extends Activity {
         setSelectButton(view);
     }
 
-    @SuppressLint("WrongConstant")
     private void setSelectButton(View view) {
         if (this.btn_paire_canel.getVisibility() == 0) {
             btn_paire_canel(this.btn_paire_canel);
@@ -145,7 +141,6 @@ public class PaireIDActivity extends Activity {
         this.tv_title_state.setText(getString(R.string.dianjikaishianniujintupeidui));
     }
 
-    @SuppressLint("WrongConstant")
     @OnClick({R.id.btn_paire_canel})
     public void btn_paire_canel(View view) {
         this.btn_paire_start.setVisibility(4);
@@ -162,7 +157,6 @@ public class PaireIDActivity extends Activity {
         this.tires_container.setVisibility(8);
     }
 
-    @SuppressLint("WrongConstant")
     @OnClick({R.id.btn_paire_start})
     public void btn_paire_start(View view) {
         View view2 = this.mImgBtn;
@@ -209,9 +203,9 @@ public class PaireIDActivity extends Activity {
         super.onStop();
     }
 
-    @SuppressLint("WrongConstant")
     public void onEventMainThread(PaireIDOkEvent paireIDOkEvent) {
-        Log.w(this.TAG, "收到了配对也就是学习到了ID:" + paireIDOkEvent.tires + ";mac:" + paireIDOkEvent.mID);
+        String str = this.TAG;
+        Log.w(str, "收到了配对也就是学习到了ID:" + paireIDOkEvent.tires + ";mac:" + paireIDOkEvent.mID);
         if (paireIDOkEvent.tires == 1) {
             this.ib_left_front_id.getBackground().setLevel(0);
         } else if (paireIDOkEvent.tires == 2) {
@@ -235,7 +229,8 @@ public class PaireIDActivity extends Activity {
     }
 
     public void onEventMainThread(QueryIDOkEvent queryIDOkEvent) {
-        Log.i(this.TAG, "收到了查寻ID:" + queryIDOkEvent.tires + ";mac:" + queryIDOkEvent.mID);
+        String str = this.TAG;
+        Log.i(str, "收到了查寻ID:" + queryIDOkEvent.tires + ";mac:" + queryIDOkEvent.mID);
         if (queryIDOkEvent.tires == 1) {
             Log.i("test", "查到 左前id:" + queryIDOkEvent.mID);
             TextView textView = this.tv_left_front_id;

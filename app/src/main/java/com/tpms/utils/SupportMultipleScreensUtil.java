@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.syt.tmps.R;
+
 public class SupportMultipleScreensUtil {
     public static final int BASE_SCREEN_HEIGHT = 600;
     public static final float BASE_SCREEN_HEIGHT_FLOAT = 600.0f;
@@ -28,7 +30,7 @@ public class SupportMultipleScreensUtil {
         if (view instanceof ViewGroup) {
             scaleViewGroup((ViewGroup) view);
         } else {
-            //scaleView(view);
+            scaleView(view);
         }
     }
 
@@ -38,11 +40,11 @@ public class SupportMultipleScreensUtil {
             if (childAt instanceof ViewGroup) {
                 scaleViewGroup((ViewGroup) childAt);
             }
-            //scaleView(childAt);
+            scaleView(childAt);
         }
     }
 
-    /*private static void scaleView(View view) {
+    private static void scaleView(View view) {
         Object tag = view.getTag(R.id.is_scale_size_tag);
         if (!(tag instanceof Boolean) || !((Boolean) tag).booleanValue()) {
             if (view instanceof TextView) {
@@ -52,7 +54,7 @@ public class SupportMultipleScreensUtil {
             }
             view.setTag(R.id.is_scale_size_tag, true);
         }
-    }*/
+    }
 
     public static void scaleViewSize(View view) {
         if (view != null) {
@@ -102,7 +104,7 @@ public class SupportMultipleScreensUtil {
         return drawable;
     }
 
-    /*public static void scaleTextView(TextView textView) {
+    public static void scaleTextView(TextView textView) {
         if (textView != null) {
             scaleViewSize(textView);
             Object tag = textView.getTag(R.id.is_scale_font_tag);
@@ -113,5 +115,5 @@ public class SupportMultipleScreensUtil {
             setTextViewCompoundDrawables(textView, compoundDrawables[0], compoundDrawables[1], compoundDrawables[2], compoundDrawables[3]);
             textView.setCompoundDrawablePadding(getScaleValue(textView.getCompoundDrawablePadding()));
         }
-    }*/
+    }
 }

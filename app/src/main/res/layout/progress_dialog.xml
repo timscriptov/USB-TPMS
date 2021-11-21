@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="240px"
+    android:layout_height="130px"
+    android:background="#000"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:orientation="horizontal">
 
     <ProgressBar
         android:layout_width="wrap_content"
@@ -14,8 +14,7 @@
         android:id="@+id/tv_txt_wait"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="@string/zhengzeihuhuan"
-        android:textColor="@color/colorGray" />
-
+        android:textColor="#fff"
+        android:textSize="27px" />
 </LinearLayout>

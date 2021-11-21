@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/outline_refresh_active_24" android:state_pressed="true" />
-    <item android:drawable="@drawable/outline_refresh_active_24" android:state_focused="true" />
-    <item android:drawable="@drawable/outline_refresh_active_24" android:state_selected="true" />
-    <item android:drawable="@drawable/outline_refresh_24" />
+    <item android:drawable="@drawable/btn_def_d" android:state_pressed="true" />
+    <item android:drawable="@drawable/btn_def_d" android:state_focused="true" />
+    <item android:drawable="@drawable/btn_def_d" android:state_selected="true" />
+    <item android:drawable="@drawable/btn_def_n" />
 </selector>

@@ -23,20 +23,13 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class TpmsApplication extends Application {
-    public String TAG = ("difengze.com-" + TpmsApplication.class.getSimpleName());
-    TpmsDataSrc datasrc = null;
-    private Service mAppService;
-    private Tpms tpms;
     @SuppressLint("StaticFieldLeak")
     public static Context context;
-
-    public static Context getContext() {
-        if (context == null) {
-            context = new TpmsApplication();
-        }
-        return context;
-    }
-
+    public String TAG = TpmsApplication.class.getSimpleName();
+    TpmsDataSrc datasrc = null;
+    BKReceiver mReceive = null;
+    private Service mAppService;
+    private Tpms tpms;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -65,6 +58,13 @@ public class TpmsApplication extends Application {
     public TpmsApplication() {
         String str = this.TAG;
         Log.i(str, "BTApplication tid:" + Thread.currentThread().getId());
+    }
+
+    public static Context getContext() {
+        if (context == null) {
+            context = new TpmsApplication();
+        }
+        return context;
     }
 
     private static String getProcessName(int i) {

@@ -5,10 +5,14 @@ import com.tpms.decode.PackBufferFrame;
 
 public class TpmsDataSrc {
     public static final int MESSAGE_DATA_PROC = 1;
-    protected PackBufferFrame BufferFrame = null;
-    boolean DEBUG = true;
     private final String TAG = "TpmsDataSrc";
+    protected PackBufferFrame BufferFrame = null;
     protected TpmsApplication theapp;
+    boolean DEBUG = true;
+
+    public TpmsDataSrc(TpmsApplication tpmsApplication) {
+        this.theapp = tpmsApplication;
+    }
 
     public String getDevName() {
         return "";
@@ -24,10 +28,6 @@ public class TpmsDataSrc {
     }
 
     public void writeData(byte[] bArr) {
-    }
-
-    public TpmsDataSrc(TpmsApplication tpmsApplication) {
-        this.theapp = tpmsApplication;
     }
 
     public void setBufferFrame(PackBufferFrame packBufferFrame) {

@@ -1,28 +1,26 @@
 package com.tpms.biz;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Handler;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
-import com.syt.tmps.utils.BitmapUtils;
 import com.syt.tmps.ModelManager;
 import com.syt.tmps.R;
 import com.syt.tmps.TpmsApplication;
-import com.tpms.data.Preferences;
-import com.tpms.data.UMErrorCode;
-import com.tpms.data.UmengConst;
+import com.syt.tmps.data.Preferences;
+import com.syt.tmps.data.UMErrorCode;
+import com.syt.tmps.data.UmengConst;
 import com.tpms.decode.FrameDecode;
 import com.tpms.encode.FrameEncode;
 import com.tpms.modle.AlarmAgrs;
@@ -84,13 +82,12 @@ public class Tpms {
     FrameEncode mencode = null;
     NotificationManager notificationManager;
 
-    @SuppressLint("WrongConstant")
     public Tpms(TpmsApplication tpmsApplication) {
         this.mPreferences = tpmsApplication.getSharedPreferences("setting", 0);
         initData();
         EventBus.getDefault().register(this);
         this.app = tpmsApplication;
-        this.notificationManager = (NotificationManager) tpmsApplication.getSystemService("notification");
+        this.notificationManager = (NotificationManager) tpmsApplication.getSystemService(Context.NOTIFICATION_SERVICE);
         this.mSoundPoolCtrl = new SoundPoolCtrl2(tpmsApplication.getApplicationContext());
     }
 
@@ -636,7 +633,6 @@ public class Tpms {
         this.mencode.reset_dev();
     }
 
-    @SuppressLint("WrongConstant")
     public void showNormalNotifMsg() {
         Log.i(this.TAG, "showNormalNotifMsg mNotificationState:" + this.mNotificationState);
         if (this.mNotificationState != 1) {
@@ -649,14 +645,7 @@ public class Tpms {
             if (Build.VERSION.SDK_INT >= 26) {
                 this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", 4));
             }
-            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms")
-                    .setContentTitle(this.app.getString(R.string.zhuangtailantaiya))
-                    .setContentText(this.app.getString(R.string.zhuangtailantaiyazhengchang))
-                    .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(R.drawable.outline_error_ok_24)
-                    .setLargeIcon(BitmapUtils.getBitmapFromVectorDrawable(this.app, R.drawable.outline_error_ok_24))
-                    .setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0))
-                    .build();
+            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms").setContentTitle(this.app.getString(R.string.zhuangtailantaiya)).setContentText(this.app.getString(R.string.zhuangtailantaiyazhengchang)).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_notif_ok).setLargeIcon(BitmapFactory.decodeResource(this.app.getResources(), R.drawable.ic_notif_ok)).setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0)).build();
             build.flags |= 2;
             try {
                 this.app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
@@ -678,7 +667,6 @@ public class Tpms {
         }
     }
 
-    @SuppressLint("WrongConstant")
     public void showErrorNotifMsg2() {
         if (this.mNotificationState != 0) {
             try {
@@ -690,15 +678,7 @@ public class Tpms {
             if (Build.VERSION.SDK_INT >= 26) {
                 this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", 4));
             }
-            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms")
-                    .setContentTitle(this.app.getString(R.string.zhuangtailantaiya))
-                    .setContentText(this.app.getString(R.string.ztltaiyayichang))
-                    .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(R.drawable.outline_error_24)
-                    .setLargeIcon(BitmapUtils.getBitmapFromVectorDrawable(this.app, R.drawable.outline_error_ok_24))
-                    .setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0))
-                    .setPriority(1)
-                    .build();
+            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms").setContentTitle(this.app.getString(R.string.zhuangtailantaiya)).setContentText(this.app.getString(R.string.ztltaiyayichang)).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_notif_error).setLargeIcon(BitmapFactory.decodeResource(this.app.getResources(), R.drawable.ic_notif_ok)).setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0)).build();
             build.flags |= 2;
             try {
                 this.app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
@@ -715,7 +695,7 @@ public class Tpms {
         return isokTires(this.mFrontLeft.mAlarmCntrols) && isokTires(this.mFrontRight.mAlarmCntrols) && isokTires(this.mBackLeft.mAlarmCntrols) && isokTires(this.mBackRight.mAlarmCntrols) && isokTires(this.mSpareTire.mAlarmCntrols);
     }
 
-    private boolean isokTires(@NonNull Map<String, AlarmCntrol> map) {
+    private boolean isokTires(Map<String, AlarmCntrol> map) {
         for (AlarmCntrol alarmCntrol : map.values()) {
             if (!TextUtils.isEmpty(alarmCntrol.mError)) {
                 return false;
@@ -730,9 +710,5 @@ public class Tpms {
         String str = this.TAG;
         Log.i(str, "isDevCheckOk:" + this.mIsSeedAckOk);
         return this.mIsSeedAckOk;
-    }
-
-    public String lt() {
-        return getFrontLeftState().toString();
     }
 }

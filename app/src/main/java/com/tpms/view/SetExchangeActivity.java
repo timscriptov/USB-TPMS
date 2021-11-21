@@ -1,6 +1,6 @@
 package com.tpms.view;
 
-import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,8 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -32,7 +30,6 @@ import com.tpms.widget.PAlertDialog;
 import de.greenrobot.event.EventBus;
 
 public class SetExchangeActivity extends Fragment {
-    private final String TAG = "SetExchangeActivity";
     private final BroadcastReceiver filterReceiver = new BroadcastReceiver() {
         /* class com.tpms.view.SetExchangeActivity.AnonymousClass1 */
 
@@ -43,6 +40,7 @@ public class SetExchangeActivity extends Fragment {
             }
         }
     };
+    private final String TAG = "SetExchangeActivity";
     TpmsApplication app = null;
     @ViewInject(R.id.btn_cannel_exchange)
     Button btn_cannel_exchange;
@@ -69,17 +67,16 @@ public class SetExchangeActivity extends Fragment {
     TextView tv_exchange_hint;
     Runnable mFailedAble = new Runnable() {
         public void run() {
-            mExChangeFailed.show();
-            if (mPDlg != null) {
-                mPDlg.dismiss();
-                mPDlg = null;
+            SetExchangeActivity.this.mExChangeFailed.show();
+            if (SetExchangeActivity.this.mPDlg != null) {
+                SetExchangeActivity.this.mPDlg.dismiss();
+                SetExchangeActivity.this.mPDlg = null;
             }
             SetExchangeActivity setExchangeActivity = SetExchangeActivity.this;
             setExchangeActivity.btn_cannel_exchange(setExchangeActivity.btn_cannel_exchange);
         }
     };
 
-    @SuppressLint("WrongConstant")
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         View inflate = layoutInflater.inflate(R.layout.fragment_exchange2, (ViewGroup) null);
         ViewUtils.inject(this, inflate);
@@ -112,7 +109,6 @@ public class SetExchangeActivity extends Fragment {
         }
     }
 
-    @SuppressLint("WrongConstant")
     private void showLeftTires(boolean z) {
         if (z) {
             this.btn_sp_fl.setVisibility(4);
@@ -241,7 +237,7 @@ public class SetExchangeActivity extends Fragment {
                     break;
             }
             this.tv_exchange_hint.setText(this.mSelectBtn.getContentDescription());
-            mPDlg = PAlertDialog.showDiolg(getActivity(), "");
+            this.mPDlg = PAlertDialog.showDiolg(getActivity(), "");
             this.mFailedHander.postDelayed(this.mFailedAble, 2000);
         }
     }

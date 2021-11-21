@@ -24,10 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SetActivity extends Activity {
-    private final String TAG = "difengze.com-TpmsMainActivity";
     private final BroadcastReceiver filterReceiver = new BroadcastReceiver() {
-        /* class com.tpms.view.SetActivity.AnonymousClass1 */
-
         public void onReceive(Context context, Intent intent) {
             String stringExtra;
             if ("android.intent.action.CLOSE_SYSTEM_DIALOGS".equals(intent.getAction()) && (stringExtra = intent.getStringExtra("reason")) != null && stringExtra.equals("homekey")) {
@@ -35,6 +32,7 @@ public class SetActivity extends Activity {
             }
         }
     };
+    private final String TAG = "SetActivity";
     Map<String, Fragment> Fragments = new HashMap<>();
     TpmsApplication app = null;
     TpmsDataSrc datasrc = null;
@@ -56,7 +54,7 @@ public class SetActivity extends Activity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.CLOSE_SYSTEM_DIALOGS");
         registerReceiver(this.filterReceiver, intentFilter);
-        Log.e("difengze.com", "onCreate SetActivity");
+        Log.e(TAG, "onCreate SetActivity");
         initView();
     }
 
@@ -113,7 +111,7 @@ public class SetActivity extends Activity {
         ((RadioGroup) findViewById(R.id.tablable)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 try {
-                    SetActivity.this.ShowFragment((String) SetActivity.this.findViewById(i).getTag());
+                    ShowFragment((String) SetActivity.this.findViewById(i).getTag());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
