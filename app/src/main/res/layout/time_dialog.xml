@@ -27,7 +27,8 @@
         <View
             android:layout_width="380px"
             android:layout_height="1px"
-            android:background="#fff" />&quot;
+            android:background="#fff" />
+
         <LinearLayout
             android:id="@+id/time_select"
             android:layout_width="wrap_content"

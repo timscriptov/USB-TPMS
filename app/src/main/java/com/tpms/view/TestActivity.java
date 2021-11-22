@@ -209,7 +209,6 @@ public class TestActivity extends Activity {
         this.app.getTpms().showNormalNotifMsg();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @OnClick({R.id.btn_notif_error})
     public void btn_notif_error(View view) {
         app.getTpms().showErrorNotifMsg2();

@@ -102,7 +102,7 @@ public class SetActivity extends Activity {
     }
 
     private void initView() {
-        String stringExtra = getIntent().getStringExtra("framgent");
+        String stringExtra = getIntent().getStringExtra("fragment");
         if (!TextUtils.isEmpty(stringExtra)) {
             ShowFragment(stringExtra);
         } else {

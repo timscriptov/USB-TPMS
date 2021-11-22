@@ -563,9 +563,9 @@ public class Tpms {
         if (yaliDanwei.equals("Kpa")) {
             return Preferences.getKpa() + i + "";
         } else if (yaliDanwei.equals("Bar")) {
-            return decimalFormat.format((double) (((float) i) / Preferences.getBar()));
+            return decimalFormat.format(((float) i) / Preferences.getBar());
         } else {
-            return yaliDanwei.equals("Psi") ? new DecimalFormat("######0.0").format((double) (((float) i) / 6.895f)) : UmengConst.N;
+            return yaliDanwei.equals("Psi") ? new DecimalFormat("######0.0").format(((float) i) / 6.895f) : UmengConst.N;
         }
     }
 
@@ -645,12 +645,17 @@ public class Tpms {
             if (Build.VERSION.SDK_INT >= 26) {
                 this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
             }
-            Notification build = new NotificationCompat.Builder(app, "com.dfz.tpms").setContentTitle(app.getString(R.string.zhuangtailantaiya)).setContentText(app.getString(R.string.zhuangtailantaiyazhengchang)).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_notif_ok).setLargeIcon(BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_notif_ok)).setContentIntent(PendingIntent.getActivity(app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(app, TpmsMainActivity.class), 0)).build();
-            build.flags |= 2;
+            NotificationCompat.Builder build = new NotificationCompat.Builder(app, "com.dfz.tpms")
+                    .setContentTitle(app.getString(R.string.zhuangtailantaiya))
+                    .setContentText(app.getString(R.string.zhuangtailantaiyazhengchang))
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.ic_notif_ok)
+                    .setLargeIcon(BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_notif_ok))
+                    .setContentIntent(PendingIntent.getActivity(app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(app, TpmsMainActivity.class), 0));
             try {
-                app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
+                app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build.build());
             } catch (Exception unused) {
-                this.notificationManager.notify(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
+                this.notificationManager.notify(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build.build());
             }
             this.mNotificationState = 1;
             Log.i(this.TAG, "lyc cur showNormalNotifMsg");
@@ -686,7 +691,6 @@ public class Tpms {
                     .setContentTitle(app.getString(R.string.zhuangtailantaiya))
                     .setContentText(app.getString(R.string.ztltaiyayichang))
                     .setPriority(NotificationCompat.PRIORITY_HIGH);
-
             try {
                 app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build.build());
             } catch (Exception e2) {

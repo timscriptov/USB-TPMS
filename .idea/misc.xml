@@ -19,8 +19,11 @@
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/drawable/outline_battery_alert_24.xml" value="0.36944444444444446" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/activity_main.xml" value="0.17831813576494426" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/activity_main_test.xml" value="0.28306159420289856" />
+        <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/activity_set.xml" value="0.17831813576494426" />
+        <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/click_error_toast.xml" value="0.28306159420289856" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/confirm_dialog.xml" value="0.20520833333333333" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/fragment_exchange2.xml" value="0.28306159420289856" />
+        <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/layout/time_dialog.xml" value="0.25" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/xml/filepaths.xml" value="0.28940217391304346" />
         <entry key="..\:/AppProjects/USB-TPMS/app/src/main/res/xml/network_security_config.xml" value="0.28940217391304346" />
       </map>
