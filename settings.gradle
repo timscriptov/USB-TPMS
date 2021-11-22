@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "TPMS2"
 include ':app'
+include ':lidroid'
+include ':greenrobot'

@@ -34,30 +34,28 @@ public class TpmsApplication extends Application {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals("android.hardware.usb.action.USB_DEVICE_DETACHED")) {
-                UsbDevice usbDevice = (UsbDevice) intent.getParcelableExtra("device");
+                UsbDevice usbDevice = intent.getParcelableExtra("device");
                 if (usbDevice != null) {
                     String deviceName = usbDevice.getDeviceName();
                     int deviceId = usbDevice.getDeviceId();
-                    String str = TpmsApplication.this.TAG;
-                    Log.i(str, "==================================name:" + deviceName + ";did:" + deviceId);
+                    Log.i(TAG, "==================================name:" + deviceName + ";did:" + deviceId);
                     if (TpmsApplication.this.datasrc == null) {
-                        Log.i(TpmsApplication.this.TAG, "datasrc==null");
-                    } else if (deviceName.equals(TpmsApplication.this.datasrc.getDevName())) {
-                        Log.i(TpmsApplication.this.TAG, "kill safe");
+                        Log.i(TAG, "datasrc==null");
+                    } else if (deviceName.equals(datasrc.getDevName())) {
+                        Log.i(TAG, "kill safe");
                         Process.myPid();
                         TpmsApplication.this.stopTpms();
                     }
                 }
             } else if (action.equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
-                Log.e(TpmsApplication.this.TAG, " ACTION_USB_ACCESSORY_ATTACHED usb 插入");
-                TpmsApplication.this.startTpms();
+                Log.e(TAG, " ACTION_USB_ACCESSORY_ATTACHED usb 插入");
+                startTpms();
             }
         }
     };
 
     public TpmsApplication() {
-        String str = this.TAG;
-        Log.i(str, "BTApplication tid:" + Thread.currentThread().getId());
+        Log.i(TAG, "BTApplication tid:" + Thread.currentThread().getId());
     }
 
     public static Context getContext() {

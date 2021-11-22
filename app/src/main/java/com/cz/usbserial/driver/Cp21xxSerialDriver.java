@@ -5,6 +5,7 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.util.Log;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -21,12 +22,18 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
         this.mPort = new Cp21xxSerialPort(usbDevice, 0);
     }
 
-    @Override // com.cz.usbserial.driver.UsbSerialDriver
+    public static Map<Integer, int[]> getSupportedDevices() {
+        LinkedHashMap<Integer, int[]> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put(4292, new int[]{60000, 60016, 60017, 60032});
+        return linkedHashMap;
+    }
+
+    @Override
     public UsbDevice getDevice() {
         return this.mDevice;
     }
 
-    @Override // com.cz.usbserial.driver.UsbSerialDriver
+    @Override
     public List<UsbSerialPort> getPorts() {
         return Collections.singletonList(this.mPort);
     }
@@ -54,64 +61,64 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
         private UsbEndpoint mReadEndpoint;
         private UsbEndpoint mWriteEndpoint;
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getCD() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getCTS() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getDSR() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getDTR() throws IOException {
-            return true;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public /* bridge */ /* synthetic */ int getPortNumber() {
-            return super.getPortNumber();
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getRI() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getRTS() throws IOException {
-            return true;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public /* bridge */ /* synthetic */ String getSerial() {
-            return super.getSerial();
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public void setDTR(boolean z) throws IOException {
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public void setRTS(boolean z) throws IOException {
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort
-        public /* bridge */ /* synthetic */ String toString() {
-            return super.toString();
-        }
-
         public Cp21xxSerialPort(UsbDevice usbDevice, int i) {
             super(usbDevice, i);
         }
 
-        @Override // com.cz.usbserial.driver.UsbSerialPort
+        @Override
+        public boolean getCD() throws IOException {
+            return false;
+        }
+
+        @Override
+        public boolean getCTS() throws IOException {
+            return false;
+        }
+
+        @Override
+        public boolean getDSR() throws IOException {
+            return false;
+        }
+
+        @Override
+        public boolean getDTR() throws IOException {
+            return true;
+        }
+
+        @Override
+        public void setDTR(boolean z) throws IOException {
+        }
+
+        @Override
+        public int getPortNumber() {
+            return super.getPortNumber();
+        }
+
+        @Override
+        public boolean getRI() throws IOException {
+            return false;
+        }
+
+        @Override
+        public boolean getRTS() throws IOException {
+            return true;
+        }
+
+        @Override
+        public void setRTS(boolean z) throws IOException {
+        }
+
+        @Override
+        public String getSerial() {
+            return super.getSerial();
+        }
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
+
+        @Override
         public UsbSerialDriver getDriver() {
             return Cp21xxSerialDriver.this;
         }
@@ -120,23 +127,22 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
             return this.mConnection.controlTransfer(REQTYPE_HOST_TO_DEVICE, i, i2, 0, null, 0, 5000);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void open(UsbDeviceConnection usbDeviceConnection) throws IOException {
             if (this.mConnection == null) {
                 this.mConnection = usbDeviceConnection;
                 for (int i = 0; i < this.mDevice.getInterfaceCount(); i++) {
                     try {
                         if (this.mConnection.claimInterface(this.mDevice.getInterface(i), true)) {
-                            String str = Cp21xxSerialDriver.TAG;
-                            Log.d(str, "claimInterface " + i + " SUCCESS");
+                            Log.d(Cp21xxSerialDriver.TAG, "claimInterface " + i + " SUCCESS");
                         } else {
-                            String str2 = Cp21xxSerialDriver.TAG;
-                            Log.d(str2, "claimInterface " + i + " FAIL");
+                            Log.d(Cp21xxSerialDriver.TAG, "claimInterface " + i + " FAIL");
                         }
                     } catch (Throwable th) {
                         try {
                             close();
-                        } catch (IOException unused) {
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                         throw th;
                     }
@@ -160,7 +166,7 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
             throw new IOException("Already opened.");
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void close() throws IOException {
             if (this.mConnection != null) {
                 try {
@@ -174,7 +180,7 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
             }
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public int read(byte[] bArr, int i) throws IOException {
             synchronized (this.mReadBufferLock) {
                 int bulkTransfer = this.mConnection.bulkTransfer(this.mReadEndpoint, this.mReadBuffer, Math.min(bArr.length, this.mReadBuffer.length), i);
@@ -186,7 +192,7 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
             }
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public int write(byte[] bArr, int i) throws IOException {
             int min;
             byte[] bArr2;
@@ -204,8 +210,7 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
                     bulkTransfer = this.mConnection.bulkTransfer(this.mWriteEndpoint, bArr2, min, i);
                 }
                 if (bulkTransfer > 0) {
-                    String str = Cp21xxSerialDriver.TAG;
-                    Log.d(str, "Wrote amt=" + bulkTransfer + " attempted=" + min);
+                    Log.d(Cp21xxSerialDriver.TAG, "Wrote amt=" + bulkTransfer + " attempted=" + min);
                     i2 += bulkTransfer;
                 } else {
                     throw new IOException("Error writing " + min + " bytes at offset " + i2 + " length=" + bArr.length);
@@ -220,7 +225,7 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
             }
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void setParameters(int i, int i2, int i3, int i4) throws IOException {
             setBaudRate(i);
             int i5 = 2048;
@@ -244,7 +249,7 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
             setConfigSingle(3, i5);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean purgeHwBuffers(boolean z, boolean z2) throws IOException {
             int i = 0;
             int i2 = z ? 10 : 0;
@@ -258,11 +263,5 @@ public class Cp21xxSerialDriver implements UsbSerialDriver {
             setConfigSingle(18, i3);
             return true;
         }
-    }
-
-    public static Map<Integer, int[]> getSupportedDevices() {
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put(4292, new int[]{60000, 60016, 60017, 60032});
-        return linkedHashMap;
     }
 }

@@ -40,7 +40,7 @@ public class TpmsMainActivity extends Activity {
             }
         }
     };
-    private final String TAG = "difengze.com-TpmsMainActivity";
+    private final String TAG = "TpmsMainActivity";
     TpmsApplication app = null;
     @ViewInject(R.id.back_left_betta)
     TextView back_left_betta;
@@ -102,10 +102,10 @@ public class TpmsMainActivity extends Activity {
     Handler mSyncHandler;
     Runnable mSyncRunAble = new Runnable() {
         public void run() {
-            if (TpmsMainActivity.this.mPDlg.isShowing()) {
-                TpmsMainActivity.this.mPDlg.dismiss();
+            if (mPDlg.isShowing()) {
+                mPDlg.dismiss();
                 TpmsMainActivity tpmsMainActivity = TpmsMainActivity.this;
-                Toast.makeText(tpmsMainActivity, tpmsMainActivity.getString(R.string.xingxiduqushibai), 4000).show();
+                Toast.makeText(tpmsMainActivity, tpmsMainActivity.getString(R.string.xingxiduqushibai), Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -131,42 +131,42 @@ public class TpmsMainActivity extends Activity {
             ViewUtils.inject(this);
             EventBus.getDefault().register(this);
             TpmsApplication tpmsApplication = (TpmsApplication) getApplication();
-            this.app = tpmsApplication;
+            app = tpmsApplication;
             tpmsApplication.startTpms();
-            this.mTpms = this.app.getTpms();
-            this.datasrc = this.app.getDataSrc();
-            this.mPDlg = PAlertDialog.showDiolg(this, getString(R.string.zhengzaiduquzhong));
+            mTpms = app.getTpms();
+            datasrc = app.getDataSrc();
+            mPDlg = PAlertDialog.showDiolg(this, getString(R.string.zhengzaiduquzhong));
             Handler handler = new Handler();
-            this.mSyncHandler = handler;
-            handler.postDelayed(this.mSyncRunAble, 14000);
+            mSyncHandler = handler;
+            handler.postDelayed(mSyncRunAble, 14000);
             if (Build.VERSION.SDK_INT >= 23 && !Settings.canDrawOverlays(this)) {
                 startActivity(new Intent("android.settings.action.MANAGE_OVERLAY_PERMISSION"));
             }
             if (this.mTpms.isDevCheckOk()) {
-                TiresState frontLeftState = this.mTpms.getFrontLeftState();
+                TiresState frontLeftState = mTpms.getFrontLeftState();
                 this.mFrontLeft = frontLeftState;
                 this.front_left_pressure.setText(getPressure(frontLeftState.AirPressure));
-                this.front_left_error.setText(this.mFrontLeft.error);
+                this.front_left_error.setText(mFrontLeft.error);
                 this.front_left_temp.setText(getTempString(this.mFrontLeft.Temperature));
-                TiresState frontRightState = this.app.getTpms().getFrontRightState();
+                TiresState frontRightState = app.getTpms().getFrontRightState();
                 this.mFrontRight = frontRightState;
                 this.front_right_pressure.setText(getPressure(frontRightState.AirPressure));
-                this.front_right_error.setText(this.mFrontRight.error);
+                this.front_right_error.setText(mFrontRight.error);
                 this.front_right_temp.setText(getTempString(this.mFrontRight.Temperature));
-                TiresState backRightState = this.app.getTpms().getBackRightState();
+                TiresState backRightState = app.getTpms().getBackRightState();
                 this.mBackRight = backRightState;
                 this.back_right_pressure.setText(getPressure(backRightState.AirPressure));
-                this.back_right_error.setText(this.mBackRight.error);
-                this.back_right_temp.setText(getTempString(this.mBackRight.Temperature));
-                TiresState backLeftState = this.app.getTpms().getBackLeftState();
+                this.back_right_error.setText(mBackRight.error);
+                this.back_right_temp.setText(getTempString(mBackRight.Temperature));
+                TiresState backLeftState = app.getTpms().getBackLeftState();
                 this.mBackLeft = backLeftState;
                 this.back_left_pressure.setText(getPressure(backLeftState.AirPressure));
-                this.back_left_error.setText(this.mBackLeft.error);
+                this.back_left_error.setText(mBackLeft.error);
                 this.back_left_temp.setText(getTempString(this.mBackLeft.Temperature));
                 if (this.app.getTpms().getSparetireEnable()) {
-                    this.ll_sptires_contioner.setVisibility(0);
+                    this.ll_sptires_contioner.setVisibility(View.VISIBLE);
                 } else {
-                    this.ll_sptires_contioner.setVisibility(4);
+                    this.ll_sptires_contioner.setVisibility(View.INVISIBLE);
                 }
                 TiresState spareTire = this.app.getTpms().getSpareTire();
                 this.mSpareTire = spareTire;
@@ -179,6 +179,7 @@ public class TpmsMainActivity extends Activity {
         finish();
     }
 
+    @Override
     public void onNewIntent(Intent intent) {
         String action;
         super.onNewIntent(intent);
@@ -187,27 +188,31 @@ public class TpmsMainActivity extends Activity {
         }
     }
 
+    @Override
     public void onStart() {
         this.mTpms.closeFloatWindow();
         super.onStart();
     }
 
+    @Override
     public void onResume() {
         super.onResume();
         this.mTpms.setForeground(true);
         this.mTpms.closeFloatWindow();
         if (this.app.getTpms().getSparetireEnable()) {
-            this.ll_sptires_contioner.setVisibility(0);
+            this.ll_sptires_contioner.setVisibility(View.VISIBLE);
         } else {
-            this.ll_sptires_contioner.setVisibility(4);
+            this.ll_sptires_contioner.setVisibility(View.INVISIBLE);
         }
     }
 
+    @Override
     public void onStop() {
         this.mTpms.setForeground(false);
         super.onStop();
     }
 
+    @Override
     public void onDestroy() {
         super.onDestroy();
         AlertDialog alertDialog = this.mPDlg;
@@ -225,6 +230,7 @@ public class TpmsMainActivity extends Activity {
         }
     }
 
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
@@ -302,33 +308,29 @@ public class TpmsMainActivity extends Activity {
     }
 
     private void updateView(TiresStateEvent tiresStateEvent, TextView textView, LinearLayout linearLayout, TextView textView2) {
-        String str;
-        String str2;
-        String str3;
+        String str = "";
         TiresState tiresState = tiresStateEvent.mState;
-        String str4 = "";
         if (tiresState.NoSignal) {
-            str2 = str4 + getString(R.string.lianjieyichang);
-            str3 = "NoSignal";
+            str = getString(R.string.lianjieyichang);
+            //str3 = "NoSignal";
         } else if (tiresState.Leakage) {
-            str2 = str4 + getString(R.string.louqizhong);
-            str3 = "Leakage";
+            str = getString(R.string.leaking);
+            //str3 = "Leakage";
         } else if (tiresState.AirPressure > this.mTpms.getHiPress()) {
-            str2 = str4 + getString(R.string.taiyaguogao);
-            str3 = "mHiPressStamp";
+            str = getString(R.string.taiyaguogao);
+            //str3 = "mHiPressStamp";
         } else if (tiresState.AirPressure < this.mTpms.getLowPress()) {
-            str2 = str4 + getString(R.string.taiyaguodi);
-            str3 = "mLowPressStamp";
+            str = getString(R.string.low_press);
+            //str3 = "mLowPressStamp";
         } else if (tiresState.Temperature > this.mTpms.getHiTemp()) {
-            str2 = str4 + getString(R.string.wengduguogao);
-            str3 = "mHiTempStamp";
+            str = getString(R.string.wengduguogao);
+            //str3 = "mHiTempStamp";
         } else if (tiresState.LowPower) {
-            str2 = str4 + getString(R.string.dianyaguodi);
-            str3 = "LowPower";
+            str = getString(R.string.low_pwr);
+            //str3 = "LowPower";
         } else {
-            str = str4;
-            textView2.setBackgroundResource(!tiresState.LowPower ? R.drawable.bettawaring : R.drawable.bettaok);
-            if (!TextUtils.isEmpty(str4)) {
+            textView2.setBackgroundResource(!tiresState.LowPower ? R.drawable.outline_battery_alert_24 : R.drawable.outline_battery_full_24);
+            if (!TextUtils.isEmpty(str)) {
                 Log.i(this.TAG, "无告警");
                 textView.setText(R.string.taiyazhengchang);
                 linearLayout.getBackground().setLevel(1);
@@ -338,16 +340,17 @@ public class TpmsMainActivity extends Activity {
             linearLayout.getBackground().setLevel(0);
             return;
         }
-        str4 = str3;
-        str = str2;
-        textView2.setBackgroundResource(!tiresState.LowPower ? R.drawable.bettawaring : R.drawable.bettaok);
-        if (!TextUtils.isEmpty(str4)) {
-        }
+        textView2.setBackgroundResource(!tiresState.LowPower ? R.drawable.outline_battery_alert_24 : R.drawable.outline_battery_full_24);
     }
 
     @OnClick({R.id.btn_paire_id})
     public void btn_paire_id(View view) {
         startActivity(new Intent(this, PaireIDActivity.class));
+    }
+
+    @OnClick({R.id.btn_test})
+    public void btn_test(View view) {
+        startActivity(new Intent(this, TestActivity.class));
     }
 
     @OnClick({R.id.btn_tpms_set})

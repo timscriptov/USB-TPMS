@@ -67,10 +67,10 @@ public class SetExchangeActivity extends Fragment {
     TextView tv_exchange_hint;
     Runnable mFailedAble = new Runnable() {
         public void run() {
-            SetExchangeActivity.this.mExChangeFailed.show();
-            if (SetExchangeActivity.this.mPDlg != null) {
-                SetExchangeActivity.this.mPDlg.dismiss();
-                SetExchangeActivity.this.mPDlg = null;
+            mExChangeFailed.show();
+            if (mPDlg != null) {
+                mPDlg.dismiss();
+                mPDlg = null;
             }
             SetExchangeActivity setExchangeActivity = SetExchangeActivity.this;
             setExchangeActivity.btn_cannel_exchange(setExchangeActivity.btn_cannel_exchange);
@@ -78,17 +78,17 @@ public class SetExchangeActivity extends Fragment {
     };
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
-        View inflate = layoutInflater.inflate(R.layout.fragment_exchange2, (ViewGroup) null);
+        View inflate = layoutInflater.inflate(R.layout.fragment_exchange2, null);
         ViewUtils.inject(this, inflate);
-        this.app = (TpmsApplication) getActivity().getApplication();
+        app = (TpmsApplication) getActivity().getApplication();
         EventBus.getDefault().register(this);
-        this.datasrc = this.app.getDataSrc();
-        this.mTpms = this.app.getTpms();
-        this.btn_cannel_exchange.setVisibility(8);
-        this.mExChangeOk = Toast.makeText(getActivity(), getString(R.string.jiaohuanchenggong), 2000);
-        this.mExChangeFailed = new CDialog(getActivity(), (int) R.layout.confirm_dialog);
-        this.mFailedHander = new Handler();
-        showLeftTires(!this.app.getTpms().getSparetireEnable());
+        datasrc = app.getDataSrc();
+        mTpms = app.getTpms();
+        btn_cannel_exchange.setVisibility(View.GONE);
+        mExChangeOk = Toast.makeText(getActivity(), getString(R.string.jiaohuanchenggong), Toast.LENGTH_LONG);
+        mExChangeFailed = new CDialog(getActivity(), R.layout.confirm_dialog);
+        mFailedHander = new Handler();
+        showLeftTires(!app.getTpms().getSparetireEnable());
         return inflate;
     }
 
@@ -111,18 +111,18 @@ public class SetExchangeActivity extends Fragment {
 
     private void showLeftTires(boolean z) {
         if (z) {
-            this.btn_sp_fl.setVisibility(4);
-            this.btn_sp_fr.setVisibility(4);
-            this.btn_sp_bl.setVisibility(4);
-            this.btn_sp_br.setVisibility(4);
+            this.btn_sp_fl.setVisibility(View.INVISIBLE);
+            this.btn_sp_fr.setVisibility(View.INVISIBLE);
+            this.btn_sp_bl.setVisibility(View.INVISIBLE);
+            this.btn_sp_br.setVisibility(View.INVISIBLE);
             this.iv_exchange.setImageLevel(0);
             btn_cannel_exchange(null);
             return;
         }
-        this.btn_sp_fl.setVisibility(0);
-        this.btn_sp_fr.setVisibility(0);
-        this.btn_sp_bl.setVisibility(0);
-        this.btn_sp_br.setVisibility(0);
+        this.btn_sp_fl.setVisibility(View.VISIBLE);
+        this.btn_sp_fr.setVisibility(View.VISIBLE);
+        this.btn_sp_bl.setVisibility(View.VISIBLE);
+        this.btn_sp_br.setVisibility(View.VISIBLE);
         btn_cannel_exchange(null);
         this.mSelectBtn = null;
     }

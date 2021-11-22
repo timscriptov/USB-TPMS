@@ -1,6 +1,6 @@
 package com.std.dev;
 
-import com.tpms.utils.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileDescriptor;

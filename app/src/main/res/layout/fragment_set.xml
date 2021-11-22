@@ -480,7 +480,7 @@
                 android:layout_height="80px"
                 android:layout_weight="2.5"
                 android:gravity="center_vertical"
-                android:text="@string/banbenxingxi"
+                android:text="@string/version_info"
                 android:textSize="24px" />
 
             <TextView

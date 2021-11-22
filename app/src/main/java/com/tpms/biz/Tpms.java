@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
@@ -86,7 +87,7 @@ public class Tpms {
         this.mPreferences = tpmsApplication.getSharedPreferences("setting", 0);
         initData();
         EventBus.getDefault().register(this);
-        this.app = tpmsApplication;
+        app = tpmsApplication;
         this.notificationManager = (NotificationManager) tpmsApplication.getSystemService(Context.NOTIFICATION_SERVICE);
         this.mSoundPoolCtrl = new SoundPoolCtrl2(tpmsApplication.getApplicationContext());
     }
@@ -163,12 +164,12 @@ public class Tpms {
     }
 
     public void initCodes() {
-        FrameEncode frameEncode = new FrameEncode(this.app);
+        FrameEncode frameEncode = new FrameEncode(app);
         this.mencode = frameEncode;
-        frameEncode.init(this.app);
+        frameEncode.init(app);
         FrameDecode frameDecode = new FrameDecode();
         this.mdecode = frameDecode;
-        frameDecode.init(this.app);
+        frameDecode.init(app);
     }
 
     public void init() {
@@ -462,7 +463,7 @@ public class Tpms {
     }
 
     public void showAlarmDialog(String str) {
-        this.dlg = new AlertDialog.Builder(this.app).setTitle("系统提示").setMessage(str).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        this.dlg = new AlertDialog.Builder(app).setTitle("系统提示").setMessage(str).setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Tpms.this.dlg.dismiss();
             }
@@ -643,12 +644,12 @@ public class Tpms {
                 e.printStackTrace();
             }
             if (Build.VERSION.SDK_INT >= 26) {
-                this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", 4));
+                this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
             }
-            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms").setContentTitle(this.app.getString(R.string.zhuangtailantaiya)).setContentText(this.app.getString(R.string.zhuangtailantaiyazhengchang)).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_notif_ok).setLargeIcon(BitmapFactory.decodeResource(this.app.getResources(), R.drawable.ic_notif_ok)).setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0)).build();
+            Notification build = new NotificationCompat.Builder(app, "com.dfz.tpms").setContentTitle(app.getString(R.string.zhuangtailantaiya)).setContentText(app.getString(R.string.zhuangtailantaiyazhengchang)).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_notif_ok).setLargeIcon(BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_notif_ok)).setContentIntent(PendingIntent.getActivity(app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(app, TpmsMainActivity.class), 0)).build();
             build.flags |= 2;
             try {
-                this.app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
+                app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
             } catch (Exception unused) {
                 this.notificationManager.notify(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
             }
@@ -676,18 +677,26 @@ public class Tpms {
                 e.printStackTrace();
             }
             if (Build.VERSION.SDK_INT >= 26) {
-                this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", 4));
+                this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
             }
-            Notification build = new NotificationCompat.Builder(this.app, "com.dfz.tpms").setContentTitle(this.app.getString(R.string.zhuangtailantaiya)).setContentText(this.app.getString(R.string.ztltaiyayichang)).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_notif_error).setLargeIcon(BitmapFactory.decodeResource(this.app.getResources(), R.drawable.ic_notif_ok)).setContentIntent(PendingIntent.getActivity(this.app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(this.app, TpmsMainActivity.class), 0)).build();
+            Notification build = new NotificationCompat.Builder(app, "com.dfz.tpms")
+                    .setContentTitle(app.getString(R.string.zhuangtailantaiya)).setContentText(app.getString(R.string.ztltaiyayichang))
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.ic_notif_error)
+                    .setLargeIcon(BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_notif_ok))
+                    .setContentIntent(PendingIntent.getActivity(app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(app, TpmsMainActivity.class), 0))
+                    .setChannelId(app.getString(R.string.zhuangtailantaiya))
+                    .setPriority(1)
+                    .build();
             build.flags |= 2;
             try {
-                this.app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
+                app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
             } catch (Exception e2) {
                 e2.printStackTrace();
-                this.notificationManager.notify(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
+                notificationManager.notify(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
             }
-            Log.i(this.TAG, "lyc cur showErrorNotifMsg2");
-            this.mNotificationState = 0;
+            Log.i(TAG, "lyc cur showErrorNotifMsg2");
+            mNotificationState = 0;
         }
     }
 

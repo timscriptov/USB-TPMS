@@ -23,7 +23,7 @@ public class KeyReceiver extends BroadcastReceiver {
             getPreferenceValue(context);
             if (this.aux_acc) {
                 System.out.println("=====true 断电时在播放");
-                context.getSharedPreferences("aux_pref", -1).edit().putBoolean("LaunchAccOff", true).apply();
+                context.getSharedPreferences("aux_pref", mScaFb).edit().putBoolean("LaunchAccOff", true).apply();
                 ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getPackageName().equals(context.getPackageName());
                 savePreferenceValue(context);
                 return;
@@ -33,13 +33,13 @@ public class KeyReceiver extends BroadcastReceiver {
     }
 
     private void getPreferenceValue(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("aux_pref", -1);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("aux_pref", mScaFb);
         this.mPreferences = sharedPreferences;
         this.aux_acc = sharedPreferences.getBoolean("aux_goplay", false);
     }
 
     private void savePreferenceValue(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("aux_pref", -1);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("aux_pref", mScaFb);
         this.mPreferences = sharedPreferences;
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putBoolean("aux_goplay", false);
@@ -48,7 +48,7 @@ public class KeyReceiver extends BroadcastReceiver {
 
     private void delayMs(int i) {
         try {
-            Thread.sleep((long) i);
+            Thread.sleep(i);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

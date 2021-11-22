@@ -8,10 +8,10 @@ abstract class CommonUsbSerialDriver implements UsbSerialDriver {
     public static final int DEFAULT_WRITE_BUFFER_SIZE = 16384;
     protected final UsbDeviceConnection mConnection;
     protected final UsbDevice mDevice;
-    protected byte[] mReadBuffer;
     protected final Object mReadBufferLock = new Object();
-    protected byte[] mWriteBuffer;
     protected final Object mWriteBufferLock = new Object();
+    protected byte[] mReadBuffer;
+    protected byte[] mWriteBuffer;
 
     public CommonUsbSerialDriver(UsbDevice usbDevice, UsbDeviceConnection usbDeviceConnection) {
         this.mDevice = usbDevice;
@@ -20,7 +20,7 @@ abstract class CommonUsbSerialDriver implements UsbSerialDriver {
         this.mWriteBuffer = new byte[16384];
     }
 
-    @Override // com.cz.usbserial.driver.UsbSerialDriver
+    @Override
     public final UsbDevice getDevice() {
         return this.mDevice;
     }

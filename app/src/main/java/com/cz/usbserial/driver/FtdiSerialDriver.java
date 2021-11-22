@@ -4,6 +4,7 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.util.Log;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -14,7 +15,27 @@ public class FtdiSerialDriver implements UsbSerialDriver {
     private final UsbDevice mDevice;
     private final UsbSerialPort mPort;
 
-    /* access modifiers changed from: private */
+    public FtdiSerialDriver(UsbDevice usbDevice) {
+        this.mDevice = usbDevice;
+        this.mPort = new FtdiSerialPort(usbDevice, 0);
+    }
+
+    public static Map<Integer, int[]> getSupportedDevices() {
+        LinkedHashMap<Integer, int[]> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put(1027, new int[]{24577, 24597});
+        return linkedHashMap;
+    }
+
+    @Override
+    public UsbDevice getDevice() {
+        return this.mDevice;
+    }
+
+    @Override
+    public List<UsbSerialPort> getPorts() {
+        return Collections.singletonList(this.mPort);
+    }
+
     public enum DeviceType {
         TYPE_BM,
         TYPE_AM,
@@ -24,34 +45,9 @@ public class FtdiSerialDriver implements UsbSerialDriver {
         TYPE_4232H
     }
 
-    public FtdiSerialDriver(UsbDevice usbDevice) {
-        this.mDevice = usbDevice;
-        this.mPort = new FtdiSerialPort(usbDevice, 0);
-    }
-
-    @Override // com.cz.usbserial.driver.UsbSerialDriver
-    public UsbDevice getDevice() {
-        return this.mDevice;
-    }
-
-    @Override // com.cz.usbserial.driver.UsbSerialDriver
-    public List<UsbSerialPort> getPorts() {
-        return Collections.singletonList(this.mPort);
-    }
-
     private class FtdiSerialPort extends CommonUsbSerialPort {
-        private static final boolean ENABLE_ASYNC_READS = false;
         public static final int FTDI_DEVICE_IN_REQTYPE = 192;
         public static final int FTDI_DEVICE_OUT_REQTYPE = 64;
-        private static final int MODEM_STATUS_HEADER_LENGTH = 2;
-        private static final int SIO_MODEM_CTRL_REQUEST = 1;
-        private static final int SIO_RESET_PURGE_RX = 1;
-        private static final int SIO_RESET_PURGE_TX = 2;
-        private static final int SIO_RESET_REQUEST = 0;
-        private static final int SIO_RESET_SIO = 0;
-        private static final int SIO_SET_BAUD_RATE_REQUEST = 3;
-        private static final int SIO_SET_DATA_REQUEST = 4;
-        private static final int SIO_SET_FLOW_CTRL_REQUEST = 2;
         public static final int USB_ENDPOINT_IN = 128;
         public static final int USB_ENDPOINT_OUT = 0;
         public static final int USB_READ_TIMEOUT_MILLIS = 5000;
@@ -64,59 +60,69 @@ public class FtdiSerialDriver implements UsbSerialDriver {
         public static final int USB_TYPE_STANDARD = 0;
         public static final int USB_TYPE_VENDOR = 0;
         public static final int USB_WRITE_TIMEOUT_MILLIS = 5000;
+        private static final boolean ENABLE_ASYNC_READS = false;
+        private static final int MODEM_STATUS_HEADER_LENGTH = 2;
+        private static final int SIO_MODEM_CTRL_REQUEST = 1;
+        private static final int SIO_RESET_PURGE_RX = 1;
+        private static final int SIO_RESET_PURGE_TX = 2;
+        private static final int SIO_RESET_REQUEST = 0;
+        private static final int SIO_RESET_SIO = 0;
+        private static final int SIO_SET_BAUD_RATE_REQUEST = 3;
+        private static final int SIO_SET_DATA_REQUEST = 4;
+        private static final int SIO_SET_FLOW_CTRL_REQUEST = 2;
         private final String TAG = FtdiSerialDriver.class.getSimpleName();
         private int mInterface = 0;
         private int mMaxPacketSize = 64;
         private DeviceType mType;
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getCD() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getCTS() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getDSR() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getDTR() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getRI() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public boolean getRTS() throws IOException {
-            return false;
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public void setDTR(boolean z) throws IOException {
-        }
-
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
-        public void setRTS(boolean z) throws IOException {
-        }
-
         public FtdiSerialPort(UsbDevice usbDevice, int i) {
             super(usbDevice, i);
         }
 
-        @Override // com.cz.usbserial.driver.UsbSerialPort
+        @Override
+        public boolean getCD() throws IOException {
+            return false;
+        }
+
+        @Override
+        public boolean getCTS() throws IOException {
+            return false;
+        }
+
+        @Override
+        public boolean getDSR() throws IOException {
+            return false;
+        }
+
+        @Override
+        public boolean getDTR() throws IOException {
+            return false;
+        }
+
+        @Override
+        public void setDTR(boolean z) throws IOException {
+        }
+
+        @Override
+        public boolean getRI() throws IOException {
+            return false;
+        }
+
+        @Override
+        public boolean getRTS() throws IOException {
+            return false;
+        }
+
+        @Override
+        public void setRTS(boolean z) throws IOException {
+        }
+
+        @Override
         public UsbSerialDriver getDriver() {
             return FtdiSerialDriver.this;
         }
 
-        private final int filterStatusBytes(byte[] bArr, byte[] bArr2, int i, int i2) {
+        private int filterStatusBytes(byte[] bArr, byte[] bArr2, int i, int i2) {
             int i3 = i % i2;
             int i4 = 0;
             int i5 = (i / i2) + (i3 == 0 ? 0 : 1);
@@ -139,15 +145,14 @@ public class FtdiSerialDriver implements UsbSerialDriver {
             throw new IOException("Reset failed: result=" + controlTransfer);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void open(UsbDeviceConnection usbDeviceConnection) throws IOException {
             if (this.mConnection == null) {
                 this.mConnection = usbDeviceConnection;
                 for (int i = 0; i < this.mDevice.getInterfaceCount(); i++) {
                     try {
                         if (usbDeviceConnection.claimInterface(this.mDevice.getInterface(i), true)) {
-                            String str = this.TAG;
-                            Log.d(str, "claimInterface " + i + " SUCCESS");
+                            Log.d(this.TAG, "claimInterface " + i + " SUCCESS");
                         } else {
                             throw new IOException("Error claiming interface " + i);
                         }
@@ -163,7 +168,7 @@ public class FtdiSerialDriver implements UsbSerialDriver {
             throw new IOException("Already open");
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void close() throws IOException {
             if (this.mConnection != null) {
                 try {
@@ -176,7 +181,7 @@ public class FtdiSerialDriver implements UsbSerialDriver {
             }
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public int read(byte[] bArr, int i) throws IOException {
             int filterStatusBytes;
             UsbEndpoint endpoint = this.mDevice.getInterface(0).getEndpoint(0);
@@ -191,7 +196,7 @@ public class FtdiSerialDriver implements UsbSerialDriver {
             return filterStatusBytes;
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public int write(byte[] bArr, int i) throws IOException {
             int min;
             byte[] bArr2;
@@ -229,7 +234,7 @@ public class FtdiSerialDriver implements UsbSerialDriver {
             throw new IOException("Setting baudrate failed: result=" + controlTransfer);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void setParameters(int i, int i2, int i3, int i4) throws IOException {
             int i5;
             int i6;
@@ -319,7 +324,7 @@ public class FtdiSerialDriver implements UsbSerialDriver {
             return new long[]{(long) i8, (this.mType == DeviceType.TYPE_2232C || this.mType == DeviceType.TYPE_2232H || this.mType == DeviceType.TYPE_4232H) ? ((j >> 8) & 65535 & 65280) | 0 : (j >> 16) & 65535, j & 65535};
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean purgeHwBuffers(boolean z, boolean z2) throws IOException {
             int controlTransfer;
             int controlTransfer2;
@@ -331,11 +336,5 @@ public class FtdiSerialDriver implements UsbSerialDriver {
                 throw new IOException("Flushing RX failed: result=" + controlTransfer);
             }
         }
-    }
-
-    public static Map<Integer, int[]> getSupportedDevices() {
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put(1027, new int[]{24577, 24597});
-        return linkedHashMap;
     }
 }

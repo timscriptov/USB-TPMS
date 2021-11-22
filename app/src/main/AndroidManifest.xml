@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.syt.tmps">
 
     <uses-feature
@@ -61,36 +62,48 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         android:name="com.syt.tmps.TpmsApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
-        android:persistent="true">
+        android:persistent="true"
+        tools:targetApi="n">
         <activity
             android:directBootAware="true"
             android:name="com.tpms.view.TestActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            tools:targetApi="n" />
         <activity
             android:directBootAware="true"
             android:name="com.tpms.view.TpmsMainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            tools:targetApi="n">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+                <action
+                    android:directBootAware="true"
+                    android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                    tools:targetApi="n" />
             </intent-filter>
 
             <meta-data
+                android:directBootAware="true"
                 android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
-                android:resource="@xml/device_filter" />
+                android:resource="@xml/device_filter"
+                tools:targetApi="n" />
         </activity>
         <activity
             android:name="com.tpms.view.PaireIDActivity"
@@ -106,7 +119,8 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme" />
 
-        <receiver android:name="com.syt.tmps.BKReceiver">
+        <receiver android:name="com.syt.tmps.BKReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="SYS_STD_IN_ACCON_EVENT" />
                 <action android:name="SYS_STD_IN_ACCOFF_EVENT" />
@@ -120,12 +134,22 @@
                 <action android:name="android.intent.action.ACTION_USER_PRESENT" />
             </intent-filter>
         </receiver>
-        <service android:name="com.syt.tmps.TpmsService">
+        <service android:name="com.syt.tmps.TpmsService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.tpms.TpmsService" />
                 <action android:name="com.tpms.TpmsService.ok" />
                 <action android:name="com.tpms.TpmsService.error" />
             </intent-filter>
         </service>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.syt.tmps.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 </manifest>

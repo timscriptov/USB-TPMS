@@ -25,7 +25,9 @@ public class TpmsService extends Service {
     Runnable getCurentWindow = new Runnable() {
         public void run() {
             try {
-                ComponentName componentName = ((ActivityManager) TpmsService.this.getSystemService(Context.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity;
+                ComponentName componentName = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE))
+                        .getRunningTasks(1)
+                        .get(0).topActivity;
                 Log.d("TestService", "pkg:" + componentName.getPackageName());
                 Log.d("TestService", "cls:" + componentName.getClassName());
             } catch (Exception e) {
@@ -35,6 +37,7 @@ public class TpmsService extends Service {
         }
     };
 
+    @Override
     public void onCreate() {
         Log.i(TAG, "onCreate");
         super.onCreate();
@@ -44,7 +47,8 @@ public class TpmsService extends Service {
 
     private Notification getForegroundNotification() {
         if (Build.VERSION.SDK_INT >= 26) {
-            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", 4));
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE))
+                    .createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
         }
         return new NotificationCompat.Builder(this, "com.dfz.tpms")
                 .setContentTitle(getString(R.string.zhuangtailantaiya)).setContentText(getString(R.string.zhuangtailantaiyazhengchang))
@@ -55,16 +59,19 @@ public class TpmsService extends Service {
                 .build();
     }
 
+    @Override
     public IBinder onBind(Intent intent) {
         Log.i(TAG, "onBind");
         return null;
     }
 
+    @Override
     public void onDestroy() {
         Log.i(TAG, "onDestroy");
         super.onDestroy();
     }
 
+    @Override
     public void onStart(Intent intent, int i) {
         super.onStart(intent, i);
     }

@@ -1,5 +1,6 @@
 package com.tpms.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,18 +58,18 @@ public class PaireIDActivity extends Activity {
     TextView tv_sptires_id;
     @ViewInject(R.id.tv_title_state)
     TextView tv_title_state;
-    private String TAG = "PaireIDActivity";
+    private final String TAG = "PaireIDActivity";
     Runnable timeOutCnt = new Runnable() {
         public void run() {
-            if (PaireIDActivity.this.mTimeOut <= 0) {
-                PaireIDActivity.this.timeOut.removeCallbacks(PaireIDActivity.this.timeOutCnt);
+            if (mTimeOut <= 0) {
+                timeOut.removeCallbacks(timeOutCnt);
                 PaireIDActivity paireIDActivity = PaireIDActivity.this;
                 paireIDActivity.btn_paire_canel(paireIDActivity.btn_paire_canel);
-                PaireIDActivity.this.btn_paire_start.setVisibility(8);
-                PaireIDActivity.this.tv_title_state.setText(R.string.dianjikaishianniujintupeidui);
+                btn_paire_start.setVisibility(View.GONE);
+                tv_title_state.setText(R.string.dianjikaishianniujintupeidui);
                 return;
             }
-            TextView textView = PaireIDActivity.this.tv_title_state;
+            TextView textView = tv_title_state;
             StringBuilder sb = new StringBuilder();
             sb.append(PaireIDActivity.this.getString(R.string.zhengzaipeidui));
             PaireIDActivity paireIDActivity2 = PaireIDActivity.this;
@@ -76,7 +77,7 @@ public class PaireIDActivity extends Activity {
             paireIDActivity2.mTimeOut = i - 1;
             sb.append(i);
             textView.setText(sb.toString());
-            PaireIDActivity.this.timeOut.postDelayed(PaireIDActivity.this.timeOutCnt, 1000);
+            timeOut.postDelayed(timeOutCnt, 1000);
         }
     };
 
@@ -89,13 +90,13 @@ public class PaireIDActivity extends Activity {
         this.app = tpmsApplication;
         this.datasrc = tpmsApplication.getDataSrc();
         this.app.getTpms().querySensorID();
-        this.btn_paire_start.setVisibility(4);
-        this.btn_paire_canel.setVisibility(8);
+        this.btn_paire_start.setVisibility(View.INVISIBLE);
+        this.btn_paire_canel.setVisibility(View.GONE);
         this.timeOut = new Handler();
         if (!this.app.getTpms().getSparetireEnable()) {
-            this.tv_sptires_id.setVisibility(4);
+            this.tv_sptires_id.setVisibility(View.INVISIBLE);
         } else {
-            this.tv_sptires_id.setVisibility(0);
+            this.tv_sptires_id.setVisibility(View.VISIBLE);
         }
     }
 
@@ -126,7 +127,7 @@ public class PaireIDActivity extends Activity {
     }
 
     private void setSelectButton(View view) {
-        if (this.btn_paire_canel.getVisibility() == 0) {
+        if (this.btn_paire_canel.getVisibility() == View.VISIBLE) {
             btn_paire_canel(this.btn_paire_canel);
             return;
         }
@@ -136,25 +137,25 @@ public class PaireIDActivity extends Activity {
         }
         this.mImgBtn = view;
         view.getBackground().setLevel(1);
-        this.btn_paire_start.setVisibility(0);
-        this.btn_paire_canel.setVisibility(8);
+        this.btn_paire_start.setVisibility(View.VISIBLE);
+        this.btn_paire_canel.setVisibility(View.GONE);
         this.tv_title_state.setText(getString(R.string.dianjikaishianniujintupeidui));
     }
 
     @OnClick({R.id.btn_paire_canel})
     public void btn_paire_canel(View view) {
-        this.btn_paire_start.setVisibility(4);
-        this.btn_paire_canel.setVisibility(8);
+        this.btn_paire_start.setVisibility(View.INVISIBLE);
+        this.btn_paire_canel.setVisibility(View.GONE);
         Log.i(this.TAG, "btn_paire_canel");
         this.tv_title_state.setText(R.string.qinxuanzeyaopeiduideluntai);
-        this.progressBar1.setVisibility(8);
+        this.progressBar1.setVisibility(View.GONE);
         this.app.getTpms().stopPaire();
         this.timeOut.removeCallbacks(this.timeOutCnt);
         View view2 = this.mImgBtn;
         if (view2 != null) {
             view2.getBackground().setLevel(0);
         }
-        this.tires_container.setVisibility(8);
+        this.tires_container.setVisibility(View.GONE);
     }
 
     @OnClick({R.id.btn_paire_start})
@@ -180,11 +181,11 @@ public class PaireIDActivity extends Activity {
             } else {
                 this.app.getTpms().paireSpTired();
             }
-            this.btn_paire_canel.setVisibility(0);
-            this.btn_paire_start.setVisibility(8);
+            this.btn_paire_canel.setVisibility(View.VISIBLE);
+            this.btn_paire_start.setVisibility(View.GONE);
             TextView textView = this.tv_title_state;
-            textView.setText(getString(R.string.zhengzaipeidui) + this.mTimeOut);
-            this.progressBar1.setVisibility(0);
+            textView.setText(getString(R.string.zhengzaipeidui) + mTimeOut);
+            this.progressBar1.setVisibility(View.VISIBLE);
             this.mTimeOut = 120;
             this.timeOut.postDelayed(this.timeOutCnt, 1000);
         }
@@ -204,8 +205,7 @@ public class PaireIDActivity extends Activity {
     }
 
     public void onEventMainThread(PaireIDOkEvent paireIDOkEvent) {
-        String str = this.TAG;
-        Log.w(str, "收到了配对也就是学习到了ID:" + paireIDOkEvent.tires + ";mac:" + paireIDOkEvent.mID);
+        Log.w(this.TAG, "收到了配对也就是学习到了ID:" + paireIDOkEvent.tires + ";mac:" + paireIDOkEvent.mID);
         if (paireIDOkEvent.tires == 1) {
             this.ib_left_front_id.getBackground().setLevel(0);
         } else if (paireIDOkEvent.tires == 2) {
@@ -222,15 +222,15 @@ public class PaireIDActivity extends Activity {
         if (view != null) {
             view.getBackground().setLevel(2);
         }
-        if (this.btn_paire_canel.getVisibility() != 8) {
-            Toast.makeText(this, getString(R.string.xuexichenggong), 2000).show();
+        if (this.btn_paire_canel.getVisibility() != View.GONE) {
+            Toast.makeText(this, getString(R.string.xuexichenggong), Toast.LENGTH_LONG).show();
         }
         btn_paire_canel(this.btn_paire_canel);
     }
 
+    @SuppressLint("SetTextI18n")
     public void onEventMainThread(QueryIDOkEvent queryIDOkEvent) {
-        String str = this.TAG;
-        Log.i(str, "收到了查寻ID:" + queryIDOkEvent.tires + ";mac:" + queryIDOkEvent.mID);
+        Log.i(this.TAG, "收到了查寻ID:" + queryIDOkEvent.tires + ";mac:" + queryIDOkEvent.mID);
         if (queryIDOkEvent.tires == 1) {
             Log.i("test", "查到 左前id:" + queryIDOkEvent.mID);
             TextView textView = this.tv_left_front_id;

@@ -2,6 +2,7 @@ package com.cz.usbserial.driver;
 
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class UsbSerialProber {
     }
 
     public List<UsbSerialDriver> findAllDrivers(UsbManager usbManager) {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<UsbSerialDriver> arrayList = new ArrayList<>();
         for (UsbDevice usbDevice : usbManager.getDeviceList().values()) {
             UsbSerialDriver probeDevice = probeDevice(usbDevice);
             if (probeDevice != null) {
@@ -43,17 +44,9 @@ public class UsbSerialProber {
             return null;
         }
         try {
-            return (UsbSerialDriver) findDriver.getConstructor(UsbDevice.class).newInstance(usbDevice);
-        } catch (NoSuchMethodException e) {
+            return findDriver.getConstructor(UsbDevice.class).newInstance(usbDevice);
+        } catch (NoSuchMethodException | IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
-        } catch (IllegalArgumentException e2) {
-            throw new RuntimeException(e2);
-        } catch (InstantiationException e3) {
-            throw new RuntimeException(e3);
-        } catch (IllegalAccessException e4) {
-            throw new RuntimeException(e4);
-        } catch (InvocationTargetException e5) {
-            throw new RuntimeException(e5);
         }
     }
 }

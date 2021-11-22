@@ -1,6 +1,6 @@
 package com.std.dev;
 
-import com.tpms.utils.Log;
+import android.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

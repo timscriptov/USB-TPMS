@@ -1,6 +1,7 @@
 package com.cz.usbserial.driver;
 
 import android.util.Log;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -10,23 +11,10 @@ public class SerialInputOutputManager implements Runnable {
     private static final int READ_WAIT_MILLIS = 200;
     private static final String TAG = SerialInputOutputManager.class.getSimpleName();
     private final UsbSerialPort mDriver;
-    private Listener mListener;
     private final ByteBuffer mReadBuffer;
-    private State mState;
     private final ByteBuffer mWriteBuffer;
-
-    public interface Listener {
-        void onNewData(byte[] bArr);
-
-        void onRunError(Exception exc);
-    }
-
-    /* access modifiers changed from: private */
-    public enum State {
-        STOPPED,
-        RUNNING,
-        STOPPING
-    }
+    private Listener mListener;
+    private State mState;
 
     public SerialInputOutputManager(UsbSerialPort usbSerialPort) {
         this(usbSerialPort, null);
@@ -40,12 +28,12 @@ public class SerialInputOutputManager implements Runnable {
         this.mListener = listener;
     }
 
-    public synchronized void setListener(Listener listener) {
-        this.mListener = listener;
-    }
-
     public synchronized Listener getListener() {
         return this.mListener;
+    }
+
+    public synchronized void setListener(Listener listener) {
+        this.mListener = listener;
     }
 
     public void writeAsync(byte[] bArr) {
@@ -79,8 +67,7 @@ public class SerialInputOutputManager implements Runnable {
                 step();
             } catch (Exception e) {
                 try {
-                    String str = TAG;
-                    Log.w(str, "Run ending due to exception: " + e.getMessage(), e);
+                    Log.w(TAG, "Run ending due to exception: " + e.getMessage(), e);
                     Listener listener = getListener();
                     if (listener != null) {
                         listener.onRunError(e);
@@ -99,8 +86,7 @@ public class SerialInputOutputManager implements Runnable {
                 }
             }
         }
-        String str2 = TAG;
-        Log.i(str2, "Stopping mState=" + getState());
+        Log.i(TAG, "Stopping mState=" + getState());
         synchronized (this) {
             this.mState = State.STOPPED;
             Log.i(TAG, "Stopped.");
@@ -111,8 +97,7 @@ public class SerialInputOutputManager implements Runnable {
         int position;
         int read = this.mDriver.read(this.mReadBuffer.array(), 200);
         if (read > 0) {
-            String str = TAG;
-            Log.d(str, "Read data len=" + read);
+            Log.d(TAG, "Read data len=" + read);
             Listener listener = getListener();
             if (listener != null) {
                 byte[] bArr = new byte[read];
@@ -132,9 +117,20 @@ public class SerialInputOutputManager implements Runnable {
             }
         }
         if (bArr2 != null) {
-            String str2 = TAG;
-            Log.d(str2, "Writing data len=" + position);
+            Log.d(TAG, "Writing data len=" + position);
             this.mDriver.write(bArr2, 200);
         }
+    }
+
+    public enum State {
+        STOPPED,
+        RUNNING,
+        STOPPING
+    }
+
+    public interface Listener {
+        void onNewData(byte[] bArr);
+
+        void onRunError(Exception exc);
     }
 }

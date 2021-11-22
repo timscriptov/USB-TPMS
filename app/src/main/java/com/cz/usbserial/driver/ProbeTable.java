@@ -1,6 +1,7 @@
 package com.cz.usbserial.driver;
 
 import android.util.Pair;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,23 +18,17 @@ public class ProbeTable {
         try {
             try {
                 for (Map.Entry<Integer, int[]> entry : ((Map<Integer, int[]>) driverClass.getMethod("getSupportedDevices", new Class[0]).invoke(null, new Object[0])).entrySet()) {
-                    int intValue = ((Integer) entry.getKey()).intValue();
-                    for (int i : (int[]) entry.getValue()) {
+                    int intValue = entry.getKey().intValue();
+                    for (int i : entry.getValue()) {
                         addProduct(intValue, i, driverClass);
                     }
                 }
                 return this;
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
-            } catch (IllegalAccessException e2) {
-                throw new RuntimeException(e2);
-            } catch (InvocationTargetException e3) {
-                throw new RuntimeException(e3);
             }
-        } catch (SecurityException e4) {
+        } catch (SecurityException | NoSuchMethodException e4) {
             throw new RuntimeException(e4);
-        } catch (NoSuchMethodException e5) {
-            throw new RuntimeException(e5);
         }
     }
 

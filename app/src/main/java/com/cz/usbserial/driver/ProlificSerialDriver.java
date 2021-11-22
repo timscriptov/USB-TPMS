@@ -5,6 +5,7 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.util.Log;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -21,12 +22,18 @@ public class ProlificSerialDriver implements UsbSerialDriver {
         this.mPort = new ProlificSerialPort(usbDevice, 0);
     }
 
-    @Override // com.cz.usbserial.driver.UsbSerialDriver
+    public static Map<Integer, int[]> getSupportedDevices() {
+        LinkedHashMap<Integer, int[]> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put(1659, new int[]{8963});
+        return linkedHashMap;
+    }
+
+    @Override
     public List<UsbSerialPort> getPorts() {
         return Collections.singletonList(this.mPort);
     }
 
-    @Override // com.cz.usbserial.driver.UsbSerialDriver
+    @Override
     public UsbDevice getDevice() {
         return this.mDevice;
     }
@@ -58,6 +65,8 @@ public class ProlificSerialDriver implements UsbSerialDriver {
         private static final int USB_RECIP_INTERFACE = 1;
         private static final int USB_WRITE_TIMEOUT_MILLIS = 5000;
         private static final int WRITE_ENDPOINT = 2;
+        private final Object mReadStatusThreadLock = new Object();
+        boolean mStopReadStatusThread = false;
         private int mBaudRate = -1;
         private int mControlLinesValue = 0;
         private int mDataBits = -1;
@@ -67,22 +76,20 @@ public class ProlificSerialDriver implements UsbSerialDriver {
         private UsbEndpoint mReadEndpoint;
         private IOException mReadStatusException = null;
         private volatile Thread mReadStatusThread = null;
-        private final Object mReadStatusThreadLock = new Object();
         private int mStatus = 0;
         private int mStopBits = -1;
-        boolean mStopReadStatusThread = false;
         private UsbEndpoint mWriteEndpoint;
 
         public ProlificSerialPort(UsbDevice usbDevice, int i) {
             super(usbDevice, i);
         }
 
-        @Override // com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public UsbSerialDriver getDriver() {
             return ProlificSerialDriver.this;
         }
 
-        private final byte[] inControlTransfer(int i, int i2, int i3, int i4, int i5) throws IOException {
+        private byte[] inControlTransfer(int i, int i2, int i3, int i4, int i5) throws IOException {
             byte[] bArr = new byte[i5];
             int controlTransfer = this.mConnection.controlTransfer(i, i2, i3, i4, bArr, i5, 1000);
             if (controlTransfer == i5) {
@@ -91,7 +98,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             throw new IOException(String.format("ControlTransfer with value 0x%x failed: %d", Integer.valueOf(i3), Integer.valueOf(controlTransfer)));
         }
 
-        private final void outControlTransfer(int i, int i2, int i3, int i4, byte[] bArr) throws IOException {
+        private void outControlTransfer(int i, int i2, int i3, int i4, byte[] bArr) throws IOException {
             int length = bArr == null ? 0 : bArr.length;
             int controlTransfer = this.mConnection.controlTransfer(i, i2, i3, i4, bArr, length, 5000);
             if (controlTransfer != length) {
@@ -99,11 +106,11 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             }
         }
 
-        private final byte[] vendorIn(int i, int i2, int i3) throws IOException {
+        private byte[] vendorIn(int i, int i2, int i3) throws IOException {
             return inControlTransfer(192, 1, i, i2, i3);
         }
 
-        private final void vendorOut(int i, int i2, byte[] bArr) throws IOException {
+        private void vendorOut(int i, int i2, byte[] bArr) throws IOException {
             outControlTransfer(64, 1, i, i2, bArr);
         }
 
@@ -111,7 +118,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             purgeHwBuffers(true, true);
         }
 
-        private final void ctrlOut(int i, int i2, int i3, byte[] bArr) throws IOException {
+        private void ctrlOut(int i, int i2, int i3, byte[] bArr) throws IOException {
             outControlTransfer(33, i, i2, i3, bArr);
         }
 
@@ -134,9 +141,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             this.mControlLinesValue = i;
         }
 
-        /* access modifiers changed from: private */
-        /* access modifiers changed from: public */
-        private final void readStatusThreadFunction() {
+        private void readStatusThreadFunction() {
             while (!this.mStopReadStatusThread) {
                 try {
                     byte[] bArr = new byte[10];
@@ -155,7 +160,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             }
         }
 
-        private final int getStatus() throws IOException {
+        private int getStatus() throws IOException {
             if (this.mReadStatusThread == null && this.mReadStatusException == null) {
                 synchronized (this.mReadStatusThreadLock) {
                     if (this.mReadStatusThread == null) {
@@ -166,8 +171,6 @@ public class ProlificSerialDriver implements UsbSerialDriver {
                             this.mStatus = bArr[8] & 255;
                         }
                         this.mReadStatusThread = new Thread(new Runnable() {
-                            /* class com.cz.usbserial.driver.ProlificSerialDriver.ProlificSerialPort.AnonymousClass1 */
-
                             public void run() {
                                 ProlificSerialPort.this.readStatusThreadFunction();
                             }
@@ -185,11 +188,11 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             throw iOException;
         }
 
-        private final boolean testStatusFlag(int i) throws IOException {
+        private boolean testStatusFlag(int i) throws IOException {
             return (getStatus() & i) == i;
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void open(UsbDeviceConnection usbDeviceConnection) throws IOException {
             if (this.mConnection == null) {
                 UsbInterface usbInterface = this.mDevice.getInterface(0);
@@ -244,7 +247,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             throw new IOException("Already open");
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void close() throws IOException {
             if (this.mConnection != null) {
                 try {
@@ -275,7 +278,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             }
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public int read(byte[] bArr, int i) throws IOException {
             synchronized (this.mReadBufferLock) {
                 int bulkTransfer = this.mConnection.bulkTransfer(this.mReadEndpoint, this.mReadBuffer, Math.min(bArr.length, this.mReadBuffer.length), i);
@@ -287,7 +290,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             }
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public int write(byte[] bArr, int i) throws IOException {
             int min;
             byte[] bArr2;
@@ -313,7 +316,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             return i2;
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void setParameters(int i, int i2, int i3, int i4) throws IOException {
             if (this.mBaudRate != i || this.mDataBits != i2 || this.mStopBits != i3 || this.mParity != i4) {
                 byte[] bArr = new byte[7];
@@ -353,27 +356,27 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             }
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean getCD() throws IOException {
             return testStatusFlag(1);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean getCTS() throws IOException {
             return testStatusFlag(128);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean getDSR() throws IOException {
             return testStatusFlag(2);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean getDTR() throws IOException {
             return (this.mControlLinesValue & 1) == 1;
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void setDTR(boolean z) throws IOException {
             int i;
             if (z) {
@@ -384,17 +387,17 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             setControlLines(i);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean getRI() throws IOException {
             return testStatusFlag(8);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean getRTS() throws IOException {
             return (this.mControlLinesValue & 2) == 2;
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public void setRTS(boolean z) throws IOException {
             int i;
             if (z) {
@@ -405,7 +408,7 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             setControlLines(i);
         }
 
-        @Override // com.cz.usbserial.driver.CommonUsbSerialPort, com.cz.usbserial.driver.UsbSerialPort
+        @Override
         public boolean purgeHwBuffers(boolean z, boolean z2) throws IOException {
             if (z) {
                 vendorOut(8, 0, null);
@@ -418,11 +421,5 @@ public class ProlificSerialDriver implements UsbSerialDriver {
             }
             return false;
         }
-    }
-
-    public static Map<Integer, int[]> getSupportedDevices() {
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put(1659, new int[]{8963});
-        return linkedHashMap;
     }
 }

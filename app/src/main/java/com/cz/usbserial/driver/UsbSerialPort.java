@@ -1,6 +1,7 @@
 package com.cz.usbserial.driver;
 
 import android.hardware.usb.UsbDeviceConnection;
+
 import java.io.IOException;
 
 public interface UsbSerialPort {
@@ -32,6 +33,8 @@ public interface UsbSerialPort {
 
     boolean getDTR() throws IOException;
 
+    void setDTR(boolean z) throws IOException;
+
     UsbSerialDriver getDriver();
 
     int getPortNumber();
@@ -39,6 +42,8 @@ public interface UsbSerialPort {
     boolean getRI() throws IOException;
 
     boolean getRTS() throws IOException;
+
+    void setRTS(boolean z) throws IOException;
 
     String getSerial();
 
@@ -48,11 +53,7 @@ public interface UsbSerialPort {
 
     int read(byte[] bArr, int i) throws IOException;
 
-    void setDTR(boolean z) throws IOException;
-
     void setParameters(int i, int i2, int i3, int i4) throws IOException;
-
-    void setRTS(boolean z) throws IOException;
 
     int write(byte[] bArr, int i) throws IOException;
 }

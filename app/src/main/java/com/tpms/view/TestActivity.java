@@ -127,11 +127,11 @@ public class TestActivity extends Activity {
     @OnClick({R.id.btn_click_toast})
     public void btn_click_toast(View view) {
         this.ctotast = new ClickToast();
-        View inflate = LayoutInflater.from(getApplicationContext()).inflate(R.layout.click_error_toast, (ViewGroup) null);
+        View inflate = LayoutInflater.from(getApplicationContext()).inflate(R.layout.click_error_toast, null);
         inflate.findViewById(R.id.close_btn).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                TestActivity.this.ctotast.hideCustomToast();
-                TestActivity.this.showTimeDialog();
+                ctotast.hideCustomToast();
+                showTimeDialog();
             }
         });
         this.ctotast.initToast(getApplicationContext(), inflate, "测试");
@@ -139,13 +139,13 @@ public class TestActivity extends Activity {
     }
 
     private void showTimeDialog() {
-        View inflate = LayoutInflater.from(getApplicationContext()).inflate(R.layout.time_dialog, (ViewGroup) null);
+        View inflate = LayoutInflater.from(getApplicationContext()).inflate(R.layout.time_dialog, null);
         this.mdlg = new CDialog(this, inflate);
         ((RadioGroup) inflate.findViewById(R.id.time_select)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                Log.i(TestActivity.this.TAG, "showTimeDialog...:" + i);
-                TestActivity.this.mdlg.dismiss();
-                TestActivity.this.ctotast = null;
+                Log.i(TAG, "showTimeDialog...:" + i);
+                mdlg.dismiss();
+                ctotast = null;
             }
         });
         this.mdlg.show();
@@ -155,7 +155,7 @@ public class TestActivity extends Activity {
         final String[] strArr = {"10分钟内", "20分钟内", "30分钟内", "熄火前不再提示"};
         new AlertDialog.Builder(this).setTitle("此轮胎相同警告不再提示").setSingleChoiceItems(strArr, 0, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(TestActivity.this, strArr[i], 1).show();
+                Toast.makeText(TestActivity.this, strArr[i], Toast.LENGTH_LONG).show();
             }
         }).create().show();
     }
@@ -180,7 +180,7 @@ public class TestActivity extends Activity {
         inflate.findViewById(R.id.close_btn_ok).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 TestActivity.this.resetDlg.dismiss();
-                Toast.makeText(TestActivity.this, "点击了关闭", 5000).show();
+                Toast.makeText(TestActivity.this, "点击了关闭", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -67,7 +67,7 @@ public class SetDetailActivity extends Fragment {
     }
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
-        View inflate = layoutInflater.inflate(R.layout.fragment_set, (ViewGroup) null);
+        View inflate = layoutInflater.inflate(R.layout.fragment_set, null);
         ViewUtils.inject(this, inflate);
         TpmsApplication tpmsApplication = (TpmsApplication) getActivity().getApplication();
         this.app = tpmsApplication;

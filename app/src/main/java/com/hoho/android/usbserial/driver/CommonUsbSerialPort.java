@@ -25,23 +25,21 @@ import java.util.EnumSet;
  */
 public abstract class CommonUsbSerialPort implements UsbSerialPort {
 
-    public static boolean DEBUG = false;
-
     private static final String TAG = CommonUsbSerialPort.class.getSimpleName();
     private static final int DEFAULT_WRITE_BUFFER_SIZE = 16 * 1024;
     private static final int MAX_READ_SIZE = 16 * 1024; // = old bulkTransfer limit
-
+    public static boolean DEBUG = false;
     protected final UsbDevice mDevice;
     protected final int mPortNumber;
-
+    protected final Object mWriteBufferLock = new Object();
     // non-null when open()
     protected UsbDeviceConnection mConnection = null;
     protected UsbEndpoint mReadEndpoint;
     protected UsbEndpoint mWriteEndpoint;
     protected UsbRequest mUsbRequest;
-
-    protected final Object mWriteBufferLock = new Object();
-    /** Internal write buffer.  Guarded by {@link #mWriteBufferLock}. */
+    /**
+     * Internal write buffer.  Guarded by {@link #mWriteBufferLock}.
+     */
     protected byte[] mWriteBuffer;
 
     public CommonUsbSerialPort(UsbDevice device, int portNumber) {
@@ -69,14 +67,19 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
     }
 
     @Override
-    public UsbEndpoint getWriteEndpoint() { return mWriteEndpoint; }
+    public UsbEndpoint getWriteEndpoint() {
+        return mWriteEndpoint;
+    }
 
     @Override
-    public UsbEndpoint getReadEndpoint() { return mReadEndpoint; }
+    public UsbEndpoint getReadEndpoint() {
+        return mReadEndpoint;
+    }
 
     /**
      * Returns the device serial number
-     *  @return serial number
+     *
+     * @return serial number
      */
     @Override
     public String getSerial() {
@@ -103,7 +106,7 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
         if (mConnection != null) {
             throw new IOException("Already open");
         }
-        if(connection == null) {
+        if (connection == null) {
             throw new IllegalArgumentException("Connection is null");
         }
         mConnection = connection;
@@ -114,10 +117,11 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
             }
             mUsbRequest = new UsbRequest();
             mUsbRequest.initialize(mConnection, mReadEndpoint);
-        } catch(Exception e) {
+        } catch (Exception e) {
             try {
                 close();
-            } catch(Exception ignored) {}
+            } catch (Exception ignored) {
+            }
             throw e;
         }
     }
@@ -131,14 +135,17 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
         }
         try {
             mUsbRequest.cancel();
-        } catch(Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         mUsbRequest = null;
         try {
             closeInt();
-        } catch(Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         try {
             mConnection.close();
-        } catch(Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         mConnection = null;
     }
 
@@ -150,7 +157,7 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
     protected void testConnection() throws IOException {
         byte[] buf = new byte[2];
         int len = mConnection.controlTransfer(0x80 /*DEVICE*/, 0 /*GET_STATUS*/, 0, 0, buf, buf.length, 200);
-        if(len < 0)
+        if (len < 0)
             throw new IOException("USB get_status request failed");
     }
 
@@ -160,10 +167,10 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
     }
 
     protected int read(final byte[] dest, final int timeout, boolean testConnection) throws IOException {
-        if(mConnection == null) {
+        if (mConnection == null) {
             throw new IOException("Connection closed");
         }
-        if(dest.length <= 0) {
+        if (dest.length <= 0) {
             throw new IllegalArgumentException("Read buffer to small");
         }
         final int nread;
@@ -181,7 +188,7 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
             nread = mConnection.bulkTransfer(mReadEndpoint, dest, readMax, timeout);
             // Android error propagation is improvable:
             //  nread == -1 can be: timeout, connection lost, buffer to small, ???
-            if(nread == -1 && testConnection && MonotonicClock.millis() < endTime)
+            if (nread == -1 && testConnection && MonotonicClock.millis() < endTime)
                 testConnection();
 
         } else {
@@ -196,7 +203,7 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
             nread = buf.position();
             // Android error propagation is improvable:
             //   response != null & nread == 0 can be: connection lost, buffer to small, ???
-            if(nread == 0) {
+            if (nread == 0) {
                 testConnection();
             }
         }
@@ -208,7 +215,7 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
         int offset = 0;
         final long endTime = (timeout == 0) ? 0 : (MonotonicClock.millis() + timeout);
 
-        if(mConnection == null) {
+        if (mConnection == null) {
             throw new IOException("Connection closed");
         }
         while (offset < src.length) {
@@ -230,8 +237,8 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
                 if (timeout == 0 || offset == 0) {
                     requestTimeout = timeout;
                 } else {
-                    requestTimeout = (int)(endTime - MonotonicClock.millis());
-                    if(requestTimeout == 0)
+                    requestTimeout = (int) (endTime - MonotonicClock.millis());
+                    if (requestTimeout == 0)
                         requestTimeout = -1;
                 }
                 if (requestTimeout < 0) {
@@ -265,28 +272,44 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
     public abstract void setParameters(int baudRate, int dataBits, int stopBits, @Parity int parity) throws IOException;
 
     @Override
-    public boolean getCD() throws IOException { throw new UnsupportedOperationException(); }
+    public boolean getCD() throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public boolean getCTS() throws IOException { throw new UnsupportedOperationException(); }
+    public boolean getCTS() throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public boolean getDSR() throws IOException { throw new UnsupportedOperationException(); }
+    public boolean getDSR() throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public boolean getDTR() throws IOException { throw new UnsupportedOperationException(); }
+    public boolean getDTR() throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public void setDTR(boolean value) throws IOException { throw new UnsupportedOperationException(); }
+    public void setDTR(boolean value) throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public boolean getRI() throws IOException { throw new UnsupportedOperationException(); }
+    public boolean getRI() throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public boolean getRTS() throws IOException { throw new UnsupportedOperationException(); }
+    public boolean getRTS() throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
-    public void setRTS(boolean value) throws IOException { throw new UnsupportedOperationException(); }
+    public void setRTS(boolean value) throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public abstract EnumSet<ControlLine> getControlLines() throws IOException;
@@ -300,6 +323,8 @@ public abstract class CommonUsbSerialPort implements UsbSerialPort {
     }
 
     @Override
-    public void setBreak(boolean value) throws IOException { throw new UnsupportedOperationException(); }
+    public void setBreak(boolean value) throws IOException {
+        throw new UnsupportedOperationException();
+    }
 
 }

@@ -74,32 +74,31 @@ public class Tpms3 extends Tpms {
         this.mConnectErrorDlg = null;
         this.mDataCheckTimer = new Runnable() {
             public void run() {
-                long currentTimeMillis = (System.currentTimeMillis() - Tpms3.this.startDataTime) / 1000;
-                String str = Tpms3.this.TAG;
-                Log.i(str, "mDataCheckTimer startDataTime:" + Tpms3.this.startDataTime + ";datTime:" + currentTimeMillis);
-                if (Tpms3.this.startDataTime == -1 || currentTimeMillis <= 120) {
-                    Tpms3.this.mDataCheckHander.postDelayed(Tpms3.this.mDataCheckTimer, 3000);
+                long currentTimeMillis = (System.currentTimeMillis() - startDataTime) / 1000;
+                Log.i(TAG, "mDataCheckTimer startDataTime:" + startDataTime + ";datTime:" + currentTimeMillis);
+                if (startDataTime == -1 || currentTimeMillis <= 120) {
+                    mDataCheckHander.postDelayed(mDataCheckTimer, 3000);
                     return;
                 }
-                Tpms3.this.showConnectErrDlg();
-                Tpms3.this.showErrorNotifMsg();
-                Tpms3.this.startDataTime = -1;
-                Tpms3.this.mDataCheckHander.postDelayed(Tpms3.this.mDataCheckTimer, 3000);
+                showConnectErrDlg();
+                showErrorNotifMsg();
+                startDataTime = -1;
+                mDataCheckHander.postDelayed(mDataCheckTimer, 3000);
             }
         };
         this.btn_click = new View.OnClickListener() {
             public void onClick(View view) {
-                Tpms3.this.mCurrentErrCtrl.mTimeInterval = Long.parseLong((String) view.getTag());
-                Tpms3.this.mCurrentErrCtrl.mTimeStamp = System.currentTimeMillis() / 1000;
-                Log.i("ttimeout", "showTimeDialog...mTimeInterval:" + Tpms3.this.mCurrentErrCtrl.mTimeInterval);
-                Tpms3.this.mTimedlg.hideCustomToast();
+                mCurrentErrCtrl.mTimeInterval = Long.parseLong((String) view.getTag());
+                mCurrentErrCtrl.mTimeStamp = System.currentTimeMillis() / 1000;
+                Log.i("ttimeout", "showTimeDialog...mTimeInterval:" + mCurrentErrCtrl.mTimeInterval);
+                mTimedlg.hideCustomToast();
                 Tpms3 tpms3 = Tpms3.this;
                 tpms3.StopSound(tpms3.mCurrentErrCtrl.mErrorKey);
-                Tpms3.this.mErrorToast = null;
-                Tpms3.this.mTimedlg = null;
+                mErrorToast = null;
+                mTimedlg = null;
                 if (Tpms3.homeListenerReceiver != null) {
                     try {
-                        Tpms3.this.app.unregisterReceiver(Tpms3.homeListenerReceiver);
+                        app.unregisterReceiver(Tpms3.homeListenerReceiver);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -108,15 +107,15 @@ public class Tpms3 extends Tpms {
         };
         this.mHeartbeat = new Runnable() {
             public void run() {
-                Tpms3.this.mencode.SendHeartbeat();
-                Tpms3.this.mHeader.postDelayed(Tpms3.this.mHeartbeat, 1000);
+                mencode.SendHeartbeat();
+                mHeader.postDelayed(mHeartbeat, 1000);
             }
         };
         this.CheckEncryptionTime = new Runnable() {
             public void run() {
-                if (!Tpms3.this.mIsSeedAckOk) {
-                    Log.i(Tpms3.this.TAG, "CheckEncryptionTime");
-                    Tpms3.this.showErrorDlg();
+                if (!mIsSeedAckOk) {
+                    Log.i(TAG, "CheckEncryptionTime");
+                    showErrorDlg();
                 }
             }
         };
@@ -128,9 +127,9 @@ public class Tpms3 extends Tpms {
     public void initCodes() {
         Log.i(this.TAG, "initCodes");
         this.mdecode = new FrameDecode3();
-        this.mencode = new FrameEncode3(this.app);
-        this.mencode.init(this.app);
-        this.mdecode.init(this.app);
+        this.mencode = new FrameEncode3(app);
+        this.mencode.init(app);
+        this.mdecode.init(app);
     }
 
     @Override
@@ -330,7 +329,7 @@ public class Tpms3 extends Tpms {
         intent.putExtra("temperature", tiresStateEvent.mState.Temperature);
         intent.putExtra("tires", tiresStateEvent.tires);
         intent.putExtra("presunit", getYaliDanwei());
-        this.app.sendBroadcast(intent);
+        app.sendBroadcast(intent);
         if (tiresStateEvent.tires == 1 && this.mFrontLeft != null) {
             tiresStateEvent.mState.TiresID = this.mFrontLeft.TiresID;
         } else if (tiresStateEvent.tires == 2 && this.mFrontRight != null) {
@@ -359,17 +358,17 @@ public class Tpms3 extends Tpms {
         if (tiresStateEvent.tires == 1) {
             tiresStateEvent.mState.mAlarmCntrols = this.mFrontLeft.mAlarmCntrols;
             this.mFrontLeft = tiresStateEvent.mState;
-            str = str2 + this.app.getResources().getString(R.string.zouqianluntai);
+            str = str2 + app.getResources().getString(R.string.fl_tire);
             str2 = str2 + "leftfront";
         } else if (tiresStateEvent.tires == 2) {
             tiresStateEvent.mState.mAlarmCntrols = this.mFrontRight.mAlarmCntrols;
             this.mFrontRight = tiresStateEvent.mState;
-            str = str2 + this.app.getResources().getString(R.string.youqianluntai);
+            str = str2 + app.getResources().getString(R.string.youqianluntai);
             str2 = str2 + "rightfront";
         } else if (tiresStateEvent.tires == 3) {
             tiresStateEvent.mState.mAlarmCntrols = this.mBackRight.mAlarmCntrols;
             this.mBackRight = tiresStateEvent.mState;
-            str = str2 + this.app.getResources().getString(R.string.youhouluntai);
+            str = str2 + app.getResources().getString(R.string.youhouluntai);
             str2 = str2 + "rightback";
             if (!isAllTiresOk()) {
                 showErrorNotifMsg();
@@ -381,12 +380,12 @@ public class Tpms3 extends Tpms {
         } else if (tiresStateEvent.tires == 0) {
             tiresStateEvent.mState.mAlarmCntrols = this.mBackLeft.mAlarmCntrols;
             this.mBackLeft = tiresStateEvent.mState;
-            str = str2 + this.app.getResources().getString(R.string.zouhouluntai);
+            str = str2 + app.getResources().getString(R.string.rl_tire);
             str2 = str2 + "leftback";
         } else if (tiresStateEvent.tires == 5) {
             tiresStateEvent.mState.mAlarmCntrols = this.mSpareTire.mAlarmCntrols;
             this.mSpareTire = tiresStateEvent.mState;
-            str = str2 + this.app.getResources().getString(R.string.beitailuntai);
+            str = str2 + app.getResources().getString(R.string.spare_tire);
             str2 = str2 + "SpareTire";
         } else {
             str = str2;
@@ -432,11 +431,11 @@ public class Tpms3 extends Tpms {
     }
 
     public void showAlarmDialog(String str, String str2, TiresStateEvent tiresStateEvent) {
-        String str3;
+        String str3 = "";
         int i = 0;
         String str4 = "";
         String str5;
-        String string;
+        //String string;
         Log.w(this.TAG, "showAlarmDialog");
         TiresState tiresState = tiresStateEvent.mState;
         long currentTimeMillis = System.currentTimeMillis() / 1000;
@@ -447,7 +446,6 @@ public class Tpms3 extends Tpms {
         boolean z5 = true;
         boolean z6 = true;
         while (true) {
-            str3 = "";
             if (!z || !tiresState.NoSignal) {
                 if (!z2 || !tiresState.Leakage) {
                     if (!z3 || tiresState.AirPressure < this.mHiPressStamp) {
@@ -455,7 +453,7 @@ public class Tpms3 extends Tpms {
                             str5 = "mLowPressStamp";
                             i = R.string.lianjieyichang;
                             if (isTimeOut(str2, currentTimeMillis, str5, tiresStateEvent)) {
-                                string = this.app.getResources().getString(R.string.taiyaguodi);
+                                //string = app.getResources().getString(R.string.low_press);
                                 break;
                             }
                             z4 = false;
@@ -467,13 +465,13 @@ public class Tpms3 extends Tpms {
                                 } else if (!isTimeOut(str2, currentTimeMillis, "LowPower", tiresStateEvent)) {
                                     z6 = false;
                                 } else if (getBettaWarringEnable()) {
-                                    str3 = this.app.getResources().getString(R.string.dianyaguodi);
+                                    str3 = app.getResources().getString(R.string.low_pwr);
                                     str4 = "LowPower";
                                 }
                             } else {
                                 str5 = "mHiTempStamp";
                                 if (isTimeOut(str2, currentTimeMillis, str5, tiresStateEvent)) {
-                                    string = this.app.getResources().getString(R.string.wengduguogao);
+                                    //string = app.getResources().getString(R.string.wengduguogao);
                                     break;
                                 }
                                 z5 = false;
@@ -482,7 +480,7 @@ public class Tpms3 extends Tpms {
                     } else {
                         str5 = "mHiPressStamp";
                         if (isTimeOut(str2, currentTimeMillis, str5, tiresStateEvent)) {
-                            string = this.app.getResources().getString(R.string.taiyaguogao);
+                            //string = app.getResources().getString(R.string.taiyaguogao);
                             break;
                         }
                         z3 = false;
@@ -490,7 +488,7 @@ public class Tpms3 extends Tpms {
                 } else {
                     str5 = "Leakage";
                     if (isTimeOut(str2, currentTimeMillis, str5, tiresStateEvent)) {
-                        string = this.app.getResources().getString(R.string.louqizhong);
+                        //string = app.getResources().getString(R.string.leaking);
                         break;
                     }
                     z2 = false;
@@ -498,7 +496,7 @@ public class Tpms3 extends Tpms {
             } else if (!isTimeOut(str2, currentTimeMillis, "NoSignal", tiresStateEvent)) {
                 z = false;
             } else if (getConnectWarringEnable()) {
-                str3 = this.app.getResources().getString(R.string.lianjieyichang);
+                str3 = app.getResources().getString(R.string.lianjieyichang);
                 str4 = "NoSignal";
                 i = R.string.lianjieyichang;
             } else {
@@ -506,7 +504,7 @@ public class Tpms3 extends Tpms {
             }
         }
         if (tiresState.NoSignal) {
-            str3 = this.app.getResources().getString(i);
+            str3 = app.getResources().getString(i);
         }
         String str6 = str + str4;
         String str7 = str2 + str3;
@@ -596,31 +594,31 @@ public class Tpms3 extends Tpms {
     }
 
     private void startMainActivity() {
-        Intent intent = new Intent(this.app, TpmsMainActivity.class);
+        Intent intent = new Intent(app, TpmsMainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        this.app.startActivity(intent);
+        app.startActivity(intent);
     }
 
     private void showErrorToast() {
         if (isDevCheckOk()) {
-            this.mErrorToast = new ClickToast();
-            View inflate = LayoutInflater.from(this.app.getApplicationContext()).inflate(R.layout.click_error_toast, (ViewGroup) null);
+            mErrorToast = new ClickToast();
+            View inflate = LayoutInflater.from(app.getApplicationContext()).inflate(R.layout.click_error_toast, (ViewGroup) null);
             inflate.findViewById(R.id.relativelayout).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Tpms3.this.startMainActivity();
+                    startMainActivity();
                 }
             });
             inflate.findViewById(R.id.close_btn).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    if (Tpms3.this.mErrorToast != null) {
-                        Tpms3.this.mErrorToast.hideCustomToast();
+                    if (mErrorToast != null) {
+                        mErrorToast.hideCustomToast();
                     }
-                    Tpms3.this.showTimeDialog();
+                    showTimeDialog();
                 }
             });
-            this.mErrorToast.setGuid(this.mCurrentErrCtrl.mErrorKey);
-            this.mErrorToast.initToast(this.app.getApplicationContext(), inflate, this.mCurrentErrCtrl.mError);
-            this.mErrorToast.show();
+            mErrorToast.setGuid(mCurrentErrCtrl.mErrorKey);
+            mErrorToast.initToast(app.getApplicationContext(), inflate, mCurrentErrCtrl.mError);
+            mErrorToast.show();
         }
     }
 
@@ -629,12 +627,12 @@ public class Tpms3 extends Tpms {
             String stackTraceString = android.util.Log.getStackTraceString(new Throwable());
             Log.i(this.TAG, "showErrorDlg");
             Log.i(this.TAG, stackTraceString);
-            View inflate = LayoutInflater.from(this.app.getApplicationContext()).inflate(R.layout.error_dialog, (ViewGroup) null);
-            this.mErrorDlg = CDialog2.makeToast(this.app, inflate, "");
+            View inflate = LayoutInflater.from(app.getApplicationContext()).inflate(R.layout.error_dialog, (ViewGroup) null);
+            this.mErrorDlg = CDialog2.makeToast(app, inflate, "");
             inflate.findViewById(R.id.btn_is_ok).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Tpms3.this.mErrorDlg.hideCustomToast();
-                    Tpms3.this.mErrorDlg = null;
+                    mErrorDlg.hideCustomToast();
+                    mErrorDlg = null;
                 }
             });
             showErrorNotifMsg2();
@@ -647,12 +645,12 @@ public class Tpms3 extends Tpms {
         Log.i(this.TAG, "showConnectErrDlg1");
         if (this.mConnectErrorDlg == null && !this.mIsPairedId) {
             Log.i(this.TAG, "showConnectErrDlg2");
-            View inflate = LayoutInflater.from(this.app.getApplicationContext()).inflate(R.layout.connect_error_dialog, (ViewGroup) null);
-            this.mConnectErrorDlg = CDialog2.makeToast(this.app, inflate, "");
+            View inflate = LayoutInflater.from(app.getApplicationContext()).inflate(R.layout.connect_error_dialog, (ViewGroup) null);
+            this.mConnectErrorDlg = CDialog2.makeToast(app, inflate, "");
             inflate.findViewById(R.id.btn_is_ok).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Tpms3.this.mConnectErrorDlg.hideCustomToast();
-                    Tpms3.this.mConnectErrorDlg = null;
+                    mConnectErrorDlg.hideCustomToast();
+                    mConnectErrorDlg = null;
                 }
             });
             this.mConnectErrorDlg.show();
@@ -668,8 +666,8 @@ public class Tpms3 extends Tpms {
     }
 
     private void showTimeDialog() {
-        View inflate = LayoutInflater.from(this.app.getApplicationContext()).inflate(R.layout.time_dialog, (ViewGroup) null);
-        this.mTimedlg = CDialog2.makeToast(this.app, inflate, "");
+        View inflate = LayoutInflater.from(app.getApplicationContext()).inflate(R.layout.time_dialog, (ViewGroup) null);
+        this.mTimedlg = CDialog2.makeToast(app, inflate, "");
         View findViewById = inflate.findViewById(R.id.mainbtn_0);
         View findViewById2 = inflate.findViewById(R.id.mainbtn_1);
         View findViewById3 = inflate.findViewById(R.id.mainbtn_2);
@@ -680,22 +678,22 @@ public class Tpms3 extends Tpms {
         findViewById4.setOnClickListener(this.btn_click);
         inflate.findViewById(R.id.time_dialog_plane).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if (Tpms3.this.mTimedlg != null) {
-                    Tpms3.this.mTimedlg.hideCustomToast();
+                if (mTimedlg != null) {
+                    mTimedlg.hideCustomToast();
                 }
-                Tpms3.this.mErrorToast.hideCustomToast();
-                Tpms3.this.mErrorToast = null;
-                Tpms3.this.mTimedlg = null;
+                mErrorToast.hideCustomToast();
+                mErrorToast = null;
+                mTimedlg = null;
                 if (Tpms3.homeListenerReceiver != null) {
                     try {
-                        Tpms3.this.app.unregisterReceiver(Tpms3.homeListenerReceiver);
+                        app.unregisterReceiver(Tpms3.homeListenerReceiver);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
         });
-        this.app.registerReceiver(homeListenerReceiver, new IntentFilter("android.intent.action.CLOSE_SYSTEM_DIALOGS"));
+        app.registerReceiver(homeListenerReceiver, new IntentFilter("android.intent.action.CLOSE_SYSTEM_DIALOGS"));
         this.mTimedlg.show();
     }
 

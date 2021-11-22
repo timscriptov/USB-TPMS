@@ -25,8 +25,8 @@ import java.util.Map;
  *
  * @author mike wakerly (opensource@hoho.com)
  * @see <a
- *      href="http://www.usb.org/developers/devclass_docs/usbcdc11.pdf">Universal
- *      Serial Bus Class Definitions for Communication Devices, v1.1</a>
+ * href="http://www.usb.org/developers/devclass_docs/usbcdc11.pdf">Universal
+ * Serial Bus Class Definitions for Communication Devices, v1.1</a>
  */
 public class CdcAcmSerialDriver implements UsbSerialDriver {
 
@@ -41,18 +41,56 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
 
         int controlInterfaceCount = 0;
         int dataInterfaceCount = 0;
-        for( int i = 0; i < device.getInterfaceCount(); i++) {
-            if(device.getInterface(i).getInterfaceClass() == UsbConstants.USB_CLASS_COMM)
+        for (int i = 0; i < device.getInterfaceCount(); i++) {
+            if (device.getInterface(i).getInterfaceClass() == UsbConstants.USB_CLASS_COMM)
                 controlInterfaceCount++;
-            if(device.getInterface(i).getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA)
+            if (device.getInterface(i).getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA)
                 dataInterfaceCount++;
         }
-        for( int port = 0; port < Math.min(controlInterfaceCount, dataInterfaceCount); port++) {
+        for (int port = 0; port < Math.min(controlInterfaceCount, dataInterfaceCount); port++) {
             mPorts.add(new CdcAcmSerialPort(mDevice, port));
         }
-        if(mPorts.size() == 0) {
+        if (mPorts.size() == 0) {
             mPorts.add(new CdcAcmSerialPort(mDevice, -1));
         }
+    }
+
+    public static Map<Integer, int[]> getSupportedDevices() {
+        final Map<Integer, int[]> supportedDevices = new LinkedHashMap<>();
+        supportedDevices.put(UsbId.VENDOR_ARDUINO,
+                new int[]{
+                        UsbId.ARDUINO_UNO,
+                        UsbId.ARDUINO_UNO_R3,
+                        UsbId.ARDUINO_MEGA_2560,
+                        UsbId.ARDUINO_MEGA_2560_R3,
+                        UsbId.ARDUINO_SERIAL_ADAPTER,
+                        UsbId.ARDUINO_SERIAL_ADAPTER_R3,
+                        UsbId.ARDUINO_MEGA_ADK,
+                        UsbId.ARDUINO_MEGA_ADK_R3,
+                        UsbId.ARDUINO_LEONARDO,
+                        UsbId.ARDUINO_MICRO,
+                });
+        supportedDevices.put(UsbId.VENDOR_VAN_OOIJEN_TECH,
+                new int[]{
+                        UsbId.VAN_OOIJEN_TECH_TEENSYDUINO_SERIAL,
+                });
+        supportedDevices.put(UsbId.VENDOR_ATMEL,
+                new int[]{
+                        UsbId.ATMEL_LUFA_CDC_DEMO_APP,
+                });
+        supportedDevices.put(UsbId.VENDOR_LEAFLABS,
+                new int[]{
+                        UsbId.LEAFLABS_MAPLE,
+                });
+        supportedDevices.put(UsbId.VENDOR_ARM,
+                new int[]{
+                        UsbId.ARM_MBED,
+                });
+        supportedDevices.put(UsbId.VENDOR_ST,
+                new int[]{
+                        UsbId.ST_CDC,
+                });
+        return supportedDevices;
     }
 
     @Override
@@ -67,23 +105,18 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
 
     public class CdcAcmSerialPort extends CommonUsbSerialPort {
 
-        private UsbInterface mControlInterface;
-        private UsbInterface mDataInterface;
-
-        private UsbEndpoint mControlEndpoint;
-
-        private int mControlIndex;
-
-        private boolean mRts = false;
-        private boolean mDtr = false;
-
         private static final int USB_RECIP_INTERFACE = 0x01;
         private static final int USB_RT_ACM = UsbConstants.USB_TYPE_CLASS | USB_RECIP_INTERFACE;
-
         private static final int SET_LINE_CODING = 0x20;  // USB CDC 1.1 section 6.2
         private static final int GET_LINE_CODING = 0x21;
         private static final int SET_CONTROL_LINE_STATE = 0x22;
         private static final int SEND_BREAK = 0x23;
+        private UsbInterface mControlInterface;
+        private UsbInterface mDataInterface;
+        private UsbEndpoint mControlEndpoint;
+        private int mControlIndex;
+        private boolean mRts = false;
+        private boolean mDtr = false;
 
         public CdcAcmSerialPort(UsbDevice device, int portNumber) {
             super(device, portNumber);
@@ -97,10 +130,10 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
         @Override
         protected void openInt(UsbDeviceConnection connection) throws IOException {
             if (mPortNumber == -1) {
-                Log.d(TAG,"device might be castrated ACM device, trying single interface logic");
+                Log.d(TAG, "device might be castrated ACM device, trying single interface logic");
                 openSingleInterface();
             } else {
-                Log.d(TAG,"trying default interface logic");
+                Log.d(TAG, "trying default interface logic");
                 openInterface();
             }
         }
@@ -140,21 +173,21 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
             for (int i = 0; i < mDevice.getInterfaceCount(); i++) {
                 UsbInterface usbInterface = mDevice.getInterface(i);
                 if (usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_COMM) {
-                    if(controlInterfaceCount == mPortNumber) {
+                    if (controlInterfaceCount == mPortNumber) {
                         mControlIndex = i;
                         mControlInterface = usbInterface;
                     }
                     controlInterfaceCount++;
                 }
                 if (usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA) {
-                    if(dataInterfaceCount == mPortNumber) {
+                    if (dataInterfaceCount == mPortNumber) {
                         mDataInterface = usbInterface;
                     }
                     dataInterfaceCount++;
                 }
             }
 
-            if(mControlInterface == null) {
+            if (mControlInterface == null) {
                 throw new IOException("No control interface");
             }
             Log.d(TAG, "Control iface=" + mControlInterface);
@@ -168,7 +201,7 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
                 throw new IOException("Invalid control endpoint");
             }
 
-            if(mDataInterface == null) {
+            if (mDataInterface == null) {
                 throw new IOException("No data interface");
             }
             Log.d(TAG, "data iface=" + mDataInterface);
@@ -189,7 +222,7 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
         private int sendAcmControlMessage(int request, int value, byte[] buf) throws IOException {
             int len = mConnection.controlTransfer(
                     USB_RT_ACM, request, value, mControlIndex, buf, buf != null ? buf.length : 0, 5000);
-            if(len < 0) {
+            if (len < 0) {
                 throw new IOException("controlTransfer failed");
             }
             return len;
@@ -200,37 +233,56 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
             try {
                 mConnection.releaseInterface(mControlInterface);
                 mConnection.releaseInterface(mDataInterface);
-            } catch(Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
         @Override
         public void setParameters(int baudRate, int dataBits, int stopBits, @Parity int parity) throws IOException {
-            if(baudRate <= 0) {
+            if (baudRate <= 0) {
                 throw new IllegalArgumentException("Invalid baud rate: " + baudRate);
             }
-            if(dataBits < DATABITS_5 || dataBits > DATABITS_8) {
+            if (dataBits < DATABITS_5 || dataBits > DATABITS_8) {
                 throw new IllegalArgumentException("Invalid data bits: " + dataBits);
             }
             byte stopBitsByte;
             switch (stopBits) {
-                case STOPBITS_1: stopBitsByte = 0; break;
-                case STOPBITS_1_5: stopBitsByte = 1; break;
-                case STOPBITS_2: stopBitsByte = 2; break;
-                default: throw new IllegalArgumentException("Invalid stop bits: " + stopBits);
+                case STOPBITS_1:
+                    stopBitsByte = 0;
+                    break;
+                case STOPBITS_1_5:
+                    stopBitsByte = 1;
+                    break;
+                case STOPBITS_2:
+                    stopBitsByte = 2;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid stop bits: " + stopBits);
             }
 
             byte parityBitesByte;
             switch (parity) {
-                case PARITY_NONE: parityBitesByte = 0; break;
-                case PARITY_ODD: parityBitesByte = 1; break;
-                case PARITY_EVEN: parityBitesByte = 2; break;
-                case PARITY_MARK: parityBitesByte = 3; break;
-                case PARITY_SPACE: parityBitesByte = 4; break;
-                default: throw new IllegalArgumentException("Invalid parity: " + parity);
+                case PARITY_NONE:
+                    parityBitesByte = 0;
+                    break;
+                case PARITY_ODD:
+                    parityBitesByte = 1;
+                    break;
+                case PARITY_EVEN:
+                    parityBitesByte = 2;
+                    break;
+                case PARITY_MARK:
+                    parityBitesByte = 3;
+                    break;
+                case PARITY_SPACE:
+                    parityBitesByte = 4;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid parity: " + parity);
             }
             byte[] msg = {
-                    (byte) ( baudRate & 0xff),
-                    (byte) ((baudRate >> 8 ) & 0xff),
+                    (byte) (baudRate & 0xff),
+                    (byte) ((baudRate >> 8) & 0xff),
                     (byte) ((baudRate >> 16) & 0xff),
                     (byte) ((baudRate >> 24) & 0xff),
                     stopBitsByte,
@@ -269,8 +321,8 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
         @Override
         public EnumSet<ControlLine> getControlLines() throws IOException {
             EnumSet<ControlLine> set = EnumSet.noneOf(ControlLine.class);
-            if(mRts) set.add(ControlLine.RTS);
-            if(mDtr) set.add(ControlLine.DTR);
+            if (mRts) set.add(ControlLine.RTS);
+            if (mDtr) set.add(ControlLine.DTR);
             return set;
         }
 
@@ -284,44 +336,6 @@ public class CdcAcmSerialDriver implements UsbSerialDriver {
             sendAcmControlMessage(SEND_BREAK, value ? 0xffff : 0, null);
         }
 
-    }
-
-    public static Map<Integer, int[]> getSupportedDevices() {
-        final Map<Integer, int[]> supportedDevices = new LinkedHashMap<>();
-        supportedDevices.put(UsbId.VENDOR_ARDUINO,
-                new int[] {
-                        UsbId.ARDUINO_UNO,
-                        UsbId.ARDUINO_UNO_R3,
-                        UsbId.ARDUINO_MEGA_2560,
-                        UsbId.ARDUINO_MEGA_2560_R3,
-                        UsbId.ARDUINO_SERIAL_ADAPTER,
-                        UsbId.ARDUINO_SERIAL_ADAPTER_R3,
-                        UsbId.ARDUINO_MEGA_ADK,
-                        UsbId.ARDUINO_MEGA_ADK_R3,
-                        UsbId.ARDUINO_LEONARDO,
-                        UsbId.ARDUINO_MICRO,
-                });
-        supportedDevices.put(UsbId.VENDOR_VAN_OOIJEN_TECH,
-                new int[] {
-                    UsbId.VAN_OOIJEN_TECH_TEENSYDUINO_SERIAL,
-                });
-        supportedDevices.put(UsbId.VENDOR_ATMEL,
-                new int[] {
-                    UsbId.ATMEL_LUFA_CDC_DEMO_APP,
-                });
-        supportedDevices.put(UsbId.VENDOR_LEAFLABS,
-                new int[] {
-                    UsbId.LEAFLABS_MAPLE,
-                });
-        supportedDevices.put(UsbId.VENDOR_ARM,
-                new int[] {
-                    UsbId.ARM_MBED,
-                });
-        supportedDevices.put(UsbId.VENDOR_ST,
-                new int[] {
-                        UsbId.ST_CDC,
-                });
-        return supportedDevices;
     }
 
 }

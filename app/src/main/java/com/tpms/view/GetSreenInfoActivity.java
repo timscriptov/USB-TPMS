@@ -1,5 +1,6 @@
 package com.tpms.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -14,13 +15,14 @@ public class GetSreenInfoActivity extends Activity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_screen);
-        final EditText editText = (EditText) findViewById(R.id.main_et_width_px);
-        final EditText editText2 = (EditText) findViewById(R.id.main_et_height_px);
-        final EditText editText3 = (EditText) findViewById(R.id.main_et_density);
-        final EditText editText4 = (EditText) findViewById(R.id.main_et_density_dpi);
-        final EditText editText5 = (EditText) findViewById(R.id.main_et_width_dip);
-        final EditText editText6 = (EditText) findViewById(R.id.main_et_height_dip);
-        ((Button) findViewById(R.id.main_btn)).setOnClickListener(new View.OnClickListener() {
+        final EditText editText = findViewById(R.id.main_et_width_px);
+        final EditText editText2 = findViewById(R.id.main_et_height_px);
+        final EditText editText3 = findViewById(R.id.main_et_density);
+        final EditText editText4 = findViewById(R.id.main_et_density_dpi);
+        final EditText editText5 = findViewById(R.id.main_et_width_dip);
+        final EditText editText6 = findViewById(R.id.main_et_height_dip);
+        findViewById(R.id.main_btn).setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             public void onClick(View view) {
                 WindowManager windowManager = GetSreenInfoActivity.this.getWindowManager();
                 int width = windowManager.getDefaultDisplay().getWidth();
