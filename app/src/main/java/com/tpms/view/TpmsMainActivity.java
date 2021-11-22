@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -93,6 +94,10 @@ public class TpmsMainActivity extends Activity {
     TextView front_right_temp;
     @ViewInject(R.id.ll_sptires_contioner)
     LinearLayout ll_sptires_contioner;
+
+    @ViewInject(R.id.btn_test)
+    Button btn_test;
+
     TiresState mBackLeft;
     TiresState mBackRight;
     TiresState mFrontLeft;
@@ -174,6 +179,7 @@ public class TpmsMainActivity extends Activity {
                 this.tv_sptires_temp.setText(getTempString(this.mSpareTire.Temperature));
                 return;
             }
+            this.btn_test.setVisibility(View.GONE);
             return;
         }
         finish();
