@@ -65,4 +65,23 @@
     <string name="zuoqianyouhoujiaohuan">Cambie la parte delantera izquierda (FL) y trasera derecha (RR)</string>
     <string name="zuoqianyouqianjiaohuan">Los cambios Front Left (FL) y Front Right (FR)</string>
     <string name="zuoqianzuohoujiaohuan">Cambie la parte delantera izquierda (FL) y trasera izquierda (RL)</string>
+
+    <string name="test_hand_work">握手</string>
+    <string name="test_query">查旬</string>
+    <string name="test_query_front_left">查旬前左轮id</string>
+    <string name="test_query_two_back">查旬两后轮id</string>
+    <string name="test_btn_enter_apk">进入应用</string>
+    <string name="test_btn_exchangeing">正在互换</string>
+    <string name="test_btn_exchange_failed">互换失败</string>
+    <string name="test_btn_reset_data">恢复默认</string>
+    <string name="btn_btn_open_usb">打开USB</string>
+    <string name="test_btn_close_usb">关闭USB</string>
+    <string name="test_btn_get_px">获取分辩信息</string>
+    <string name="test_btn_notif_ok">正常状态</string>
+    <string name="test_btn_notif_error">错误状态</string>
+    <string name="test_btn_play_sound">播放声音</string>
+    <string name="test_btn_stop_sound">停声音</string>
+    <string name="test_btn_start_data">开启数据</string>
+    <string name="test_btn_click_toast">告警浮动框</string>
+    <string name="test_btn_time_select">时间选择框</string>
 </resources>

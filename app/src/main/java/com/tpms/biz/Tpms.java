@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
@@ -679,21 +678,20 @@ public class Tpms {
             if (Build.VERSION.SDK_INT >= 26) {
                 this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
             }
-            Notification build = new NotificationCompat.Builder(app, "com.dfz.tpms")
-                    .setContentTitle(app.getString(R.string.zhuangtailantaiya)).setContentText(app.getString(R.string.ztltaiyayichang))
+            NotificationCompat.Builder build = new NotificationCompat.Builder(app, "com.dfz.tpms")
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.ic_notif_error)
                     .setLargeIcon(BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_notif_ok))
                     .setContentIntent(PendingIntent.getActivity(app, UMErrorCode.E_UM_BE_DEFLATE_FAILED, new Intent(app, TpmsMainActivity.class), 0))
-                    .setChannelId(app.getString(R.string.zhuangtailantaiya))
-                    .setPriority(1)
-                    .build();
-            build.flags |= 2;
+                    .setContentTitle(app.getString(R.string.zhuangtailantaiya))
+                    .setContentText(app.getString(R.string.ztltaiyayichang))
+                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+
             try {
-                app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
+                app.getTpmsServices().startForeground(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build.build());
             } catch (Exception e2) {
                 e2.printStackTrace();
-                notificationManager.notify(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build);
+                notificationManager.notify(UMErrorCode.E_UM_BE_DEFLATE_FAILED, build.build());
             }
             Log.i(TAG, "lyc cur showErrorNotifMsg2");
             mNotificationState = 0;
