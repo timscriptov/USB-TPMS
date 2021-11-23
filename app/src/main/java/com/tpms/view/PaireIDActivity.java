@@ -12,9 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.std.dev.TpmsDataSrc;
 import com.mcal.tmps.R;
 import com.mcal.tmps.TpmsApplication;
@@ -26,37 +23,23 @@ import de.greenrobot.event.EventBus;
 
 public class PaireIDActivity extends Activity {
     TpmsApplication app = null;
-    @ViewInject(R.id.btn_paire_canel)
     Button btn_paire_canel;
-    @ViewInject(R.id.btn_paire_start)
     Button btn_paire_start;
     TpmsDataSrc datasrc = null;
-    @ViewInject(R.id.ib_left_back_id)
     ImageButton ib_left_back_id;
-    @ViewInject(R.id.ib_left_front_id)
     ImageButton ib_left_front_id;
-    @ViewInject(R.id.ib_right_back_id)
     ImageButton ib_right_back_id;
-    @ViewInject(R.id.ib_right_front_id)
     ImageButton ib_right_front_id;
     View mImgBtn;
     int mTimeOut = 120;
-    @ViewInject(R.id.progressBar1)
     ProgressBar progressBar1;
     Handler timeOut;
-    @ViewInject(R.id.tires_container)
     LinearLayout tires_container;
-    @ViewInject(R.id.tv_left_back_id)
     TextView tv_left_back_id;
-    @ViewInject(R.id.tv_left_front_id)
     TextView tv_left_front_id;
-    @ViewInject(R.id.tv_right_back_id)
     TextView tv_right_back_id;
-    @ViewInject(R.id.tv_right_front_id)
     TextView tv_right_front_id;
-    @ViewInject(R.id.tv_sptires_id)
     TextView tv_sptires_id;
-    @ViewInject(R.id.tv_title_state)
     TextView tv_title_state;
     private final String TAG = "PaireIDActivity";
     Runnable timeOutCnt = new Runnable() {
@@ -84,7 +67,22 @@ public class PaireIDActivity extends Activity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_paire_id);
-        ViewUtils.inject(this);
+
+        btn_paire_canel = findViewById(R.id.btn_paire_canel);
+        btn_paire_start = findViewById(R.id.btn_paire_start);
+        ib_left_back_id = findViewById(R.id.ib_left_back_id);
+        ib_left_front_id = findViewById(R.id.ib_left_front_id);
+        ib_right_back_id = findViewById(R.id.ib_right_back_id);
+        ib_right_front_id = findViewById(R.id.ib_right_front_id);
+        progressBar1 = findViewById(R.id.progressBar1);
+        tires_container = findViewById(R.id.tires_container);
+        tv_left_back_id = findViewById(R.id.tv_left_back_id);
+        tv_left_front_id = findViewById(R.id.tv_left_front_id);
+        tv_right_back_id = findViewById(R.id.tv_right_back_id);
+        tv_right_front_id = findViewById(R.id.tv_right_front_id);
+        tv_sptires_id = findViewById(R.id.tv_sptires_id);
+        tv_title_state = findViewById(R.id.tv_title_state);
+
         EventBus.getDefault().register(this);
         TpmsApplication tpmsApplication = (TpmsApplication) getApplication();
         this.app = tpmsApplication;
@@ -100,27 +98,22 @@ public class PaireIDActivity extends Activity {
         }
     }
 
-    @OnClick({R.id.ib_left_front_id})
     public void ib_left_front_id(View view) {
         setSelectButton(view);
     }
 
-    @OnClick({R.id.ib_right_front_id})
     public void ib_right_front_id(View view) {
         setSelectButton(view);
     }
 
-    @OnClick({R.id.ib_right_back_id})
     public void ib_right_back_id(View view) {
         setSelectButton(view);
     }
 
-    @OnClick({R.id.ib_left_back_id})
     public void ib_left_back_id(View view) {
         setSelectButton(view);
     }
 
-    @OnClick({R.id.tv_sptires_id})
     public void tv_sptires_id(View view) {
         Log.i(this.TAG, "tv_sptires_id");
         setSelectButton(view);
@@ -142,7 +135,6 @@ public class PaireIDActivity extends Activity {
         this.tv_title_state.setText(getString(R.string.dianjikaishianniujintupeidui));
     }
 
-    @OnClick({R.id.btn_paire_canel})
     public void btn_paire_canel(View view) {
         this.btn_paire_start.setVisibility(View.INVISIBLE);
         this.btn_paire_canel.setVisibility(View.GONE);
@@ -158,7 +150,6 @@ public class PaireIDActivity extends Activity {
         this.tires_container.setVisibility(View.GONE);
     }
 
-    @OnClick({R.id.btn_paire_start})
     public void btn_paire_start(View view) {
         View view2 = this.mImgBtn;
         if (view2 != null) {
@@ -259,12 +250,10 @@ public class PaireIDActivity extends Activity {
         }
     }
 
-    @OnClick({R.id.back_ui})
     public void back_ui(View view) {
         finish();
     }
 
-    @OnClick({R.id.view_plane})
     public void view_plane(View view) {
         Log.i(this.TAG, "遮罩层，屏蔽下层的点击事件");
     }

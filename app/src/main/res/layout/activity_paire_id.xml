@@ -11,7 +11,7 @@
         android:layout_height="86px">
 
         <TextView
-            android:id="@+id/back_ui"
+            android:onClick="back_ui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="主架胎ID"
@@ -94,6 +94,7 @@
 
                 <ImageButton
                     android:id="@+id/ib_left_front_id"
+                    android:onClick="ib_left_front_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20px"
@@ -105,6 +106,7 @@
 
                 <ImageButton
                     android:id="@+id/ib_left_back_id"
+                    android:onClick="ib_left_back_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20px"
@@ -130,6 +132,7 @@
 
                 <TextView
                     android:id="@+id/tv_sptires_id"
+                    android:onClick="tv_sptires_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20px"
@@ -148,6 +151,7 @@
 
                 <ImageButton
                     android:id="@+id/ib_right_front_id"
+                    android:onClick="ib_right_front_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20px"
@@ -159,6 +163,7 @@
 
                 <ImageButton
                     android:id="@+id/ib_right_back_id"
+                    android:onClick="ib_right_back_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20px"
@@ -208,7 +213,7 @@
             android:visibility="gone">
 
             <View
-                android:id="@+id/view_plane"
+                android:onClick="view_plane"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
@@ -225,6 +230,7 @@
 
         <Button
             android:id="@+id/btn_paire_start"
+            android:onClick="btn_paire_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_paire_start_selector"
@@ -232,6 +238,7 @@
 
         <Button
             android:id="@+id/btn_paire_canel"
+            android:onClick="btn_paire_canel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_paire_canel_selector"

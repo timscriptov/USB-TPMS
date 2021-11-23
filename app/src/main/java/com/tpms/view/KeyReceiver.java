@@ -6,18 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.tpms.utils.Util;
-
 public class KeyReceiver extends BroadcastReceiver {
     private static final String BOOT_COMPLATE = "android.intent.action.BOOT_COMPLETED";
     private final int mScaFb = -1;
-    Util Util = null;
     private boolean aux_acc = false;
     private SharedPreferences mPreferences;
 
     public void onReceive(Context context, Intent intent) {
         intent.getAction();
-        this.Util = new Util();
         if (intent.getAction().equals(BOOT_COMPLATE)) {
             System.out.println("======AUX收到开机广播");
             getPreferenceValue(context);
