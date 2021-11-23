@@ -48,9 +48,9 @@ public class TpmsService extends Service {
     private Notification getForegroundNotification() {
         if (Build.VERSION.SDK_INT >= 26) {
             ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE))
-                    .createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
+                    .createNotificationChannel(new NotificationChannel("com.mcal.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
         }
-        return new NotificationCompat.Builder(this, "com.dfz.tpms")
+        return new NotificationCompat.Builder(this, "com.mcal.tpms")
                 .setContentTitle(getString(R.string.zhuangtailantaiya)).setContentText(getString(R.string.zhuangtailantaiyazhengchang))
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_notif_ok)

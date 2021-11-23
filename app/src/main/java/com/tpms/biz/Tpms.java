@@ -642,9 +642,9 @@ public class Tpms {
                 e.printStackTrace();
             }
             if (Build.VERSION.SDK_INT >= 26) {
-                this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
+                this.notificationManager.createNotificationChannel(new NotificationChannel("com.mcal.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
             }
-            NotificationCompat.Builder build = new NotificationCompat.Builder(app, "com.dfz.tpms")
+            NotificationCompat.Builder build = new NotificationCompat.Builder(app, "com.mcal.tpms")
                     .setContentTitle(app.getString(R.string.zhuangtailantaiya))
                     .setContentText(app.getString(R.string.zhuangtailantaiyazhengchang))
                     .setWhen(System.currentTimeMillis())
@@ -680,9 +680,9 @@ public class Tpms {
                 e.printStackTrace();
             }
             if (Build.VERSION.SDK_INT >= 26) {
-                this.notificationManager.createNotificationChannel(new NotificationChannel("com.dfz.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
+                this.notificationManager.createNotificationChannel(new NotificationChannel("com.mcal.tpms", "tpms", NotificationManager.IMPORTANCE_HIGH));
             }
-            NotificationCompat.Builder build = new NotificationCompat.Builder(app, "com.dfz.tpms")
+            NotificationCompat.Builder build = new NotificationCompat.Builder(app, "com.mcal.tpms")
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.ic_notif_error)
                     .setLargeIcon(BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_notif_ok))
