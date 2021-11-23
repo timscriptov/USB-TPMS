@@ -14,29 +14,29 @@ public class GetSreenInfoActivity extends Activity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_screen);
-        final EditText editText = findViewById(R.id.main_et_width_px);
-        final EditText editText2 = findViewById(R.id.main_et_height_px);
-        final EditText editText3 = findViewById(R.id.main_et_density);
-        final EditText editText4 = findViewById(R.id.main_et_density_dpi);
-        final EditText editText5 = findViewById(R.id.main_et_width_dip);
-        final EditText editText6 = findViewById(R.id.main_et_height_dip);
+        EditText width_px = findViewById(R.id.main_et_width_px);
+        EditText height_px = findViewById(R.id.main_et_height_px);
+        EditText density = findViewById(R.id.main_et_density);
+        EditText density_dpi = findViewById(R.id.main_et_density_dpi);
+        EditText width_dip = findViewById(R.id.main_et_width_dip);
+        EditText height_dip = findViewById(R.id.main_et_height_dip);
         findViewById(R.id.main_btn).setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             public void onClick(View view) {
                 WindowManager windowManager = GetSreenInfoActivity.this.getWindowManager();
                 int width = windowManager.getDefaultDisplay().getWidth();
                 int height = windowManager.getDefaultDisplay().getHeight();
-                editText.setText(width + "");
-                editText2.setText(height + "");
+                width_px.setText(width + "");
+                height_px.setText(height + "");
                 float f = getResources().getDisplayMetrics().density;
-                editText3.setText(f + "");
-                editText4.setText(((float) getResources().getDisplayMetrics().densityDpi) + "");
+                density.setText(f + "");
+                density_dpi.setText(((float) getResources().getDisplayMetrics().densityDpi) + "");
                 GetSreenInfoActivity getSreenInfoActivity = GetSreenInfoActivity.this;
                 int pxToDip = getSreenInfoActivity.pxToDip(getSreenInfoActivity, (float) width);
                 GetSreenInfoActivity getSreenInfoActivity2 = GetSreenInfoActivity.this;
                 int pxToDip2 = getSreenInfoActivity2.pxToDip(getSreenInfoActivity2, (float) height);
-                editText5.setText(pxToDip + "");
-                editText6.setText(pxToDip2 + "");
+                width_dip.setText(pxToDip + "");
+                height_dip.setText(pxToDip2 + "");
             }
         });
     }
