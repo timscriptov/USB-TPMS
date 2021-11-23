@@ -11,17 +11,13 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.std.dev.TpmsDataSrc;
-import com.syt.tmps.R;
-import com.syt.tmps.TpmsApplication;
+import com.mcal.tmps.R;
+import com.mcal.tmps.TpmsApplication;
 import com.tpms.biz.Tpms;
 import com.tpms.modle.DeviceOpenEvent;
 import com.tpms.modle.TiresState;
@@ -43,60 +39,32 @@ public class TpmsMainActivity extends Activity {
     };
     private final String TAG = "TpmsMainActivity";
     TpmsApplication app = null;
-    @ViewInject(R.id.back_left_betta)
     TextView back_left_betta;
-    @ViewInject(R.id.back_left_connect)
     TextView back_left_connect;
-    @ViewInject(R.id.back_left_error)
     TextView back_left_error;
-    @ViewInject(R.id.back_left_infos)
     LinearLayout back_left_infos;
-    @ViewInject(R.id.back_left_pressure)
     TextView back_left_pressure;
-    @ViewInject(R.id.back_left_temp)
     TextView back_left_temp;
-    @ViewInject(R.id.back_right_betta)
     TextView back_right_betta;
-    @ViewInject(R.id.back_right_connect)
     TextView back_right_connect;
-    @ViewInject(R.id.back_right_error)
     TextView back_right_error;
-    @ViewInject(R.id.back_right_infos)
     LinearLayout back_right_infos;
-    @ViewInject(R.id.back_right_pressure)
     TextView back_right_pressure;
-    @ViewInject(R.id.back_right_temp)
     TextView back_right_temp;
     TpmsDataSrc datasrc = null;
-    @ViewInject(R.id.front_left_betta)
     TextView front_left_betta;
-    @ViewInject(R.id.front_left_connect)
     TextView front_left_connect;
-    @ViewInject(R.id.front_left_error)
     TextView front_left_error;
-    @ViewInject(R.id.front_left_infos)
     LinearLayout front_left_infos;
-    @ViewInject(R.id.front_left_pressure)
     TextView front_left_pressure;
-    @ViewInject(R.id.front_left_temp)
     TextView front_left_temp;
-    @ViewInject(R.id.front_right_betta)
     TextView front_right_betta;
-    @ViewInject(R.id.front_right_connect)
     TextView front_right_connect;
-    @ViewInject(R.id.front_right_error)
     TextView front_right_error;
-    @ViewInject(R.id.front_right_infos)
     LinearLayout front_right_infos;
-    @ViewInject(R.id.front_right_pressure)
     TextView front_right_pressure;
-    @ViewInject(R.id.front_right_temp)
     TextView front_right_temp;
-    @ViewInject(R.id.ll_sptires_contioner)
     LinearLayout ll_sptires_contioner;
-
-    @ViewInject(R.id.btn_test)
-    Button btn_test;
 
     TiresState mBackLeft;
     TiresState mBackRight;
@@ -115,13 +83,9 @@ public class TpmsMainActivity extends Activity {
         }
     };
     Tpms mTpms;
-    @ViewInject(R.id.tv_sptires_betta)
     TextView tv_sptires_betta;
-    @ViewInject(R.id.tv_sptires_error)
     TextView tv_sptires_error;
-    @ViewInject(R.id.tv_sptires_pressure)
     TextView tv_sptires_pressure;
-    @ViewInject(R.id.tv_sptires_temp)
     TextView tv_sptires_temp;
 
     public void onClick(View view) {
@@ -133,7 +97,38 @@ public class TpmsMainActivity extends Activity {
         Intent intent = getIntent();
         if (intent == null || (action = intent.getAction()) == null || !action.equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
             setContentView(R.layout.activity_main);
-            ViewUtils.inject(this);
+
+            back_left_betta = findViewById(R.id.back_left_betta);
+            back_left_connect = findViewById(R.id.back_left_connect);
+            back_left_error = findViewById(R.id.back_left_error);
+            back_left_infos = findViewById(R.id.back_left_infos);
+            back_left_pressure = findViewById(R.id.back_left_pressure);
+            back_left_temp = findViewById(R.id.back_left_temp);
+            back_right_betta = findViewById(R.id.back_right_betta);
+            back_right_connect = findViewById(R.id.back_right_connect);
+            back_right_error = findViewById(R.id.back_right_error);
+            back_right_infos = findViewById(R.id.back_right_infos);
+            back_right_pressure = findViewById(R.id.back_right_pressure);
+            back_right_temp = findViewById(R.id.back_right_temp);
+            front_left_betta = findViewById(R.id.front_left_betta);
+            front_left_connect = findViewById(R.id.front_left_connect);
+            front_left_error = findViewById(R.id.front_left_error);
+            front_left_infos = findViewById(R.id.front_left_infos);
+            front_left_pressure = findViewById(R.id.front_left_pressure);
+            front_left_temp = findViewById(R.id.front_left_temp);
+            front_right_betta = findViewById(R.id.front_right_betta);
+            front_right_connect = findViewById(R.id.front_right_connect);
+            front_right_error = findViewById(R.id.front_right_error);
+            front_right_infos = findViewById(R.id.front_right_infos);
+            front_right_pressure = findViewById(R.id.front_right_pressure);
+            front_right_temp = findViewById(R.id.front_right_temp);
+            ll_sptires_contioner = findViewById(R.id.ll_sptires_contioner);
+
+            tv_sptires_betta = findViewById(R.id.tv_sptires_betta);
+            tv_sptires_error = findViewById(R.id.tv_sptires_error);
+            tv_sptires_pressure = findViewById(R.id.tv_sptires_pressure);
+            tv_sptires_temp = findViewById(R.id.tv_sptires_temp);
+
             EventBus.getDefault().register(this);
             TpmsApplication tpmsApplication = (TpmsApplication) getApplication();
             app = tpmsApplication;
@@ -179,7 +174,6 @@ public class TpmsMainActivity extends Activity {
                 this.tv_sptires_temp.setText(getTempString(this.mSpareTire.Temperature));
                 return;
             }
-            this.btn_test.setVisibility(View.GONE);
             return;
         }
         finish();
@@ -349,17 +343,14 @@ public class TpmsMainActivity extends Activity {
         textView2.setBackgroundResource(!tiresState.LowPower ? R.drawable.outline_battery_alert_24 : R.drawable.outline_battery_full_24);
     }
 
-    @OnClick({R.id.btn_paire_id})
     public void btn_paire_id(View view) {
         startActivity(new Intent(this, PaireIDActivity.class));
     }
 
-    @OnClick({R.id.btn_test})
     public void btn_test(View view) {
         startActivity(new Intent(this, TestActivity.class));
     }
 
-    @OnClick({R.id.btn_tpms_set})
     public void btn_tpms_set(View view) {
         startActivity(new Intent(this, SetActivity.class));
     }

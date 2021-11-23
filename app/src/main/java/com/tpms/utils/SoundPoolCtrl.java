@@ -5,7 +5,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.text.TextUtils;
 
-import com.syt.tmps.R;
+import com.mcal.tmps.R;
 
 public class SoundPoolCtrl {
     protected static int playerCount;

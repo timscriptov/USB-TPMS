@@ -12,7 +12,7 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.util.Log;
 
-import com.syt.tmps.BuildConfig;
+import com.mcal.tmps.BuildConfig;
 
 import java.io.IOException;
 import java.util.Collections;

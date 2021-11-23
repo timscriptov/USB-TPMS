@@ -1,6 +1,6 @@
 package com.tpms.utils;
 
-import com.syt.tmps.data.UmengConst;
+import com.mcal.tmps.data.UmengConst;
 
 import java.io.ByteArrayOutputStream;
 

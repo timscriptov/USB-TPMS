@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.syt.tmps.R;
+import com.mcal.tmps.R;
 
 public class PAlertDialog {
     private static final String TAG = "PAlertDialog";

@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.std.dev.TpmsDataSrc;
-import com.syt.tmps.R;
-import com.syt.tmps.TpmsApplication;
+import com.mcal.tmps.R;
+import com.mcal.tmps.TpmsApplication;
 
 public class TestScorActivity extends Activity {
     private final String TAG = "MainActivity";

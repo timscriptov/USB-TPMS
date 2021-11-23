@@ -2,7 +2,7 @@ package com.tpms.encode;
 
 import android.content.Context;
 
-import com.syt.tmps.TpmsApplication;
+import com.mcal.tmps.TpmsApplication;
 import com.tpms.utils.Log;
 
 import java.util.HashMap;

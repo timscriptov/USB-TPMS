@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.syt.tmps">
+    package="com.mcal.tmps">
 
     <uses-feature
         android:name="android.hardware.usb.host"
@@ -65,7 +65,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
-        android:name="com.syt.tmps.TpmsApplication"
+        android:name="com.mcal.tmps.TpmsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -119,7 +119,7 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme" />
 
-        <receiver android:name="com.syt.tmps.BKReceiver"
+        <receiver android:name="com.mcal.tmps.BKReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="SYS_STD_IN_ACCON_EVENT" />
@@ -134,7 +134,7 @@
                 <action android:name="android.intent.action.ACTION_USER_PRESENT" />
             </intent-filter>
         </receiver>
-        <service android:name="com.syt.tmps.TpmsService"
+        <service android:name="com.mcal.tmps.TpmsService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.tpms.TpmsService" />
@@ -144,7 +144,7 @@
         </service>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.syt.tmps.fileprovider"
+            android:authorities="com.mcal.tmps.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

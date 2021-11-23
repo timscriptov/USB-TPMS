@@ -1,4 +1,4 @@
-package com.syt.tmps;
+package com.mcal.tmps;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -19,7 +19,7 @@ import android.util.Log;
 import com.tpms.view.TpmsMainActivity;
 
 public class TpmsService extends Service {
-    private static final String NOTIFI_CLICK_ACTION = "com.syt.tpms.action.NOTIFI_CLICK_ACTION";
+    private static final String NOTIFI_CLICK_ACTION = "com.mcal.tpms.action.NOTIFI_CLICK_ACTION";
     private static final int SERVICE_NOTIFICATION_ID = 112;
     private static final String TAG = "TpmsService";
     Runnable getCurentWindow = new Runnable() {

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.syt.tmps.R;
+import com.mcal.tmps.R;
 
 public class SupportMultipleScreensUtil {
     public static final int BASE_SCREEN_HEIGHT = 600;

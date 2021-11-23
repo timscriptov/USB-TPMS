@@ -6,10 +6,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 
-import com.syt.tmps.R;
+import com.mcal.tmps.R;
 
 public class GetSreenInfoActivity extends Activity {
     public void onCreate(Bundle bundle) {

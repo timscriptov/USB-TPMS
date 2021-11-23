@@ -1,9 +1,9 @@
-package com.syt.tmps.data;
+package com.mcal.tmps.data;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.syt.tmps.TpmsApplication;
+import com.mcal.tmps.TpmsApplication;
 
 public class Preferences {
     private static SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(TpmsApplication.getContext());

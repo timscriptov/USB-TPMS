@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.syt.tmps.R;
+import com.mcal.tmps.R;
 
 public class ClickToast {
     private boolean closeBtnEvent = false;

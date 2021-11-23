@@ -1,4 +1,4 @@
-package com.syt.tmps;
+package com.mcal.tmps;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

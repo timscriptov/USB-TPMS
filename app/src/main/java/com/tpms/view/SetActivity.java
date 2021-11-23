@@ -15,8 +15,8 @@ import android.widget.RadioGroup;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.std.dev.TpmsDataSrc;
-import com.syt.tmps.R;
-import com.syt.tmps.TpmsApplication;
+import com.mcal.tmps.R;
+import com.mcal.tmps.TpmsApplication;
 import com.tpms.modle.TiresState;
 import com.tpms.utils.Log;
 

@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.syt.tmps"
+        applicationId "com.mcal.tmps"
         minSdk 16
         targetSdk 29
         versionCode 157

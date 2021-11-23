@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.syt.tmps.R;
-import com.syt.tmps.TpmsApplication;
+import com.mcal.tmps.R;
+import com.mcal.tmps.TpmsApplication;
 import com.tpms.decode.FrameDecode3;
 import com.tpms.encode.FrameEncode3;
 import com.tpms.modle.AlarmAgrs;

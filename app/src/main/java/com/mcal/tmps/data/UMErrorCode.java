@@ -1,4 +1,4 @@
-package com.syt.tmps.data;
+package com.mcal.tmps.data;
 
 public class UMErrorCode {
     public static final int E_UM_BE_CREATE_FAILED = 111;

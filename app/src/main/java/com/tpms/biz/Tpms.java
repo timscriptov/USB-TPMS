@@ -1,7 +1,6 @@
 package com.tpms.biz;
 
 import android.app.AlertDialog;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,12 +14,12 @@ import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
-import com.syt.tmps.ModelManager;
-import com.syt.tmps.R;
-import com.syt.tmps.TpmsApplication;
-import com.syt.tmps.data.Preferences;
-import com.syt.tmps.data.UMErrorCode;
-import com.syt.tmps.data.UmengConst;
+import com.mcal.tmps.ModelManager;
+import com.mcal.tmps.R;
+import com.mcal.tmps.TpmsApplication;
+import com.mcal.tmps.data.Preferences;
+import com.mcal.tmps.data.UMErrorCode;
+import com.mcal.tmps.data.UmengConst;
 import com.tpms.decode.FrameDecode;
 import com.tpms.encode.FrameEncode;
 import com.tpms.modle.AlarmAgrs;

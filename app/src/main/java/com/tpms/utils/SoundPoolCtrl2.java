@@ -4,7 +4,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.text.TextUtils;
 
-import com.syt.tmps.R;
+import com.mcal.tmps.R;
 
 public class SoundPoolCtrl2 extends SoundPoolCtrl {
     String TAG = "difengze.com-SoundPoolCtrl2";

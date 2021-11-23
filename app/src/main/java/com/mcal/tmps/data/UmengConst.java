@@ -1,4 +1,4 @@
-package com.syt.tmps.data;
+package com.mcal.tmps.data;
 
 public class UmengConst {
     public static final byte a = 0;

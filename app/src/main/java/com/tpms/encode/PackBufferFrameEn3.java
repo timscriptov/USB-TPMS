@@ -1,6 +1,6 @@
 package com.tpms.encode;
 
-import com.syt.tmps.TpmsApplication;
+import com.mcal.tmps.TpmsApplication;
 import com.tpms.utils.Log;
 import com.tpms.utils.SLOG;
 

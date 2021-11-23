@@ -18,9 +18,9 @@ import android.widget.Toast;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
+import com.mcal.tmps.R;
+import com.mcal.tmps.TpmsApplication;
 import com.std.dev.TpmsDataSrc;
-import com.syt.tmps.R;
-import com.syt.tmps.TpmsApplication;
 import com.tpms.biz.Tpms;
 import com.tpms.modle.TiresExchangeEvent;
 import com.tpms.utils.Log;
@@ -31,8 +31,6 @@ import de.greenrobot.event.EventBus;
 
 public class SetExchangeActivity extends Fragment {
     private final BroadcastReceiver filterReceiver = new BroadcastReceiver() {
-        /* class com.tpms.view.SetExchangeActivity.AnonymousClass1 */
-
         public void onReceive(Context context, Intent intent) {
             String stringExtra;
             if ("android.intent.action.CLOSE_SYSTEM_DIALOGS".equals(intent.getAction()) && (stringExtra = intent.getStringExtra("reason")) != null) {

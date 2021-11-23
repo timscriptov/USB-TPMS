@@ -17,7 +17,7 @@ import android.hardware.usb.UsbInterface;
 import android.util.Log;
 
 import com.hoho.android.usbserial.util.MonotonicClock;
-import com.syt.tmps.BuildConfig;
+import com.mcal.tmps.BuildConfig;
 
 import java.io.IOException;
 import java.util.Collections;

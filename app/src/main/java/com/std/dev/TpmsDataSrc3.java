@@ -1,6 +1,6 @@
 package com.std.dev;
 
-import com.syt.tmps.TpmsApplication;
+import com.mcal.tmps.TpmsApplication;
 import com.tpms.decode.PackBufferFrame;
 import com.tpms.utils.SLOG;
 

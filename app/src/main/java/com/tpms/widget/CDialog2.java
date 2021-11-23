@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.syt.tmps.R;
+import com.mcal.tmps.R;
 
 public class CDialog2 {
     private boolean closeBtnEvent = false;
