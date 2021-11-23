@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TPMS - RUS</string>
     <string name="aianzuo_spjiaohuan">Exchange FL e Pneu Sobressalente</string>
-    <string name="app_name">TPMS</string>
     <string name="version_info">Versão informação</string>
     <string name="spare_tire">Pneu sobressalente:</string>
     <string name="dianjikaishianniujintupeidui">Pressione o botão par para iniciar</string>

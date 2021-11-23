@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TPMS - RUS</string>
     <string name="aianzuo_spjiaohuan">FL and Spare tire exchange</string>
-    <string name="app_name">TPMS</string>
     <string name="version_info">Version Information</string>
     <string name="spare_tire">Spare tire:</string>
     <string name="dianjikaishianniujintupeidui">Press the pair button to start</string>

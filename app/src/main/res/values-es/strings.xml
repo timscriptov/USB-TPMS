@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TPMS - RUS</string>
     <string name="aianzuo_spjiaohuan">Cambio FL y neumático de repuesto</string>
-    <string name="app_name">TPMS</string>
     <string name="version_info">Información de versión</string>
     <string name="spare_tire">Neumático de repuesto:</string>
     <string name="dianjikaishianniujintupeidui">Presione el botón de par para comenzar</string>

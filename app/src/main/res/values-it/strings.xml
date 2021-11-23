@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TPMS - RUS</string>
     <string name="aianzuo_spjiaohuan">Scambio pneumatici FL e Spare</string>
-    <string name="app_name">TPMS</string>
     <string name="version_info">Informazioni sulla versione</string>
     <string name="spare_tire">Ruota di scorta:</string>
     <string name="dianjikaishianniujintupeidui">Premi il pulsante per iniziare</string>

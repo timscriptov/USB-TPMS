@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TPMS - RUS</string>
     <string name="aianzuo_spjiaohuan">Zamiana PL i koło zapasowe</string>
     <string name="version_info">Informacje o wersji</string>
     <string name="spare_tire">opona zapasowe:</string>

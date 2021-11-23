@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TPMS - RUS</string>
     <string name="aianzuo_spjiaohuan">FLとスペアタイヤ交換</string>
-    <string name="app_name">TPMS</string>
     <string name="version_info">バージョン情報</string>
     <string name="spare_tire">スペアタイヤ:</string>
     <string name="dianjikaishianniujintupeidui">ペアボタンを押して開始する</string>

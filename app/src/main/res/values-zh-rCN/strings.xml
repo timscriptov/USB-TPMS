@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TPMS - RUS</string>
     <string name="aianzuo_spjiaohuan">左前轮胎与备胎互换</string>
     <string name="version_info">版本信息</string>
     <string name="spare_tire">备胎:</string>

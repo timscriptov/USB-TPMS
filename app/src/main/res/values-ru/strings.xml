@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TPMS - RUS</string>
     <string name="aianzuo_spjiaohuan">Обмен FL и запасного колеса</string>
     <string name="version_info">Информация о версии</string>
     <string name="spare_tire">Запасная шина:</string>
